@@ -4,3 +4,6 @@
       -fx-border-color:transparent;
       -fx-text-fill:transparent;    
   }
+  .text-field{
+  	-fx-background-radius: 20.0;
+  }
