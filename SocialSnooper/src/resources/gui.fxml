@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="800.0" prefWidth="276.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField promptText="search" />
+            <HBox prefHeight="8.0" prefWidth="276.0">
+               <children>
+                  <Region prefHeight="19.0" prefWidth="9.0" />
+                  <TextField prefHeight="25.0" prefWidth="197.0" promptText="search" styleClass="fieldR" />
+               </children>
+            </HBox>
             <Region prefHeight="12.0" prefWidth="100.0" />
             <Button mnemonicParsing="false" styleClass="imageButton">
                <graphic>
-                  <ImageView fitHeight="36.0" fitWidth="57.0" preserveRatio="true">
+                  <ImageView fitHeight="98.0" fitWidth="120.0" preserveRatio="true">
                      <image>
                         <Image url="@fb-art.png" />
                      </image>
@@ -29,7 +39,7 @@
             </Button>
             <Button mnemonicParsing="false" styleClass="imageButton">
                <graphic>
-                  <ImageView fitHeight="36.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="97.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tt-art.png" />
                      </image>
@@ -38,7 +48,7 @@
             </Button>
             <Button mnemonicParsing="false" styleClass="imageButton">
                <graphic>
-                  <ImageView fitHeight="36.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="97.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@ig-art.png" />
                      </image>
@@ -51,4 +61,58 @@
          </opaqueInsets>
       </VBox>
    </left>
+   <right>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="800.0" prefWidth="166.0">
+               <children>
+                  <Accordion>
+                    <panes>
+                      <TitledPane animated="false" text="Profiles">
+                           <content>
+                              <VBox prefHeight="301.0" prefWidth="98.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="112.0" text="Profile 1" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile 2" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile 3" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile 4" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile 5" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile 6" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile 7" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile 8" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile 9" />
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <RadioButton mnemonicParsing="false" text="Profile10" />
+                                 </children>
+                              </VBox>
+                           </content>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </right>
+   <center>
+      <HBox prefHeight="733.0" prefWidth="835.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="684.0" fitWidth="815.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@filler.png" />
+               </image>
+            </ImageView>
+            <Region prefHeight="800.0" prefWidth="5.0" />
+            <ScrollBar orientation="VERTICAL" prefHeight="800.0" prefWidth="22.0" visibleAmount="7.0" />
+         </children>
+      </HBox>
+   </center>
 </BorderPane>
