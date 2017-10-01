@@ -14,12 +14,12 @@
   
 .radio-button > .radio {
   -fx-color: #B6BABE;
-  -fx-border-color: #B6BABE;
   -fx-border-width: 0;
+  
   
 }
 .radio-button:selected > .radio{
-  -fx-color: #69B1E2;
+  /*-fx-color: #69B1E2;*/
   -fx-background-color: #69B1E2;
 }
 
@@ -30,4 +30,9 @@
 .vbox-image{
 	-fx-background-image:  url("/resources/striped-lines.jpg"); 
 	-fx-background-repeat: repeat;
+}
+.text-field-blank{
+	-fx-border-color: transparent;
+	-fx-background-radius: 0.0;
+	-fx-background-radius: 0, 0, 0, 0;
 }
