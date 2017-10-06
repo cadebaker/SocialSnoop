@@ -23,7 +23,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <left>
-      <VBox prefHeight="800.0" prefWidth="276.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="800.0" prefWidth="276.0" styleClass="vbox-left" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="43.0" prefWidth="276.0">
                <children>
@@ -36,7 +36,7 @@
                               <Insets top="100.0" />
                            </opaqueInsets>
                            <font>
-                              <Font name="Cambria" size="14.0" />
+                              <Font name="Times New Roman" size="14.0" />
                            </font>
                         </TextField>
                      </children>
@@ -46,7 +46,7 @@
             <HBox prefHeight="33.0" prefWidth="276.0">
                <children>
                   <Region prefHeight="100.0" prefWidth="77.0" />
-                  <Button fx:id="faceBookButton" mnemonicParsing="false" onAction="#buttonClicked" styleClass="imageButton">
+                  <Button fx:id="faceBookButton" mnemonicParsing="false" onAction="#buttonClicked" styleClass="image-button">
                      <graphic>
                         <ImageView fitHeight="48.0" fitWidth="177.0" preserveRatio="true">
                            <image>
@@ -58,7 +58,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="twitterButton" mnemonicParsing="false" onAction="#buttonClicked" styleClass="imageButton">
+                  <Button fx:id="twitterButton" mnemonicParsing="false" onAction="#buttonClicked" styleClass="image-button">
                      <graphic>
                         <ImageView fitHeight="49.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -67,9 +67,9 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="instagramButton" layoutX="151.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClicked" styleClass="imageButton">
+                  <Button fx:id="instagramButton" layoutX="151.0" layoutY="10.0" mnemonicParsing="false" onAction="#buttonClicked" styleClass="image-button">
                      <graphic>
-                        <ImageView fitHeight="49.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="49.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/ig-art.png" />
                            </image>
@@ -85,25 +85,16 @@
       </VBox>
    </left>
    <right>
-      <VBox prefHeight="800.0" prefWidth="166.0" styleClass="vbox-image">
+      <VBox prefHeight="800.0" prefWidth="166.0" styleClass="vbox-right">
          <children>
-            <Region prefHeight="5.0" prefWidth="179.0" />
             <Accordion prefHeight="352.0" prefWidth="179.0">
                <panes>
                   <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
-                        <HBox prefHeight="0.0" prefWidth="143.0">
+                        <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
-                              <Text fx:id="profile1Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="88.767578125" />
-                              <Button fx:id="profile1Button" mnemonicParsing="false" onAction="#settingsButtonClicked" prefHeight="25.0" prefWidth="15.0" styleClass="imageButton">
-                                 <graphic>
-                                    <ImageView fitHeight="17.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/gear.png" />
-                                       </image></ImageView>
-                                 </graphic>
-                              </Button>
-                              <RadioButton focusTraversable="false" mnemonicParsing="false" prefHeight="34.0" prefWidth="21.0">
+                              <Text fx:id="profile1Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                              <RadioButton focusTraversable="false" mnemonicParsing="false">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="profile" />
                                  </toggleGroup>
@@ -454,16 +445,25 @@
                   </TitledPane>
                </panes>
             </Accordion>
-            <Region prefHeight="341.0" prefWidth="179.0" />
+            <Region prefHeight="345.0" prefWidth="179.0" />
+            <HBox prefHeight="68.0" prefWidth="179.0">
+               <children>
+                  <Region prefHeight="100.0" prefWidth="57.0" />
+                  <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#settingsButtonClicked" styleClass="flat-button" text="Settings">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+               </children>
+            </HBox>
             <Accordion />
-            <Button fx:id="settingsButton" mnemonicParsing="false" text="Settings" />
          </children>
       </VBox>
    </right>
    <center>
       <HBox prefHeight="733.0" prefWidth="835.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="resultsArea" prefHeight="800.0" prefWidth="1783.0" />
+            <TextArea fx:id="resultsArea" prefHeight="800.0" prefWidth="1783.0" styleClass="vbox-blue" />
             <Region prefHeight="800.0" prefWidth="931.0" />
             <ScrollBar orientation="VERTICAL" prefHeight="800.0" prefWidth="22.0" visibleAmount="7.0" />
          </children>

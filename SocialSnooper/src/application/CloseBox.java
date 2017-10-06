@@ -1,4 +1,4 @@
-package application;
+import java.io.File;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class CloseBox {
@@ -15,11 +16,13 @@ public class CloseBox {
 
 	public static boolean display(String title, String message) {
 		Stage window = new Stage();
+		window.initStyle(StageStyle.DECORATED);
+		window.setResizable(false);
 		
 		//disables user input on other windows
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle(title);
-		window.setMinWidth(250);
+		window.setMinWidth(230);
 		window.setMinHeight(150);
 
 		Label label = new Label();
@@ -43,6 +46,7 @@ public class CloseBox {
 		layout.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(layout);
+		
 		window.setScene(scene);
 		
 		//disables user input on other windows
