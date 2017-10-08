@@ -1,5 +1,6 @@
-import java.io.File;
+package application;
 
+import java.io.File;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
