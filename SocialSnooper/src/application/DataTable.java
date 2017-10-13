@@ -57,15 +57,25 @@ public class DataTable {
 
 	public DataTable(String fileName) {
 		this.fileName = fileName;
+		
+
+		setUp();
+
+		
+
+	}
+	
+	public void display() {
+		setUp();
+		
+		
 		window = new Stage();
 		window.initStyle(StageStyle.UNDECORATED);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Profiles");
 
 		window.setOnCloseRequest(e -> save(fileName));
-
-		setUp();
-
+		
 		HBox hBox = new HBox();
 		hBox.setPadding(new Insets(10, 10, 10, 10));
 		// spacing between individual components
@@ -79,7 +89,6 @@ public class DataTable {
 		scene = new Scene(layout);
 		window.setScene(scene);
 		window.show();
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -115,6 +124,7 @@ public class DataTable {
 		nameColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		twitterColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		instagramColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
+		faceBookColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		faceBookKeyColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 
 		// https://stackoverflow.com/questions/41465181/tableview-update-database-on-edit,
@@ -132,6 +142,11 @@ public class DataTable {
 		instagramColumn.setOnEditCommit(event -> {
 			TableCell cell = event.getRowValue();
 			cell.setInstagramURL(event.getNewValue());
+		});
+		
+		faceBookColumn.setOnEditCommit(event -> {
+			TableCell cell = event.getRowValue();
+			cell.setFaceBookURL(event.getNewValue());
 		});
 		
 		faceBookKeyColumn.setOnEditCommit(event -> {
@@ -187,9 +202,9 @@ public class DataTable {
 
 		ObservableList<TableCell> profiles = FXCollections.observableArrayList();
 
-		for (int i = 0; i < profileNames.size(); i++) {
+		for (int i = 0; i < getProfileNames().size(); i++) {
 			profiles.add(
-					new TableCell(profileNames.get(i), twitterURLs.get(i), instagramURLs.get(i), faceBookURLs.get(i), faceBookKeys.get(i)));
+					new TableCell(getProfileNames().get(i), twitterURLs.get(i), instagramURLs.get(i), faceBookURLs.get(i), faceBookKeys.get(i)));
 		}
 
 		return profiles;
@@ -223,7 +238,7 @@ public class DataTable {
 	 * Method that uses a scanner to read profile variables from a text file
 	 *****************************************************************************/
 	public void load(String fileName) {
-		profileNames = new ArrayList<String>();
+		setProfileNames(new ArrayList<String>());
 		twitterURLs = new ArrayList<String>();
 		instagramURLs = new ArrayList<String>();
 		faceBookURLs = new ArrayList<String>();
@@ -244,7 +259,7 @@ public class DataTable {
 			for (String p : profileArray) {
 				String[] parts = p.split(":");
 
-				profileNames.add(parts[0]);
+				getProfileNames().add(parts[0]);
 				twitterURLs.add(parts[1]);
 				instagramURLs.add(parts[2]);
 				faceBookURLs.add(parts[3]);
@@ -258,7 +273,7 @@ public class DataTable {
 		catch (Exception error) {
 			save(fileName);
 			for (int i = 0; i < 10; i++) {
-				profileNames.add("Profile");
+				getProfileNames().add("Profile");
 				twitterURLs.add("twitterURL");
 				instagramURLs.add("instagramURL");
 				faceBookURLs.add("facebookURL");
@@ -285,5 +300,13 @@ public class DataTable {
 			e.printStackTrace();
 		}
 
+	}
+
+	public ArrayList<String> getProfileNames() {
+		return profileNames;
+	}
+
+	public void setProfileNames(ArrayList<String> profileNames) {
+		this.profileNames = profileNames;
 	}
 }
