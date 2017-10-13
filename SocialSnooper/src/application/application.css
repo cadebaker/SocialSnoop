@@ -42,3 +42,12 @@
 	-fx-background-color: radial-gradient(center 180% -40%, radius 300%, #00BFFF 45%, #0065a4 50%);
 }
 
+.scroll-bar{
+	-fx-font-size: 14px;
+}
+
+#name-text{
+	-fx-font: 16px "Times New Roman";
+}
+
+
