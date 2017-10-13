@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +20,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -104,18 +109,58 @@ public class Controller {
 
 	@FXML
 	private Text profile10Name;
+	
+	//contains profile urls
+	@FXML
+	private GridPane profile1Data;
 
 	@FXML
-	private TextArea resultsArea;
+	private GridPane profile2Data;
+
+	@FXML
+	private GridPane profile3Data;
+
+	@FXML
+	private GridPane profile4Data;
+
+	@FXML
+	private GridPane profile5Data;
+
+	@FXML
+	private GridPane profile6Data;
+
+	@FXML
+	private GridPane profile7Data;
+
+	@FXML
+	private GridPane profile8Data;
+
+	@FXML
+	private GridPane profile9Data;
+	@FXML
+	
+	private GridPane profile10Data;
+
+	@FXML
+	private VBox displayBox;
+	
+	@FXML
+	private ScrollPane scroller;
 
 	public Controller() {
 		// table = new DataTable();
 
 	}
+	
+	public void initialize() {
+		scroller.setFitToWidth(true);
+		
+	}
 
 	@FXML
 	private void showField() {
 		setResultsArea();
+		
 	}
 
 	@FXML
@@ -133,7 +178,7 @@ public class Controller {
 	private void settingsButtonClicked(ActionEvent e) {
 		//System.out.println(profile1Name.getText());
 		DataTable table = new DataTable("savedprofiles.txt");
-
+		
 		// load data
 		
 		// save new data
@@ -143,7 +188,9 @@ public class Controller {
 
 
 	private void setResultsArea() {
-		resultsArea.setText(searchField.getText());
+		Profile ay = new Profile(searchField.getText(),"description of this person", "/resources/fb-art.png");
+		
+		displayBox.getChildren().addAll(ay.getPane());
 	}
 
 	public Text[] getProfileNames() {

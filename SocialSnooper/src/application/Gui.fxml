@@ -4,8 +4,7 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -94,7 +93,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile1Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton focusTraversable="false" mnemonicParsing="false">
+                              <RadioButton fx:id="profile1Button" focusTraversable="false" mnemonicParsing="false">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="profile" />
                                  </toggleGroup>
@@ -107,7 +106,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -116,12 +114,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -133,7 +128,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile2Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton focusTraversable="false" mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile2Button" focusTraversable="false" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -142,7 +137,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -151,12 +145,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -168,7 +159,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile3Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile3Button" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -177,7 +168,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -186,12 +176,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -203,7 +190,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile4Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile4Button" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -212,7 +199,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -221,12 +207,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -238,7 +221,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile5Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile5Button" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -247,7 +230,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -256,12 +238,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -273,7 +252,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile6Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile6Button" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -282,7 +261,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -291,12 +269,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -308,7 +283,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile7Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile7Button" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -317,7 +292,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -326,12 +300,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -343,7 +314,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile8Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile8Button" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -352,7 +323,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -361,12 +331,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -378,7 +345,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile9Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile9Button" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -387,7 +354,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -396,12 +362,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -413,7 +376,7 @@
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
                               <Text fx:id="profile10Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                              <RadioButton mnemonicParsing="false" toggleGroup="$profile" />
+                              <RadioButton fx:id="profile10Button" mnemonicParsing="false" toggleGroup="$profile" />
                            </children>
                         </HBox>
                      </graphic>
@@ -422,7 +385,6 @@
                            <children>
                               <GridPane prefHeight="110.0" prefWidth="201.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="15.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="142.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -431,12 +393,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="F:" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="T:" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="I:" GridPane.rowIndex="2" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -463,9 +422,11 @@
    <center>
       <HBox prefHeight="733.0" prefWidth="835.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="resultsArea" prefHeight="800.0" prefWidth="1783.0" styleClass="vbox-blue" />
-            <Region prefHeight="800.0" prefWidth="931.0" />
-            <ScrollBar orientation="VERTICAL" prefHeight="800.0" prefWidth="22.0" visibleAmount="7.0" />
+            <ScrollPane fx:id="scroller" prefHeight="800.0" prefWidth="1278.0">
+               <content>
+                  <VBox fx:id="displayBox" prefHeight="800.0" prefWidth="1829.0" />
+               </content>
+            </ScrollPane>
          </children>
       </HBox>
    </center>
