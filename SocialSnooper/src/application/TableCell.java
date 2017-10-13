@@ -3,22 +3,25 @@ package application;
 public class TableCell {
 
 	private String name;
-	private String faceBookURL;
 	private String twitterURL;
 	private String instagramURL;
+	private String faceBookURL;
+	private String faceBookKey;
 
 	public TableCell() {
 		this.name = "";
-		this.faceBookURL = "";
 		this.twitterURL = "";
 		this.instagramURL = "";
+		this.faceBookURL = "";
+		this.faceBookKey = "";
 	}
 
-	public TableCell(String name, String faceBookURL, String twitterURL, String instagramURL) {
+	public TableCell(String name, String twitterURL, String instagramURL, String faceBookURL, String faceBookKey) {
 		this.name = name;
-		this.faceBookURL = faceBookURL;
 		this.twitterURL = twitterURL;
 		this.instagramURL = instagramURL;
+		this.faceBookURL = faceBookURL;
+		this.faceBookKey = faceBookKey;
 	}
 
 	public String getName() {
@@ -27,14 +30,6 @@ public class TableCell {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getFaceBookURL() {
-		return faceBookURL;
-	}
-
-	public void setFaceBookURL(String faceBookURL) {
-		this.faceBookURL = faceBookURL;
 	}
 
 	public String getTwitterURL() {
@@ -51,6 +46,22 @@ public class TableCell {
 
 	public void setInstagramURL(String instagramURL) {
 		this.instagramURL = instagramURL;
+	}
+	
+	public String getFaceBookURL() {
+		return faceBookURL;
+	}
+
+	public void setFaceBookURL(String faceBookURL) {
+		this.faceBookURL = faceBookURL;
+	}
+
+	public String getFaceBookKey() {
+		return faceBookKey;
+	}
+
+	public void setFaceBookKey(String faceBookKey) {
+		this.faceBookKey = faceBookKey;
 	}
 
 	
