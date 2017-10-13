@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -24,6 +25,7 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -37,130 +39,61 @@ public class Controller {
 	private TextField searchField;
 
 	@FXML
-	private Button faceBookButton;
-
-	@FXML
-	private Button twitterButton;
-
-	@FXML
-	private Button instagramButton;
-
-	@FXML
-	private Button settingsButton;
+	private Button instagramButton, faceBookButton, twitterButton, settingsButton;
 
 	// Profile Radio Buttons
 	@FXML
-	private RadioButton profile1Button;
-
-	@FXML
-	private RadioButton profile2Button;
-
-	@FXML
-	private RadioButton profile3Button;
-
-	@FXML
-	private RadioButton profile4Button;
-
-	@FXML
-	private RadioButton profile5Button;
-
-	@FXML
-	private RadioButton profile6Button;
-
-	@FXML
-	private RadioButton profile7Button;
-
-	@FXML
-	private RadioButton profile8Button;
-
-	@FXML
-	private RadioButton profile9Button;
-
-	@FXML
-	private RadioButton profile10Button;
+	private RadioButton profile1Button, profile2Button, profile3Button, profile4Button, profile5Button, profile6Button,
+			profile7Button, profile8Button, profile9Button, profile10Button;
 
 	// Profile Button name
 	@FXML
-	private Text profile1Name;
-
+	private Text profile1Name, profile2Name, profile3Name, profile4Name, profile5Name, profile6Name, profile7Name,
+			profile8Name, profile9Name, profile10Name;
+		
 	@FXML
-	private Text profile2Name;
-
-	@FXML
-	private Text profile3Name;
-
-	@FXML
-	private Text profile4Name;
-
-	@FXML
-	private Text profile5Name;
-
-	@FXML
-	private Text profile6Name;
-
-	@FXML
-	private Text profile7Name;
-
-	@FXML
-	private Text profile8Name;
-
-	@FXML
-	private Text profile9Name;
-
-	@FXML
-	private Text profile10Name;
+	private Text profile1T, profile2T, profile3T, profile4T, profile5T, profile6T, profile7T, profile8T,
+			profile9T, profile10T;
 	
-	//contains profile urls
 	@FXML
-	private GridPane profile1Data;
-
-	@FXML
-	private GridPane profile2Data;
-
-	@FXML
-	private GridPane profile3Data;
-
-	@FXML
-	private GridPane profile4Data;
-
-	@FXML
-	private GridPane profile5Data;
-
-	@FXML
-	private GridPane profile6Data;
-
-	@FXML
-	private GridPane profile7Data;
-
-	@FXML
-	private GridPane profile8Data;
-
-	@FXML
-	private GridPane profile9Data;
-	@FXML
+	private Text profile1I, profile2I, profile3I, profile4I, profile5I, profile6I, profile7I, profile8I,
+			profile9I, profile10I;
 	
-	private GridPane profile10Data;
+	@FXML
+	private Text profile1FB, profile2FB, profile3FB, profile4FB, profile5FB, profile6FB, profile7FB, profile8FB,
+			profile9FB, profile10FB;
+
+	// contains profile urls
+	@FXML
+	private TitledPane profile1Data, profile2Data, profile3Data, profile4Data, profile5Data, profile6Data, profile7Data,
+			profile8Data, profile9Data, profile10Data;
+	
+	//TODO: MAKE VARIABLES FOR EACH TEXT INSIDE THE TITLED PANES
+
+	@FXML
+	private Accordion accordian;
 
 	@FXML
 	private VBox displayBox;
-	
+
 	@FXML
 	private ScrollPane scroller;
+	
+	private DataTable table;
 
 	public Controller() {
-		// table = new DataTable();
+		 table = new DataTable("savedprofiles.txt");
 
 	}
-	
+
 	public void initialize() {
 		scroller.setFitToWidth(true);
-		
 	}
 
 	@FXML
 	private void showField() {
 		setResultsArea();
-		
+
 	}
 
 	@FXML
@@ -168,7 +101,7 @@ public class Controller {
 		if (e.getSource() == faceBookButton) {
 			System.out.println("Switching to facebook searching");
 		} else if (e.getSource() == twitterButton) {
-			System.out.println("Switching to twitter searching");
+			displayBox.getChildren().clear();
 		} else if (e.getSource() == instagramButton) {
 			System.out.println("Switching to instagram searching");
 		}
@@ -176,27 +109,64 @@ public class Controller {
 
 	@FXML
 	private void settingsButtonClicked(ActionEvent e) {
-		//System.out.println(profile1Name.getText());
-		DataTable table = new DataTable("savedprofiles.txt");
-		
+		// System.out.println(profile1Name.getText());
+		//DataTable table = new DataTable("savedprofiles.txt");
+		table.display();
 		// load data
-		
+
 		// save new data
 		// update Profile changes
 
 	}
 
+	@FXML
+	private void updateAccordians() {
+		try {
+			String id = accordian.getExpandedPane().getId();
+		int i = Integer.parseInt(id.substring(7, id.indexOf("Data")));
+		
+		getProfileNames()[i].setText(table.getProfileNames().get(i));
+		
+		}
+		catch(NullPointerException e){
+			
+		}
+		
+
+	}
 
 	private void setResultsArea() {
-		Profile ay = new Profile(searchField.getText(),"description of this person", "/resources/fb-art.png");
-		
+		Profile ay = new Profile(searchField.getText(), "description of this person", "/resources/fb-art.png");
+
 		displayBox.getChildren().addAll(ay.getPane());
 	}
 
 	public Text[] getProfileNames() {
 		Text[] rtn = { profile1Name, profile2Name, profile3Name, profile4Name, profile5Name, profile6Name, profile7Name,
 				profile8Name, profile9Name, profile10Name };
-		
+
+		return rtn;
+	}
+	
+	public Text[] getProfileT() {
+		Text[] rtn = { profile1T, profile2T, profile3T, profile4T, profile5T, profile6T, profile7T, profile8T,
+				profile9T, profile10T };
+
+		return rtn;
+	}
+	
+	public Text[] getProfileI() {
+		Text[] rtn = { profile1I, profile2I, profile3I, profile4I, profile5I, profile6I, profile7I, profile8I,
+				profile9I, profile10I };
+
+		return rtn;
+	}
+	
+	public Text[] getProfileFB() {
+		Text[] rtn = { profile1FB, profile2FB, profile3FB, profile4FB, profile5FB, profile6FB, profile7FB, profile8FB,
+				profile9FB, profile10FB };
+
 		return rtn;
 	}
 }
+
