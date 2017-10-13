@@ -43,13 +43,13 @@ public class DataTable {
 
 	private String fileName;
 
-	private ArrayList<String> profileNames, faceBookURLs, twitterURLs, instagramURLs;
+	private ArrayList<String> profileNames, twitterURLs, instagramURLs, faceBookURLs, faceBookKeys;
 
 	Stage window;
 
 	TableView<TableCell> table;
 
-	TableColumn<TableCell, String> nameColumn, faceBookColumn, twitterColumn, instagramColumn;
+	TableColumn<TableCell, String> nameColumn, twitterColumn, instagramColumn, faceBookColumn, faceBookKeyColumn;
 
 	Scene scene;
 
@@ -61,7 +61,7 @@ public class DataTable {
 		window.initStyle(StageStyle.UNDECORATED);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Profiles");
-		
+
 		window.setOnCloseRequest(e -> save(fileName));
 
 		setUp();
@@ -90,38 +90,38 @@ public class DataTable {
 		// lower case string has to match the variable name in the sub class
 		nameColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("name"));
 
-		// Facebook column
-		faceBookColumn = new TableColumn<>("Facebook URL");
-		faceBookColumn.setMinWidth(200);
-		faceBookColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("faceBookURL"));
-
 		// Twitter column
 		twitterColumn = new TableColumn<>("Twitter URL");
 		twitterColumn.setMinWidth(200);
 		twitterColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("twitterURL"));
 
-		// Twitter column
+		// Instagram column
 		instagramColumn = new TableColumn<>("Instagram URL");
 		instagramColumn.setMinWidth(200);
 		instagramColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("instagramURL"));
 
+		// Facebook column
+		faceBookColumn = new TableColumn<>("Facebook URL");
+		faceBookColumn.setMinWidth(200);
+		faceBookColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("faceBookURL"));
+
+		// FacebookKey column
+		faceBookKeyColumn = new TableColumn<>("Facebook Key");
+		faceBookKeyColumn.setMinWidth(200);
+		faceBookKeyColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("faceBookKey"));
+
 		// https://stackoverflow.com/questions/23300774/why-tableview-tablecolumn-is-not-editable
 		// by Aerospace
 		nameColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
-		faceBookColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		twitterColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		instagramColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
+		faceBookKeyColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 
 		// https://stackoverflow.com/questions/41465181/tableview-update-database-on-edit,
 		// answer by James_D
 		nameColumn.setOnEditCommit(event -> {
 			TableCell cell = event.getRowValue();
 			cell.setName(event.getNewValue());
-		});
-
-		faceBookColumn.setOnEditCommit(event -> {
-			TableCell cell = event.getRowValue();
-			cell.setFaceBookURL(event.getNewValue());
 		});
 
 		twitterColumn.setOnEditCommit(event -> {
@@ -133,6 +133,12 @@ public class DataTable {
 			TableCell cell = event.getRowValue();
 			cell.setInstagramURL(event.getNewValue());
 		});
+		
+		faceBookKeyColumn.setOnEditCommit(event -> {
+			TableCell cell = event.getRowValue();
+			cell.setFaceBookKey(event.getNewValue());
+		});
+
 
 		// Clear button
 		clear = new Button();
@@ -171,7 +177,7 @@ public class DataTable {
 		table.getSelectionModel().cellSelectionEnabledProperty().set(true);
 
 		table.setItems(getProfiles());
-		table.getColumns().addAll(nameColumn, faceBookColumn, twitterColumn, instagramColumn);
+		table.getColumns().addAll(nameColumn, twitterColumn, instagramColumn, faceBookColumn, faceBookKeyColumn);
 
 	}
 
@@ -183,7 +189,7 @@ public class DataTable {
 
 		for (int i = 0; i < profileNames.size(); i++) {
 			profiles.add(
-					new TableCell(profileNames.get(i), faceBookURLs.get(i), twitterURLs.get(i), instagramURLs.get(i)));
+					new TableCell(profileNames.get(i), twitterURLs.get(i), instagramURLs.get(i), faceBookURLs.get(i), faceBookKeys.get(i)));
 		}
 
 		return profiles;
@@ -193,7 +199,7 @@ public class DataTable {
 	 * Method that prints all profile variables to a text file
 	 *****************************************************************************/
 	public void save(String fileName) {
-		fileName = "src\\resources\\" + fileName;
+		fileName = "SocialSnooper\\src\\resources\\" + fileName;
 		PrintWriter out = null;
 
 		try {
@@ -202,7 +208,7 @@ public class DataTable {
 			for (TableCell x : table.getItems()) {
 
 				out.println(
-						x.getName() + ":" + x.getFaceBookURL() + ":" + x.getTwitterURL() + ":" + x.getInstagramURL());
+						x.getName() + ":" + x.getTwitterURL() + ":" + x.getInstagramURL() + ":" + x.getFaceBookURL() + ":" + x.getFaceBookKey());
 
 			}
 
@@ -218,13 +224,14 @@ public class DataTable {
 	 *****************************************************************************/
 	public void load(String fileName) {
 		profileNames = new ArrayList<String>();
-		faceBookURLs = new ArrayList<String>();
 		twitterURLs = new ArrayList<String>();
 		instagramURLs = new ArrayList<String>();
+		faceBookURLs = new ArrayList<String>();
+		faceBookKeys = new ArrayList<String>();
 
 		try {
 			// open the data file
-			Scanner fileReader = new Scanner(new File("src\\resources\\" + fileName));
+			Scanner fileReader = new Scanner(new File("SocialSnooper\\src\\resources\\" + fileName));
 
 			String[] profileArray = new String[10];
 
@@ -238,9 +245,10 @@ public class DataTable {
 				String[] parts = p.split(":");
 
 				profileNames.add(parts[0]);
-				faceBookURLs.add(parts[1]);
-				twitterURLs.add(parts[2]);
-				instagramURLs.add(parts[3]);
+				twitterURLs.add(parts[1]);
+				instagramURLs.add(parts[2]);
+				faceBookURLs.add(parts[3]);
+				faceBookKeys.add(parts[4]);
 			}
 
 			fileReader.close();
@@ -251,15 +259,16 @@ public class DataTable {
 			save(fileName);
 			for (int i = 0; i < 10; i++) {
 				profileNames.add("Profile");
-				faceBookURLs.add("facebookURL");
 				twitterURLs.add("twitterURL");
 				instagramURLs.add("instagramURL");
+				faceBookURLs.add("facebookURL");
+				faceBookKeys.add("facebookKey");
 			}
 		}
 	}
 
 	public void erase(String fileName) {
-		fileName = "src\\resources\\" + fileName;
+		fileName = "SocialSnooper\\src\\resources\\" + fileName;
 		PrintWriter out = null;
 
 		try {
@@ -267,7 +276,7 @@ public class DataTable {
 			// TODO: print out all text data in easily readable format
 			for (TableCell x : table.getItems()) {
 
-				out.println("Profile" + ":" + "facebookURL" + ":" + "twitterURL" + ":" + "instagramURL");
+				out.println("Profile" + ":" + "twitterURL" + ":" + "instagramURL" + ":" + "facebookURL" + ":" + "facebookKey");
 
 			}
 
@@ -277,5 +286,4 @@ public class DataTable {
 		}
 
 	}
-
 }
