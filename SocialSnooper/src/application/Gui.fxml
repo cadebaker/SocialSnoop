@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
@@ -20,7 +26,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <left>
       <VBox prefHeight="800.0" prefWidth="276.0" styleClass="vbox-left" BorderPane.alignment="CENTER">
          <children>
@@ -86,9 +92,9 @@
    <right>
       <VBox prefHeight="800.0" prefWidth="166.0" styleClass="vbox-right">
          <children>
-            <Accordion prefHeight="352.0" prefWidth="179.0">
+            <Accordion fx:id="accordian" prefHeight="352.0" prefWidth="179.0">
                <panes>
-                  <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile1Data" layoutX="10.0" layoutY="10.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -123,7 +129,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile2Data" layoutX="10.0" layoutY="10.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -154,7 +160,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile3Data" layoutX="10.0" layoutY="35.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -185,7 +191,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile4Data" layoutX="10.0" layoutY="10.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -216,7 +222,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile5Data" layoutX="10.0" layoutY="35.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -247,7 +253,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile6Data" layoutX="10.0" layoutY="35.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -278,7 +284,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile7Data" layoutX="10.0" layoutY="35.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -309,7 +315,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="35.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile8Data" layoutX="10.0" layoutY="35.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -340,7 +346,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="110.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile9Data" layoutX="10.0" layoutY="110.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -371,7 +377,7 @@
                         </VBox>
                      </content>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="210.0" prefHeight="200.0" prefWidth="200.0">
+                  <TitledPane fx:id="profile10Data" layoutX="10.0" layoutY="210.0" onMouseClicked="#updateAccordians" prefHeight="200.0" prefWidth="200.0">
                      <graphic>
                         <HBox prefHeight="17.0" prefWidth="146.0">
                            <children>
@@ -415,7 +421,6 @@
                   </Button>
                </children>
             </HBox>
-            <Accordion />
          </children>
       </VBox>
    </right>
@@ -431,3 +436,4 @@
       </HBox>
    </center>
 </BorderPane>
+
