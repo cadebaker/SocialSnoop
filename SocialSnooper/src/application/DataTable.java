@@ -309,4 +309,36 @@ public class DataTable {
 	public void setProfileNames(ArrayList<String> profileNames) {
 		this.profileNames = profileNames;
 	}
-}
+
+	public ArrayList<String> getTwitterURLs() {
+		return twitterURLs;
+	}
+
+	public void setTwitterURLs(ArrayList<String> twitterURLs) {
+		this.twitterURLs = twitterURLs;
+	}
+
+	public ArrayList<String> getInstagramURLs() {
+		return instagramURLs;
+	}
+
+	public void setInstagramURLs(ArrayList<String> instagramURLs) {
+		this.instagramURLs = instagramURLs;
+	}
+
+	public ArrayList<String> getFaceBookURLs() {
+		return faceBookURLs;
+	}
+
+	public void setFaceBookURLs(ArrayList<String> faceBookURLs) {
+		this.faceBookURLs = faceBookURLs;
+	}
+
+	public ArrayList<String> getFaceBookKeys() {
+		return faceBookKeys;
+	}
+
+	public void setFaceBookKeys(ArrayList<String> faceBookKeys) {
+		this.faceBookKeys = faceBookKeys;
+	}
+
