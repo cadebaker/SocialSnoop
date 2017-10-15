@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import application.Profile;
+import application.TwitterProfile;
 import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.TwitterException;
@@ -93,12 +93,12 @@ public class TwitterSnooper {
 	 **********************************************************************************/
 	public TwitterSearch searchUser(String searchInput)throws TwitterException{
 
-		ArrayList<Profile> users = new ArrayList<Profile>();
+		ArrayList<TwitterProfile> users = new ArrayList<TwitterProfile>();
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		
 		for(int page_index = 1; page_index <=  5; page_index++)	//Loops though first 20 pages.
 			for(User u  : twitter.searchUsers(searchInput, page_index)){ //Get users on each page.
-				users.add(new Profile(u));//Gets the name of the user.
+				users.add(new TwitterProfile(u));//Gets the name of the user.
 				tweets.add(new Tweet(u.getStatus(),u.getName(), u.getScreenName()));//Gets the last post from the user.
 			}
 		return new TwitterSearch(users,tweets); 	
@@ -156,7 +156,7 @@ public class TwitterSnooper {
 		
 		System.out.println("Searchs results for A ");
 		TwitterSearch search = test.searchUser("A");
-		for(Profile p:  search.profiles)
+		for(TwitterProfile p:  search.profiles)
 			System.out.println("~~~~~ " +"\nName: " +p.getName() + "\nScreen name: " + p.getScreenName()  
 			+ "\nBio: " + p.getBio() + "\nLast Status: " + search.tweets.get(search.profiles.indexOf(p)).toString() + "\n~~~~~");
 			
