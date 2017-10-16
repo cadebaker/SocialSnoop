@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-import application.Post;
 import application.TwitterProfile;
 import twitter4j.ResponseList;
 import twitter4j.Status;
@@ -49,7 +48,7 @@ public class TwitterSnooper {
 	private final String ACCESS_TOKEN = "3319697893-lBMlF6DzYtDj0xl7v9gC7uRZ2xsafnOVr0GYMuY";
 	
 	/**Used to set up access token.*/
-	private final String ACCESS_TOKEN_SECRET = " XnmEUOrkMHfwgkV1wUcnoiDcFbjm5PdMUelgugBo8I8lB";
+	private final String ACCESS_TOKEN_SECRET = "XnmEUOrkMHfwgkV1wUcnoiDcFbjm5PdMUelgugBo8I8lB";
 	
 	/**Takes access token strings to gain access to twitter4j's capabilities.*/
 	private ConfigurationBuilder cb;
@@ -96,12 +95,16 @@ public class TwitterSnooper {
 
 		ArrayList<TwitterProfile> users = new ArrayList<TwitterProfile>();
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-		
+		try{
 		for(int page_index = 1; page_index <=  5; page_index++)	//Loops though first 20 pages.
 			for(User u  : twitter.searchUsers(searchInput, page_index)){ //Get users on each page.
 				users.add(new TwitterProfile(u));//Gets the name of the user.
 				tweets.add(new Tweet(u.getStatus(),u.getName(), u.getScreenName()));//Gets the last post from the user.
 			}
+		}
+		catch(Exception e){
+			
+		}
 		return new TwitterSearch(users,tweets); 	
 	}
 	
@@ -159,17 +162,17 @@ public class TwitterSnooper {
 	*/
 	public static void main(String [] args) throws TwitterException{
 		
-		TwitterSnooper test = new TwitterSnooper("Qaw0NK0hKJtVBGddXwMTtmTdT","YZ6nRlV9rhqAr5kK9pa1n67NJgS9SlYREVIlri8qOyueymhwgi");
+		TwitterSnooper test = new TwitterSnooper("FhCBvdpzex12AQmkQMKEobkei","8tGcCduevsMdEWSL2K7uZS4gHiGP8v9U5lswJ3SMogXbigu4Wy");
 		
 		//test.getUsersProfilePic("A");	//Returns an array list of ImageIcons, can be displayed with a JLabel.
 		
 		
 		System.out.println("Searchs results for A ");
 		TwitterSearch search = test.searchUser("A");
-		for(TwitterProfile p:  search.profiles)
-			System.out.println("~~~~~ " +"\nName: " +p.getName() + "\nScreen name: " + p.getScreenName()  
-			+ "\nBio: " + p.getBio() + "\nLast Status: " + search.tweets.get(search.profiles.indexOf(p)).toString() + "\n~~~~~");
-			
+//		for(TwitterProfile p:  search.profiles)
+//			System.out.println("~~~~~ " +"\nName: " +p.getName().getText() + "\nScreen name: " + p.getScreenName().getText()  
+//			+ "\nBio: " + p.getBio().getText() + "\nLast Status: " + search.tweets.get(search.profiles.indexOf(p)).toString() + "\n~~~~~");
+//			
 	}
 	
 }
