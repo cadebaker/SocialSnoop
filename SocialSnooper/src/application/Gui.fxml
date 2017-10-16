@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -17,34 +16,20 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <left>
       <VBox prefHeight="800.0" prefWidth="276.0" styleClass="vbox-left" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="43.0" prefWidth="276.0">
+            <HBox prefHeight="16.0" prefWidth="276.0">
                <children>
-                  <Region prefHeight="43.0" prefWidth="80.0" />
-                  <VBox prefHeight="43.0" prefWidth="189.0">
-                     <children>
-                        <Region prefHeight="8.0" prefWidth="100.0" />
-                        <TextField fx:id="searchField" focusTraversable="false" onAction="#showField" prefHeight="28.0" prefWidth="189.0" promptText="search by name or email" styleClass="fieldR">
-                           <opaqueInsets>
-                              <Insets top="100.0" />
-                           </opaqueInsets>
-                           <font>
-                              <Font name="Times New Roman" size="14.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </VBox>
+                  <VBox prefHeight="35.0" prefWidth="276.0" />
                </children>
             </HBox>
             <HBox prefHeight="33.0" prefWidth="276.0">
                <children>
-                  <Region prefHeight="100.0" prefWidth="77.0" />
+                  <Region prefHeight="59.0" prefWidth="37.0" />
                   <Button fx:id="faceBookButton" mnemonicParsing="false" onAction="#buttonClicked" styleClass="image-button">
                      <graphic>
                         <ImageView fitHeight="48.0" fitWidth="177.0" preserveRatio="true">
@@ -114,9 +99,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile1T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile1I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile1F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile1T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile1I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile1F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -145,9 +130,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile2T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile2I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile2F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile2T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile2I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile2F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -176,9 +161,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile3T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile3I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile3F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile3T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile3I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile3F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -207,9 +192,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile4T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile4I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile4F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile4T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile4I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile4F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -238,9 +223,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile5T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile5I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile5F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile5T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile5I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile5F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -269,9 +254,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile6T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile6I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile6F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile6T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile6I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile6F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -300,9 +285,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile7T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile7I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile7F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile7T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile7I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile7F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -331,9 +316,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile8T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile8I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile8F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile8T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile8I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile8F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -362,9 +347,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile9T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile9I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile9F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile9T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile9I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile9F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -393,9 +378,9 @@
                                     <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Text fx:id="profile10T" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" />
-                                    <Text fx:id="profile10I" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" GridPane.rowIndex="1" />
-                                    <Text fx:id="profile10F" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="2" />
+                                    <Text fx:id="profile10T" strokeType="OUTSIDE" strokeWidth="0.0" text="Twitter URL" />
+                                    <Text fx:id="profile10I" strokeType="OUTSIDE" strokeWidth="0.0" text="Instagram URL" GridPane.rowIndex="1" />
+                                    <Text fx:id="profile10F" strokeType="OUTSIDE" strokeWidth="0.0" text="Facebook URL" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -430,3 +415,4 @@
       </HBox>
    </center>
 </BorderPane>
+
