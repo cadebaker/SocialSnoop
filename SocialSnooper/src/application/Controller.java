@@ -166,7 +166,7 @@ public class Controller {
 	private void setResultsArea() {
 		//Profile ay = new Profile(searchField.getText(), "description of this person", "/resources/fb-art.png");
 
-		displayBox.getChildren().addAll(ay.getPane());
+		//displayBox.getChildren().addAll(ay.getPane());
 	}
 
 	public Text[] getProfileNames() {
