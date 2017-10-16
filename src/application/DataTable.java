@@ -210,7 +210,7 @@ public class DataTable {
 	 * Method that prints all profile variables to a text file
 	 *****************************************************************************/
 	public void save(String fileName) {
-		fileName = "SocialSnooper\\src\\resources\\" + fileName;
+		fileName = "src\\resources\\" + fileName;
 		PrintWriter out = null;
 
 		try {
@@ -241,7 +241,7 @@ public class DataTable {
 
 		try {
 			// open the data file
-			Scanner fileReader = new Scanner(new File("SocialSnooper\\src\\resources\\" + fileName));
+			Scanner fileReader = new Scanner(new File("src\\resources\\" + fileName));
 
 			String[] profileArray = new String[10];
 
@@ -276,7 +276,7 @@ public class DataTable {
 	}
 
 	public void erase(String fileName) {
-		fileName = "SocialSnooper\\src\\resources\\" + fileName;
+		fileName = "src\\resources\\" + fileName;
 		PrintWriter out = null;
 
 		try {
