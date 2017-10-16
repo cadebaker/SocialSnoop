@@ -4,23 +4,26 @@ public class TableCell {
 
 	private String name;
 	private String twitterURL;
+	private String twitterName;
 	private String instagramURL;
+	private String instagramKey;
 	private String faceBookURL;
 	private String faceBookKey;
 
 	public TableCell() {
 		this.name = "";
 		this.twitterURL = "";
+		this.twitterName = "";
 		this.instagramURL = "";
+		this.instagramKey = "";
 		this.faceBookURL = "";
 		this.faceBookKey = "";
 	}
 
-	public TableCell(String name, String twitterURL, String instagramURL, String faceBookURL, String faceBookKey) {
+	public TableCell(String name, String twitterName, String instagramKey, String faceBookKey) {
 		this.name = name;
-		this.twitterURL = twitterURL;
-		this.instagramURL = instagramURL;
-		this.faceBookURL = faceBookURL;
+		this.twitterName = twitterName;
+		this.instagramKey = instagramKey;
 		this.faceBookKey = faceBookKey;
 	}
 
@@ -62,6 +65,22 @@ public class TableCell {
 
 	public void setFaceBookKey(String faceBookKey) {
 		this.faceBookKey = faceBookKey;
+	}
+
+	public String getTwitterName() {
+		return twitterName;
+	}
+
+	public void setTwitterName(String twitterKey) {
+		this.twitterName = twitterKey;
+	}
+
+	public String getInstagramKey() {
+		return instagramKey;
+	}
+
+	public void setInstagramKey(String instagramKey) {
+		this.instagramKey = instagramKey;
 	}
 
 	
