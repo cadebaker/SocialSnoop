@@ -20,6 +20,7 @@ public class TwitterProfile {
 	private BorderPane pane;
 	/** The first and last name of the twitter user. */
 	Text name;
+	//private String name, screenName, bio, tweetDate;
 
 	/** The screen name of the twitter profile. */
 	Text screenName;
@@ -44,10 +45,13 @@ public class TwitterProfile {
 	 *            A user.
 	 *********************************************/
 	public TwitterProfile(User u) {
-		name = new Text(u.getName()); // Gets the name of the user.
-		screenName = new Text(u.getScreenName()); // Gets the screen name of the
+		//name = new Text(u.getName()); // Gets the name of the user.
+		name = new Text(u.getName());
+		//screenName = new Text(u.getScreenName()); // Gets the screen name of the
 													// user.
-		bio = new Text(u.getDescription()); // Gets the user description.
+		screenName = new Text(u.getScreenName());
+		//bio = new Text(u.getDescription()); // Gets the user description.
+		bio = new Text(u.getDescription());
 		url = u.getURL(); // Gets the URL of the user's twitter page.
 		image = new Image(u.getProfileImageURL());
 
@@ -59,7 +63,7 @@ public class TwitterProfile {
 		
 		profilePic.setPreserveRatio(true);
 		BorderPane.setMargin(profilePic, new Insets(12, 12, 8, 12));
-
+		
 		name.setId("name-text");
 
 		VBox textHolder = new VBox();
@@ -76,82 +80,60 @@ public class TwitterProfile {
 		
 	}
 
-	/******************************
-	 * Gets the name of the user.
-	 * 
-	 * @return A string of holding the users name.
-	 *****************************/
+	public BorderPane getPane() {
+		return pane;
+	}
+
+	public void setPane(BorderPane pane) {
+		this.pane = pane;
+	}
+
 	public Text getName() {
 		return name;
 	}
 
-	/****************************************************
-	 * Gets the screen name of the user
-	 * 
-	 * @return A string holding the users screen name.
-	 ***************************************************/
+	public void setName(Text name) {
+		this.name = name;
+	}
+
 	public Text getScreenName() {
 		return screenName;
 	}
 
-	/***************************************************
-	 * Gets a string holding the holding the users bio.
-	 * 
-	 * @return A string holding the users screen name.
-	 **************************************************/
+	public void setScreenName(Text screenName) {
+		this.screenName = screenName;
+	}
+
 	public Text getBio() {
 		return bio;
 	}
 
-	/*******************************************************
-	 * Gets the profile picture of the user.
-	 * 
-	 * @return a ImageIcon holding the users profile pic.
-	 ******************************************************/
+	public void setBio(Text bio) {
+		this.bio = bio;
+	}
+
 	public ImageView getProfilePic() {
 		return profilePic;
 	}
 
-	/*******************************************
-	 * Gets the URL to this users home page.
-	 * 
-	 * @return the URL converted to a string.
-	 *******************************************/
-	public String getURL() {
+	public void setProfilePic(ImageView profilePic) {
+		this.profilePic = profilePic;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	public String getUrl() {
 		return url;
 	}
 
-//	public Profile(String pName, String pDescription, Image img) {
-//
-//		this.name = new Text(pName);
-//		this.description = new Text(pDescription);
-//		this.image = img;
-//		picture = new ImageView(image);
-//
-//		// https://stackoverflow.com/questions/27894945/how-do-i-resize-an-imageview-image-in-javafx,
-//		// by James_D
-//		picture.setFitHeight(100);
-//		picture.setFitWidth(100);
-//		picture.setPreserveRatio(true);
-//		BorderPane.setMargin(picture, new Insets(12, 12, 8, 12));
-//
-//		name.setId("name-text");
-//
-//		VBox textHolder = new VBox();
-//		textHolder.getChildren().addAll(name, description);
-//		VBox.setMargin(name, new Insets(10, 10, 0, 0));
-//		VBox.setMargin(description, new Insets(0, 10, 10, 10));
-//
-//		pane = new BorderPane();
-//		pane.setLeft(picture);
-//		pane.setCenter(textHolder);
-//
-//		pane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//
-//	}
-
-	public BorderPane getPane() {
-		return pane;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
