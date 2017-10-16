@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import apis.Tweet;
+import apis.TwitterSearch;
 import apis.TwitterSnooper;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -38,6 +38,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import twitter4j.TwitterException;
 
+/******************************************************************************
+ * @author Logan Karney, Tony Sciarini
+ *****************************************************************************/
 public class Controller {
 
 	@FXML
@@ -47,10 +50,10 @@ public class Controller {
 	private Button instagramButton, faceBookButton, twitterButton, settingsButton;
 
 	// Profile Radio Buttons
-	
+
 	@FXML
 	private ToggleGroup profile;
-	
+
 	@FXML
 	private RadioButton profile1Button, profile2Button, profile3Button, profile4Button, profile5Button, profile6Button,
 			profile7Button, profile8Button, profile9Button, profile10Button;
@@ -69,14 +72,14 @@ public class Controller {
 			profile10I;
 
 	@FXML
-	private Text profile1F, profile2F, profile3F, profile4F, profile5F, profile6F, profile7F, profile8F,
-			profile9F, profile10F;
+	private Text profile1F, profile2F, profile3F, profile4F, profile5F, profile6F, profile7F, profile8F, profile9F,
+			profile10F;
 
 	// contains profile urls
 	@FXML
 	private TitledPane profile1Data, profile2Data, profile3Data, profile4Data, profile5Data, profile6Data, profile7Data,
 			profile8Data, profile9Data, profile10Data;
-
+	
 	// TODO: MAKE VARIABLES FOR EACH TEXT INSIDE THE TITLED PANES
 
 	@FXML
@@ -90,9 +93,18 @@ public class Controller {
 
 	private DataTable table;
 
+	private SocialFilter filter;
+	
+	
+	/**Determines when user is searching.*/
+	private boolean isSearching;
+
 	public Controller() {
 		table = new DataTable("savedprofiles.txt");
-
+		filter = SocialFilter.TWITTER;
+		isSearching = false;      //Initialize 
+		
+		//new Thread(this).start(); //Start the thread.
 	}
 
 	public void initialize() {
@@ -101,28 +113,20 @@ public class Controller {
 		for (int i = 0; i < getProfileNames().length; i++) {
 			getProfileNames()[i].setText(table.getProfileNames().get(i));
 		}
-		
-		//System.out.println(profile1Button.getToggleGroup());
-		//System.out.println(profile.getToggles());
-	}
 
-	@FXML
-	private void showField() {
-		//TODO unselect radiobutton
-		//profile.selectToggle(null);
-		
-		setResultsArea();
-
+		// System.out.println(profile1Button.getToggleGroup());
+		// System.out.println(profile.getToggles());
 	}
 
 	@FXML
 	private void buttonClicked(ActionEvent e) {
 		if (e.getSource() == faceBookButton) {
-			System.out.println("Switching to facebook searching");
+			filter = SocialFilter.FACEBOOK;
 		} else if (e.getSource() == twitterButton) {
+			filter = SocialFilter.TWITTER;
 			displayBox.getChildren().clear();
 		} else if (e.getSource() == instagramButton) {
-			System.out.println("Switching to instagram searching");
+			filter = SocialFilter.INSTAGRAM;
 		}
 	}
 
@@ -130,17 +134,37 @@ public class Controller {
 	private void settingsButtonClicked(ActionEvent e) {
 		// System.out.println(profile1Name.getText());
 		// DataTable table = new DataTable("savedprofiles.txt");
-		table.display();
-		// load data
 
+		table.display(this);
+		
+		
+		// load data
+		
 		// save new data
 		// update Profile changes
 
 	}
-	
+
 	@FXML
-	private void radioButtonClicked(){
-		System.out.println(profile.getSelectedToggle());
+	private void radioButtonClicked() {						//TODO
+		//System.out.println(profile.getSelectedToggle());
+		displayBox.getChildren().clear();
+		if (filter == SocialFilter.FACEBOOK) {
+			
+		} else if (filter == SocialFilter.INSTAGRAM) {
+
+		} else if (filter == SocialFilter.TWITTER) {
+			//isSearching = true;
+			TwitterSnooper snoop = new TwitterSnooper("FhCBvdpzex12AQmkQMKEobkei","8tGcCduevsMdEWSL2K7uZS4gHiGP8v9U5lswJ3SMogXbigu4Wy");
+			try {
+				TwitterSearch search = snoop.searchUser("cadebaker");
+				for(TwitterProfile p:  search.getProfiles()){
+					displayBox.getChildren().addAll(p.getPane());
+				}
+			} catch (TwitterException e) {
+				System.out.println("Error contacting twitter");
+			}
+		}
 	}
 
 	@FXML
@@ -149,42 +173,24 @@ public class Controller {
 			String id = accordian.getExpandedPane().getId();
 			int i = Integer.parseInt(id.substring(7, id.indexOf("Data"))) - 1;
 			table.load("savedprofiles.txt");
-			getProfileNames()[i].setText(table.getProfileNames().get(i));
+
+			// TODO: pull data from the keys
 			getProfileT()[i].setText(table.getTwitterURLs().get(i));
 			getProfileI()[i].setText(table.getInstagramURLs().get(i));
 			getProfileF()[i].setText(table.getFaceBookURLs().get(i));
-			
-			//System.out.println(table.getProfileNames().get(i) + " " + table.getTwitterURLs().get(i) + " "
-			//	+ table.getInstagramURLs().get(i) + " " + table.getFaceBookURLs().get(i));
-			
-			
-			
-			
-			
-			
+
+			// TODO: display data from active file
+
 		} catch (NullPointerException e) {
 		}
 
 	}
 
 	private void setResultsArea() {
-		
-		TwitterSnooper snoop = new TwitterSnooper("ggv4YVJFLp93MjAXvX0ZD6Cxi", "vtqZjFkwshwKr8P7hCSfinHnLnmXZBj4CpOlwiwNYyVvbMUcYK");
-		
-		try {
-			ArrayList<Tweet> tweets = snoop.getUserTimeLine();
-			
-			for(Tweet t : tweets)
-				System.out.println(t.toString());
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		//TwitterProfile ay = new TwitterProfile(u);
+		// Profile ay = new Profile(searchField.getText(), "description of this
+		// person", "/resources/fb-art.png");
 
-		//displayBox.getChildren().addAll(ay.getPane());
+		// displayBox.getChildren().addAll(ay.getPane());
 	}
 
 	public Text[] getProfileNames() {
@@ -214,4 +220,6 @@ public class Controller {
 
 		return rtn;
 	}
+	
+	
 }
