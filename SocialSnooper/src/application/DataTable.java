@@ -43,39 +43,39 @@ public class DataTable {
 
 	private String fileName;
 
-	private ArrayList<String> profileNames, twitterURLs, instagramURLs, faceBookURLs, faceBookKeys;
+	private ArrayList<String> profileNames, twitterURLs, twitterNames, instagramURLs, instagramKeys, faceBookURLs,
+			faceBookKeys;
 
 	Stage window;
 
 	TableView<TableCell> table;
 
-	TableColumn<TableCell, String> nameColumn, twitterColumn, instagramColumn, faceBookColumn, faceBookKeyColumn;
+	TableColumn<TableCell, String> nameColumn, twitterNameColumn, instagramKeyColumn, faceBookKeyColumn;
 
 	Scene scene;
 
 	Button clear, reset, done;
+	
+	private Controller c;
 
 	public DataTable(String fileName) {
 		this.fileName = fileName;
-		
 
 		setUp();
-
-		
 
 	}
-	
-	public void display() {
+
+	public void display(Controller c) {
+		this.c = c;
 		setUp();
-		
-		
+
 		window = new Stage();
 		window.initStyle(StageStyle.UNDECORATED);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Profiles");
 
 		window.setOnCloseRequest(e -> save(fileName));
-		
+
 		HBox hBox = new HBox();
 		hBox.setPadding(new Insets(10, 10, 10, 10));
 		// spacing between individual components
@@ -89,6 +89,7 @@ public class DataTable {
 		scene = new Scene(layout);
 		window.setScene(scene);
 		window.show();
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -99,20 +100,15 @@ public class DataTable {
 		// lower case string has to match the variable name in the sub class
 		nameColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("name"));
 
-		// Twitter column
-		twitterColumn = new TableColumn<>("Twitter URL");
-		twitterColumn.setMinWidth(200);
-		twitterColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("twitterURL"));
+		// TwitterKey column
+		twitterNameColumn = new TableColumn<>("Twitter Name");
+		twitterNameColumn.setMinWidth(200);
+		twitterNameColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("twitterName"));
 
-		// Instagram column
-		instagramColumn = new TableColumn<>("Instagram URL");
-		instagramColumn.setMinWidth(200);
-		instagramColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("instagramURL"));
-
-		// Facebook column
-		faceBookColumn = new TableColumn<>("Facebook URL");
-		faceBookColumn.setMinWidth(200);
-		faceBookColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("faceBookURL"));
+		// InstagramKey column
+		instagramKeyColumn = new TableColumn<>("Instagram Key");
+		instagramKeyColumn.setMinWidth(200);
+		instagramKeyColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("instagramKey"));
 
 		// FacebookKey column
 		faceBookKeyColumn = new TableColumn<>("Facebook Key");
@@ -122,9 +118,8 @@ public class DataTable {
 		// https://stackoverflow.com/questions/23300774/why-tableview-tablecolumn-is-not-editable
 		// by Aerospace
 		nameColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
-		twitterColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
-		instagramColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
-		faceBookColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
+		twitterNameColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
+		instagramKeyColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		faceBookKeyColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 
 		// https://stackoverflow.com/questions/41465181/tableview-update-database-on-edit,
@@ -134,26 +129,20 @@ public class DataTable {
 			cell.setName(event.getNewValue());
 		});
 
-		twitterColumn.setOnEditCommit(event -> {
+		twitterNameColumn.setOnEditCommit(event -> {
 			TableCell cell = event.getRowValue();
-			cell.setTwitterURL(event.getNewValue());
+			cell.setTwitterName(event.getNewValue());
 		});
 
-		instagramColumn.setOnEditCommit(event -> {
+		instagramKeyColumn.setOnEditCommit(event -> {
 			TableCell cell = event.getRowValue();
-			cell.setInstagramURL(event.getNewValue());
+			cell.setInstagramKey(event.getNewValue());
 		});
-		
-		faceBookColumn.setOnEditCommit(event -> {
-			TableCell cell = event.getRowValue();
-			cell.setFaceBookURL(event.getNewValue());
-		});
-		
+
 		faceBookKeyColumn.setOnEditCommit(event -> {
 			TableCell cell = event.getRowValue();
 			cell.setFaceBookKey(event.getNewValue());
 		});
-
 
 		// Clear button
 		clear = new Button();
@@ -184,6 +173,13 @@ public class DataTable {
 		done.setOnAction(e -> {
 			// save data
 			save(fileName);
+			load(fileName);
+			Text[] names = c.getProfileNames();
+			
+			for(int i = 0; i < names.length; i++){
+				names[i].setText(profileNames.get(i));
+			}
+			
 			window.close();
 		});
 
@@ -192,7 +188,7 @@ public class DataTable {
 		table.getSelectionModel().cellSelectionEnabledProperty().set(true);
 
 		table.setItems(getProfiles());
-		table.getColumns().addAll(nameColumn, twitterColumn, instagramColumn, faceBookColumn, faceBookKeyColumn);
+		table.getColumns().addAll(nameColumn, twitterNameColumn, instagramKeyColumn, faceBookKeyColumn);
 
 	}
 
@@ -203,8 +199,8 @@ public class DataTable {
 		ObservableList<TableCell> profiles = FXCollections.observableArrayList();
 
 		for (int i = 0; i < getProfileNames().size(); i++) {
-			profiles.add(
-					new TableCell(getProfileNames().get(i), twitterURLs.get(i), instagramURLs.get(i), faceBookURLs.get(i), faceBookKeys.get(i)));
+			profiles.add(new TableCell(getProfileNames().get(i), twitterNames.get(i), instagramKeys.get(i),
+					faceBookKeys.get(i)));
 		}
 
 		return profiles;
@@ -223,7 +219,7 @@ public class DataTable {
 			for (TableCell x : table.getItems()) {
 
 				out.println(
-						x.getName() + ":" + x.getTwitterURL() + ":" + x.getInstagramURL() + ":" + x.getFaceBookURL() + ":" + x.getFaceBookKey());
+						x.getName() + ":" + x.getTwitterName() + ":" + x.getInstagramKey() + ":" + x.getFaceBookKey());
 
 			}
 
@@ -239,9 +235,8 @@ public class DataTable {
 	 *****************************************************************************/
 	public void load(String fileName) {
 		setProfileNames(new ArrayList<String>());
-		twitterURLs = new ArrayList<String>();
-		instagramURLs = new ArrayList<String>();
-		faceBookURLs = new ArrayList<String>();
+		twitterNames = new ArrayList<String>();
+		instagramKeys = new ArrayList<String>();
 		faceBookKeys = new ArrayList<String>();
 
 		try {
@@ -260,10 +255,9 @@ public class DataTable {
 				String[] parts = p.split(":");
 
 				getProfileNames().add(parts[0]);
-				twitterURLs.add(parts[1]);
-				instagramURLs.add(parts[2]);
-				faceBookURLs.add(parts[3]);
-				faceBookKeys.add(parts[4]);
+				twitterNames.add(parts[1]);
+				instagramKeys.add(parts[2]);
+				faceBookKeys.add(parts[3]);
 			}
 
 			fileReader.close();
@@ -274,9 +268,8 @@ public class DataTable {
 			save(fileName);
 			for (int i = 0; i < 10; i++) {
 				getProfileNames().add("Profile");
-				twitterURLs.add("twitterURL");
-				instagramURLs.add("instagramURL");
-				faceBookURLs.add("facebookURL");
+				twitterNames.add("twitterName");
+				instagramKeys.add("instagramKey");
 				faceBookKeys.add("facebookKey");
 			}
 		}
@@ -291,7 +284,7 @@ public class DataTable {
 			// TODO: print out all text data in easily readable format
 			for (TableCell x : table.getItems()) {
 
-				out.println("Profile" + ":" + "twitterURL" + ":" + "instagramURL" + ":" + "facebookURL" + ":" + "facebookKey");
+				out.println("Profile" + ":" + "TwitterName" + ":" + "InstagramKey" + ":" + "FacebookKey");
 
 			}
 
@@ -340,5 +333,35 @@ public class DataTable {
 
 	public void setFaceBookKeys(ArrayList<String> faceBookKeys) {
 		this.faceBookKeys = faceBookKeys;
+	}
+
+	/******************************************************************************
+	 * @return the twitterKeys
+	 *****************************************************************************/
+	public ArrayList<String> getTwitterKeys() {
+		return twitterNames;
+	}
+
+	/******************************************************************************
+	 * @param twitterKeys
+	 *            the twitterKeys to set
+	 *****************************************************************************/
+	public void setTwitterKeys(ArrayList<String> twitterKeys) {
+		this.twitterNames = twitterKeys;
+	}
+
+	/******************************************************************************
+	 * @return the instagramKeys
+	 *****************************************************************************/
+	public ArrayList<String> getInstagramKeys() {
+		return instagramKeys;
+	}
+
+	/******************************************************************************
+	 * @param instagramKeys
+	 *            the instagramKeys to set
+	 *****************************************************************************/
+	public void setInstagramKeys(ArrayList<String> instagramKeys) {
+		this.instagramKeys = instagramKeys;
 	}
 }
