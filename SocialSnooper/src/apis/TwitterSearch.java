@@ -13,7 +13,7 @@ import application.TwitterProfile;
  *******************************************************************/
 public class TwitterSearch {
 	/**Array List of the twitter profiles that came for the search*/
-	protected ArrayList<TwitterProfile> profiles;
+	private ArrayList<TwitterProfile> profiles;
 	
 	/**Array List of the last status update if each twitter profile user.*/
 	protected ArrayList<Tweet> tweets;
@@ -26,7 +26,21 @@ public class TwitterSearch {
 	 * @return 
 	 *************************************************************************/
 	 TwitterSearch(ArrayList<TwitterProfile> p, ArrayList<Tweet> t){
-		profiles = p;
+		setProfiles(p);
 		tweets = t;
+	}
+
+	/******************************************************************************
+	 * @return the profiles
+	 *****************************************************************************/
+	public ArrayList<TwitterProfile> getProfiles() {
+		return profiles;
+	}
+
+	/******************************************************************************
+	 * @param profiles the profiles to set
+	 *****************************************************************************/
+	public void setProfiles(ArrayList<TwitterProfile> profiles) {
+		this.profiles = profiles;
 	}
 }
