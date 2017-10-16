@@ -5,8 +5,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import apis.Tweet;
+import apis.TwitterSnooper;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -33,6 +36,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import twitter4j.TwitterException;
 
 public class Controller {
 
@@ -164,7 +168,21 @@ public class Controller {
 	}
 
 	private void setResultsArea() {
-		//Profile ay = new Profile(searchField.getText(), "description of this person", "/resources/fb-art.png");
+		
+		TwitterSnooper snoop = new TwitterSnooper("ggv4YVJFLp93MjAXvX0ZD6Cxi", "vtqZjFkwshwKr8P7hCSfinHnLnmXZBj4CpOlwiwNYyVvbMUcYK");
+		
+		try {
+			ArrayList<Tweet> tweets = snoop.getUserTimeLine();
+			
+			for(Tweet t : tweets)
+				System.out.println(t.toString());
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		//TwitterProfile ay = new TwitterProfile(u);
 
 		//displayBox.getChildren().addAll(ay.getPane());
 	}
