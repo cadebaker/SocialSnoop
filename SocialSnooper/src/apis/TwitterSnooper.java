@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import application.Post;
 import application.TwitterProfile;
 import twitter4j.ResponseList;
 import twitter4j.Status;
@@ -45,10 +46,10 @@ public class TwitterSnooper {
 	private String consumerSecret;
 	
 	/**Used to set up access token.*/
-	private final String ACCESS_TOKEN = "";
+	private final String ACCESS_TOKEN = "3319697893-lBMlF6DzYtDj0xl7v9gC7uRZ2xsafnOVr0GYMuY";
 	
 	/**Used to set up access token.*/
-	private final String ACCESS_TOKEN_SECRET = "";
+	private final String ACCESS_TOKEN_SECRET = " XnmEUOrkMHfwgkV1wUcnoiDcFbjm5PdMUelgugBo8I8lB";
 	
 	/**Takes access token strings to gain access to twitter4j's capabilities.*/
 	private ConfigurationBuilder cb;
@@ -104,15 +105,24 @@ public class TwitterSnooper {
 		return new TwitterSearch(users,tweets); 	
 	}
 	
+	public ArrayList<Tweet> getUserTimeLine() throws TwitterException {
+		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+		
+		for(Status s : twitter.getUserTimeline())
+			tweets.add(new Tweet(s, s.getUser().getName(), s.getUser().getScreenName() ));
+		
+		return tweets;
+	}
+	
 	/********************************************************************************
 	 * Searches for one user. Used mostly for testing.
 	 * @param searchInput	The screen name or name of the user being searched for.
 	 * @return				The user 
 	 * @throws TwitterException If twitter is down.
 	 ********************************************************************************/
-	public User searchAUser(String searchInput)throws TwitterException{
-		return twitter.lookupUsers(searchInput).get(0);
-	}
+	//public User searchAUser(String searchInput)throws TwitterException{
+	//	return twitter.lookupUsers(searchInput).get(0);
+	//}
 	
 	/**********************************************************************
 	 * Given a user, u, this method will return the last tweet made by that
