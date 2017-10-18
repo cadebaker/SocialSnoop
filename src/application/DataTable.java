@@ -404,17 +404,17 @@ public class DataTable {
 	}
 
 	/******************************************************************************
-	 * @return ArrayList of twitterKeys
+	 * @return ArrayList of twitterNames
 	 *****************************************************************************/
-	public ArrayList<String> getTwitterKeys() {
+	public ArrayList<String> getTwitterNames() {
 		return twitterNames;
 	}
 
 	/******************************************************************************
 	 * @param twitterKeys
-	 *            sets twitterKeys
+	 *            sets twitterNames
 	 *****************************************************************************/
-	public void setTwitterKeys(ArrayList<String> twitterKeys) {
+	public void setTwitterNames(ArrayList<String> twitterKeys) {
 		this.twitterNames = twitterKeys;
 	}
 
