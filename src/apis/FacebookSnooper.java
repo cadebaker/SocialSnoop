@@ -32,11 +32,10 @@ public class FacebookSnooper {
 	/* private string to hold the user's Facebook access token */
 	private static String MY_ACCESS_TOKEN = "";
 
-	/*
-	 * private string to hold the application secret (never changes so its
-	 * static)
-	 */
-	private static final String MY_APP_SECRET = "9e1c68e2f607f6b1be1bbef52913421c";
+	/* private string to hold the application secret (never changes so its
+	 * static)*/
+	private static final String MY_APP_SECRET = 
+			"9e1c68e2f607f6b1be1bbef52913421c";
 
 	/* private FacebookClient object to set up access to the Facebook API */
 	private FacebookClient facebookClient;
@@ -56,14 +55,11 @@ public class FacebookSnooper {
 	/* private arraylist of strings to hold the links to the posts */
 	private ArrayList<String> postLink = new ArrayList<String>();
 
-	private User activeUserImages;
+	/* private arraylist of profiles created by the api */
+	private ArrayList<FacebookProfile> profiles = 
+			new ArrayList<FacebookProfile>();
 
-	/** private arraylist of profiles created by the api */
-	private ArrayList<FacebookProfile> profiles = new ArrayList<FacebookProfile>();
-
-	/**
-	 * private instance of the controller class, used to manipulate GUI data
-	 **/
+	/*private instance of the controller class, used to manipulate GUI data*/
 	private Controller c;
 
 	/**********************************************************************
@@ -82,7 +78,8 @@ public class FacebookSnooper {
 
 		// Initialize a Facebook Client using RestFB, the user's access token,
 		// and the application secret
-		facebookClient = new DefaultFacebookClient(MY_ACCESS_TOKEN, MY_APP_SECRET, Version.VERSION_2_8);
+		facebookClient = new DefaultFacebookClient
+				(MY_ACCESS_TOKEN, MY_APP_SECRET, Version.VERSION_2_8);
 
 		// Initialize a user object from RestFB
 		activeUser = facebookClient.fetchObject("me", User.class);
@@ -108,9 +105,8 @@ public class FacebookSnooper {
 	public String getProfilePicture() {
 		// create a JSONObject to pull the user's high quality profile
 		// picture URL and filter out the fields that are not the URL
-		JsonObject js = facebookClient.fetchObject("/me/picture", JsonObject.class, Parameter.with("type", "large"), // the
-																														// image
-																														// size
+		JsonObject js = facebookClient.fetchObject("/me/picture", 
+				JsonObject.class, Parameter.with("type", "large"),
 				Parameter.with("redirect", "false"), // don't redirect
 				Parameter.with("fields", "url")); // only show URL
 
@@ -133,14 +129,15 @@ public class FacebookSnooper {
 		return activeUser.getName();
 	}
 
-	/***********************************************************************
+	/***************************************************************************
 	 * getPosts() gets the user's posts from Facebook and stores them as
 	 * FacebookProfile object
-	 **********************************************************************/
+	 **************************************************************************/
 	public void getPosts() {
 
 		// Create a connection to the Facebook posts for the active user
-		Connection<Post> myFeed = facebookClient.fetchConnection("me/feed", Post.class);
+		Connection<Post> myFeed = 
+				facebookClient.fetchConnection("me/feed", Post.class);
 
 		// Store the posts from myFeed in the myFeedPage array
 		for (List<Post> myFeedPage : myFeed) {
@@ -175,32 +172,66 @@ public class FacebookSnooper {
 		}
 	}
 
-	/******************************************************************************
+	/***************************************************************************
 	 * @return profiles
-	 *****************************************************************************/
+	 **************************************************************************/
 	public ArrayList<FacebookProfile> getProfiles() {
 		return profiles;
 	}
 
-	/******************************************************************************
-	 * @param profiles
-	 *            sets profiles
-	 *****************************************************************************/
+	/***************************************************************************
+	 * @param profile sets profiles
+	 **************************************************************************/
 	public void setProfiles(ArrayList<FacebookProfile> profiles) {
 		this.profiles = profiles;
 	}
+	
+	/***************************************************************************
+	 * getPostData() returns the arraylist of postData
+	 * @return returns the postData array
+	 **************************************************************************/
+	public ArrayList<String> getPostData() {
+		return postData;
+	}
+	
+	/***************************************************************************
+	 * getPostStory() returns the arraylist of postStory
+	 * @return returns the postStory array
+	 **************************************************************************/
+	public ArrayList<String> getPostStory() {
+		return postStory;
+	}
+	
+	/***************************************************************************
+	 * getPostTime() returns the arraylist of postTime
+	 * @return returns the postTime array
+	 **************************************************************************/
+	public ArrayList<Date> getPostTime() {
+		return postTime;
+	}
+	
+	/***************************************************************************
+	 * getPostLink() returns the arraylist of postLink
+	 * @return returns the postLink array
+	 **************************************************************************/
+	public ArrayList<String> getPostLink() {
+		return postLink;
+	}
 
-	/***********************************************************************
+	/***************************************************************************
 	 * main(String[] args) tests different aspects of the code above, such as
 	 * the ability to use the constructor and the getters
 	 * 
 	 * @param args
 	 *            Default requirement for the running of the program
-	 **********************************************************************/
+	 **************************************************************************/
 	public static void main(String[] args) {
 		// utilize the constructor with a long term access token (Cade's)
 		FacebookSnooper fb = new FacebookSnooper(
-				"EAAL02oTtWsgBANXt6DOJPxBuvCQZBTFW3y5I4Eny6WNr2gsQHLeFOZBodPHfEa5Gusffv72PRCwSVPeT8LDhsqMzP8qdlGzpvxSePMVmBrTJHMaupYv4GTJqLZAUIa5jCUxijD1zAuhfqJPmmDZAZBExoIcMZAJmZAK5PZBG1aWbvwZDZD", null);
+				"EAAL02oTtWsgBANXt6DOJPxBuvCQZBTFW3y5I4Eny6WNr2gsQHLeFOZBodPHf"
+				+ "Ea5Gusffv72PRCwSVPeT8LDhsqMzP8qdlGzpvxSePMVmBrTJHMaupYv4GTJq"
+				+ "LZAUIa5jCUxijD1zAuhfqJPmmDZAZBExoIcMZAJmZAK5PZBG1aWbvwZDZD"
+				, null);
 
 		// get the user's name
 		System.out.println(fb.getName());
@@ -209,3 +240,4 @@ public class FacebookSnooper {
 		System.out.println(fb.getProfilePicture());
 
 	}
+}
