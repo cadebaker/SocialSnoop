@@ -1,10 +1,10 @@
 package apis;
 
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.swing.JTextField;
+//import javax.swing.JTextField;
 
 import twitter4j.Status;
 
@@ -35,8 +35,10 @@ public class Tweet {
 	 * information about the time the tweet was posted. The name and 
 	 * screen name of the postee. And the text of the tweet. 
 	 * @param s A Status form a user
+	 * @param name A name
+	 * @param screenName The Twitter screen name
 	 ******************************************************************/
-	public Tweet(Status s, String name, String screenName){
+	public Tweet(final Status s, final String name, final String screenName) {
 		tweetTime = dateToString(s.getCreatedAt()); //Get time tweeted.
 		this.name = name; //get the name of the user that posted the tweet
 		this.screenName = screenName; //get the screen name of the user that posted the tweet.
@@ -44,15 +46,15 @@ public class Tweet {
 	}
 	/*******************************************
 	 * Gets the time the tweet was tweeted.
-	 * @return 
+	 * @return String
 	 *******************************************/
 	public String getTweetTime() {
 		return tweetTime;
 	}
 	
 	/**************************************************
-	 * Gets the name of the user who tweeted the post
-	 * @return
+	 * Gets the name of the user who tweeted the post.
+	 * @return String
 	 **************************************************/
 	public String getName() {
 		return name;
@@ -60,7 +62,7 @@ public class Tweet {
 
 	/***********************************************************
 	 * Gets the screen name of the user that tweeted the post.
-	 * @return
+	 * @return String
 	 ***********************************************************/
 	public String getScreenName() {
 		return screenName;
@@ -68,43 +70,53 @@ public class Tweet {
 
 	/***********************************
 	 * Gets the text of the tweet.
-	 * @return
+	 * @return String
 	 **********************************/
 	public String getTweet() {
 		return tweet;
 	}
-	
-	public String toString(){
+	/********************************************************** 
+	 * A to string method that will print out information.
+	 * @return String 
+	 **********************************************************/
+	public String toString() {
 		return name + " * " + screenName + " * " + tweetTime + "\n\t" + tweet + "\n";
 	}
 	
 	/****************************************************
 	 * Converts a object of Date to a formatted string.
-	 * @param Date Date that is to be converted.
+	 * @param date Date that is to be converted.
 	 * @return A string representation of the Date.
 	 ****************************************************/
 	@SuppressWarnings("deprecation")
-	private String dateToString(Date date){
+	private String dateToString(final Date date) {
 		
 		//Compare current date to the time the other date was created.
 		//SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy"); //Format the date.
 		Date current = Calendar.getInstance().getTime();		  //Get the current date.
 	
-		int x= date.compareTo(current);
+		int x = date.compareTo(current);
 		
-		if(x == 0) //If the tweet was posted today.
-			if(date.getHours() == 1) //If it was posted within the last hour use minutes.
+		
+		if (x == 0) { //If the tweet was posted today. 
+			if (date.getHours() == 1) { //If it was posted within the last hour use minutes.
 				return date.getMinutes() + "m";
-			else
-				return date.getHours() + "h";//If posted more than an hour ago then use hours.
-		else if(x < 0)  //If the tweet was posted before current date, then use the month and the day.
-			return date.toString().substring(4,11);
-		else
+			} else {
+				return date.getHours() + "h"; //If posted more than an hour ago then use hours.
+			}
+		} else if (x < 0) { //If the tweet was posted before current date, then use the month and the day.
+			return date.toString().substring(4, 11);
+		} else {
 			return "FUUUUTURE!!!"; //If the post was made in the future
+		}
 	}
 	
-	public static void main(String [] args){
+	/***************************************************************
+	 *  Main method. 
+	 *  @param args is standard main parameter
+	 ***************************************************************/
+	public static void main(final String[] args) {
 		Date date = Calendar.getInstance().getTime();
-		System.out.println(date.toString().substring(4,11));
+		System.out.println(date.toString().substring(4, 11));
 	}
 }

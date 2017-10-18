@@ -1,35 +1,35 @@
 package application;
 
 /*******************************************************************************
- * Class that the DataTable.TableView is comprised of
+ * Class that the DataTable.TableView is comprised of.
  *
  * @author Logan Karney
  ******************************************************************************/
 public class TableCell {
 
-	/** Name of Cell **/
+	/** Name of Cell. **/
 	private String name;
 
-	/** Twitter URL of Cell **/
+	/** Twitter URL of Cell. **/
 	private String twitterURL;
 
-	/** Twitter Profile Name of Cell **/
+	/** Twitter Profile Name of Cell. **/
 	private String twitterName;
 
-	/** Instagram URL of CEll **/
+	/** Instagram URL of CEll. **/
 	private String instagramURL;
 
-	/** Instagram Token of Cell **/
+	/** Instagram Token of Cell. **/
 	private String instagramKey;
 
-	/** Facebook URL of Cell **/
+	/** Facebook URL of Cell. **/
 	private String faceBookURL;
 
-	/** Facebook Token of Cell **/
+	/** Facebook Token of Cell. **/
 	private String faceBookKey;
 
 	/******************************************************************************
-	 * Default Constructor
+	 * Default Constructor.
 	 *****************************************************************************/
 	public TableCell() {
 		this.name = "";
@@ -51,7 +51,7 @@ public class TableCell {
 	 * @param faceBookKey
 	 * Cell faceBook token
 	 *****************************************************************************/
-	public TableCell(String name, String twitterName, String instagramKey, String faceBookKey) {
+	public TableCell(final String name, final String twitterName, final String instagramKey, final String faceBookKey) {
 		this.name = name;
 		this.twitterName = twitterName;
 		this.instagramKey = instagramKey;
@@ -69,7 +69,7 @@ public class TableCell {
 	 * @param name
 	 *            sets the profile name
 	 *****************************************************************************/
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
@@ -84,7 +84,7 @@ public class TableCell {
 	 * @param twitterURL
 	 *            sets the Twitter URL
 	 *****************************************************************************/
-	public void setTwitterURL(String twitterURL) {
+	public void setTwitterURL(final String twitterURL) {
 		this.twitterURL = twitterURL;
 	}
 
@@ -99,7 +99,7 @@ public class TableCell {
 	 * @param instagramURL
 	 *            sets the Instagram URL
 	 *****************************************************************************/
-	public void setInstagramURL(String instagramURL) {
+	public void setInstagramURL(final String instagramURL) {
 		this.instagramURL = instagramURL;
 	}
 
@@ -114,7 +114,7 @@ public class TableCell {
 	 * @param faceBookURL
 	 *            sets the Instagram URL
 	 *****************************************************************************/
-	public void setFaceBookURL(String faceBookURL) {
+	public void setFaceBookURL(final String faceBookURL) {
 		this.faceBookURL = faceBookURL;
 	}
 
@@ -129,7 +129,7 @@ public class TableCell {
 	 * @param faceBookKey
 	 *            sets the faceBookKey
 	 *****************************************************************************/
-	public void setFaceBookKey(String faceBookKey) {
+	public void setFaceBookKey(final String faceBookKey) {
 		this.faceBookKey = faceBookKey;
 	}
 
@@ -144,7 +144,7 @@ public class TableCell {
 	 * @param twitterKey
 	 *            sets the twitterKey
 	 *****************************************************************************/
-	public void setTwitterName(String twitterKey) {
+	public void setTwitterName(final String twitterKey) {
 		this.twitterName = twitterKey;
 	}
 
@@ -159,7 +159,7 @@ public class TableCell {
 	 * @param instagramKey
 	 * sets the InstagramKey
 	 *****************************************************************************/
-	public void setInstagramKey(String instagramKey) {
+	public void setInstagramKey(final String instagramKey) {
 		this.instagramKey = instagramKey;
 	}
 

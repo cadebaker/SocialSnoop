@@ -10,25 +10,29 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /*******************************************************************************
- * Class that makes a pop-up to ensure the user wants to close the main program
+ * Class that makes a pop-up to ensure the user wants to close the main program.
  *
  * @author Logan Karney
  ******************************************************************************/
-public class CloseBox {
+public final class CloseBox {
 
-	/** the user given input **/
-	static boolean answer;
-
-	/******************************************************************************
-	 * Displays the pop-up
+	/** the user given input.**/
+	private static boolean answer;
+	
+	/** Constructor. */
+	protected CloseBox() {
+		answer = true;
+	}
+	/**********************************************************************
+	 * Displays the pop-up.
 	 *
 	 * @param title
 	 *            the title of the window
 	 * @param message
 	 *            the message displayed to the user
-	 * @return
-	 *****************************************************************************/
-	public static boolean display(String title, String message) {
+	 * @return boolean
+	 ****************************************************************/
+	static boolean display(final String title, final String message) {
 		Stage window = new Stage();
 
 		// removes minimize and maximize buttons from the frame

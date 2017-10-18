@@ -1,5 +1,6 @@
 package apis;
 
+
 import java.util.Date;
 
 import com.restfb.types.Post;
@@ -13,48 +14,48 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 /*******************************************************************************
- * Class that formats data pulled from the Facebook API
+ * Class that formats data pulled from the Facebook API.
  *
  * @author Logan
  ******************************************************************************/
 public class FacebookProfile {
 
-	/** the primary storage container **/
+	/** the primary storage container. **/
 	private HBox pane;
 
-	/** Holds the text data from the facebook API **/
+	/** Holds the text data from the facebook API. **/
 	private VBox textHolder;
 
-	/** The Post's main data **/
+	/** The Post's main data. **/
 	private Text postDataText;
 
-	/** The Post's secondary heading **/
+	/** The Post's secondary heading. **/
 	private Text postStoryText;
 
-	/** Time at which the post was made **/
+	/** Time at which the post was made. **/
 	private Date postTime;
 
-	/** Raw data from the Facebook API **/
-	@SuppressWarnings("unused")
+	/** Raw data from the Facebook API. **/
+	@SuppressWarnings("Unused field")
 	private Post p;
 
-	/** The object created from the Profile Image url **/
+	/** The object created from the Profile Image url. **/
 	private Image img;
 
 	/******************************************************************************
 	 * @param p
-	 *            Raw data from the facebook API
+	 *            Raw data from the facebook API.
 	 * @param c
 	 *            Instance of the Controller class
 	 *****************************************************************************/
 	@SuppressWarnings("deprecation")
-	public FacebookProfile(Post p, Controller c) {
+	public FacebookProfile(final Post p, final Controller c) {
 
 		this.img = c.getFbProfilePicture();
 
 		pane = new HBox();
 
-		this.p = p;
+		//this.p = p;
 
 		textHolder = new VBox();
 
@@ -71,21 +72,23 @@ public class FacebookProfile {
 	}
 
 	/******************************************************************************
-	 * @return a VBox that contains relevant Text Post information
+	 * @return a VBox that contains relevant Text Post information.
 	 *****************************************************************************/
 	public VBox getVBox() {
-		if (!postDataText.getText().trim().equals(null))
+		if (!postDataText.getText().trim().equals("")) {
 			textHolder.getChildren().addAll(postDataText);
 		VBox.setMargin(postDataText, new Insets(5, 10, 0, 10));
-
-		if (!postStoryText.getText().equals(null)) {
+		}
+		if (!postStoryText.getText().equals("")) {
 			postDataText.setId("name-text");
-			if (postDataText.getText().trim().equals(""))
+			if (postDataText.getText().trim().equals("")) {
 
 				textHolder.getChildren().addAll(postStoryText);
 
 			VBox.setMargin(postStoryText, new Insets(0, 0, 0, 10));
+			}
 		} else {
+			return textHolder;
 		}
 
 		return textHolder;
@@ -93,14 +96,14 @@ public class FacebookProfile {
 
 	/******************************************************************************
 	 * @param img
-	 *            sets the Image url
+	 *            sets the Image url.
 	 *****************************************************************************/
-	public void setImg(Image img) {
+	public void setImg(final Image img) {
 		this.img = img;
 	}
 
 	/******************************************************************************
-	 * @return a HBox Container that has the user's profile image and text data
+	 * @return a HBox Container that has the user's profile image and text data.
 	 *****************************************************************************/
 	public HBox getHBox() {
 

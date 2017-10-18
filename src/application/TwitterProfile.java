@@ -9,29 +9,32 @@ import javafx.scene.text.Text;
 import twitter4j.User;
 
 /*******************************************************************************
- * Creates a user profile generated from data taken from the Twitter api
+ * Creates a user profile generated from data taken from the Twitter api.
  *
  * @author Logan Karney
  ******************************************************************************/
 public class TwitterProfile {
 
+	/** Creates Border. */
 	private BorderPane pane;
 	/** The first and last name of the twitter user. */
-	protected Text name;
+	private Text name;
 	// private String name, screenName, bio, tweetDate;
 
 	/** The screen name of the twitter profile. */
-	protected Text screenName;
+	//Text screenName;
 
 	/** The users bio. */
 	private Text bio;
 
 	/** The users profile picture. */
-	protected ImageView profilePic;
-	protected Image image;
+	private ImageView profilePic;
+	
+	/** Create image. */
+	private Image image;
 
 	/** The URL of the users home twitter page. */
-	private String url;
+	//private String url;
 
 	// private ImageIcon profilePic;
 
@@ -42,16 +45,16 @@ public class TwitterProfile {
 	 * @param u
 	 *            A user.
 	 *********************************************/
-	public TwitterProfile(User u) {
+	public TwitterProfile(final User u) {
 		// name = new Text(u.getName()); // Gets the name of the user.
 		name = new Text(u.getName());
 		// screenName = new Text(u.getScreenName()); // Gets the screen name of
 		// the
 		// user.
-		screenName = new Text(u.getScreenName());
+		//screenName = new Text(u.getScreenName());
 		// bio = new Text(u.getDescription()); // Gets the user description.
-		setBio(new Text(u.getDescription()));
-		url = u.getURL(); // Gets the URL of the user's twitter page.
+		bio = new Text(u.getDescription());
+		//url = u.getURL(); // Gets the URL of the user's twitter page.
 		image = new Image(u.getBiggerProfileImageURL());
 
 		profilePic = new ImageView(image);
@@ -66,9 +69,9 @@ public class TwitterProfile {
 		name.setId("name-text");
 
 		VBox textHolder = new VBox();
-		textHolder.getChildren().addAll(name, getBio());
+		textHolder.getChildren().addAll(name, bio);
 		VBox.setMargin(name, new Insets(10, 10, 0, 0));
-		VBox.setMargin(getBio(), new Insets(0, 10, 10, 10));
+		VBox.setMargin(bio, new Insets(0, 10, 10, 10));
 
 		pane = new BorderPane();
 		pane.setLeft(profilePic);
@@ -83,38 +86,5 @@ public class TwitterProfile {
 	 *****************************************************************************/
 	public BorderPane getPane() {
 		return pane;
-	}
-
-	/********************************************************
-	 * Gets the twitter user bio.
-	 * @return	returns the a text object of the user bio.
-	 ********************************************************/
-	public Text getBio() {
-		return bio;
-	}
-	
-	/***************************************
-	 * Sets the bio of the user profile.
-	 * @param bio a object of text
-	 **************************************/
-	public void setBio(Text bio){
-		this.bio = bio;
-	}
-
-	/*********************************************
-	 * Gets the twitter user name.
-	 * @return returns a Text of the user name.
-	 *********************************************/
-	public Text getName() {
-		// TODO Auto-generated method stub
-		return name;
-	}
-	
-	/*******************************************************************
-	 * Gets the screen name of the twitter user.
-	 * @return returns a Text object of the twitter users screen name.
-	 ******************************************************************/
-	public Text getScreenName(){
-		return screenName;
 	}
 }

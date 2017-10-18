@@ -25,43 +25,43 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /*******************************************************************************
- * Class that handles the local saving and loading of profile data
+ * Class that handles the local saving and loading of profile data.
  *
  * @author Logan Karney
  ******************************************************************************/
 public class DataTable {
 
-	/** name of the text file that is loaded **/
+	/** name of the text file that is loaded. **/
 	private String fileName;
 
-	/** Used to hold the data of multiple profiles **/
+	/** Used to hold the data of multiple profiles. **/
 	private ArrayList<String> profileNames, twitterURLs, twitterNames, instagramURLs, instagramKeys, faceBookURLs,
 			faceBookKeys;
 
-	/** primary stage **/
-	Stage window;
+	/** primary stage. **/
+	private Stage window;
 
-	/** Display Table **/
-	TableView<TableCell> table;
+	/** Display Table. **/
+	private TableView<TableCell> table;
 
-	/** columns displayed in the table object **/
-	TableColumn<TableCell, String> nameColumn, twitterNameColumn, instagramKeyColumn, faceBookKeyColumn;
+	/** columns displayed in the table object. **/
+	private TableColumn<TableCell, String> nameColumn, twitterNameColumn, instagramKeyColumn, faceBookKeyColumn;
 
-	/** scene **/
-	Scene scene;
+	/** scene. **/
+	private Scene scene;
 
-	/** Buttons used for user interaction within the menu **/
-	Button clear, reset, done;
+	/** Buttons used for user interaction within the menu. **/
+	private Button clear, reset, done;
 
-	/** instance of the Controller class that called this class **/
+	/** instance of the Controller class that called this class. **/
 	private Controller c;
 
 	/******************************************************************************
-	 * Sets up Data and saves filename variable
+	 * Sets up Data and saves filename variable.
 	 * 
-	 * @param fileName
+	 * @param fileName is name of file
 	 *****************************************************************************/
-	public DataTable(String fileName) {
+	public DataTable(final String fileName) {
 		this.fileName = fileName;
 
 		setUp();
@@ -69,12 +69,12 @@ public class DataTable {
 	}
 
 	/******************************************************************************
-	 * Displays relevant saved data
+	 * Displays relevant saved data.
 	 *
 	 * @param c
 	 *            Controller class
 	 *****************************************************************************/
-	public void display(Controller c) {
+	public void display(final Controller c) {
 		this.c = c;
 		setUp();
 
@@ -105,7 +105,7 @@ public class DataTable {
 	}
 
 	/******************************************************************************
-	 * Prepares data to be displayed
+	 * Prepares data to be displayed.
 	 *****************************************************************************/
 	@SuppressWarnings("unchecked")
 	public void setUp() {
@@ -213,7 +213,7 @@ public class DataTable {
 	}
 
 	/******************************************************************************
-	 * @return ArrayList of TableCells
+	 * @return ArrayList of TableCells.
 	 *****************************************************************************/
 	public ObservableList<TableCell> getProfiles() {
 
@@ -230,17 +230,17 @@ public class DataTable {
 	}
 
 	/******************************************************************************
-	 * Method that prints all profile variables to a text file
+	 * Method that prints all profile variables to a text file.
 	 * 
 	 * @param fileName
 	 * text file to which the data is saved
 	 *****************************************************************************/
-	public void save(String fileName) {
-		fileName = "src\\resources\\" + fileName;
+	public void save(final String fileName) {
+		String file = "src\\resources\\" + fileName;
 		PrintWriter out = null;
 
 		try {
-			out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+			out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
 
 			for (TableCell x : table.getItems()) {
 
@@ -257,12 +257,12 @@ public class DataTable {
 	}
 
 	/******************************************************************************
-	 * Method that uses a scanner to read profile variables from a text file
+	 * Method that uses a scanner to read profile variables from a text file.
 	 * 
 	 * @param fileName
 	 * text file that is loaded
 	 *****************************************************************************/
-	public void load(String fileName) {
+	public void load(final String fileName) {
 		setProfileNames(new ArrayList<String>());
 		twitterNames = new ArrayList<String>();
 		instagramKeys = new ArrayList<String>();
@@ -292,10 +292,7 @@ public class DataTable {
 			}
 
 			fileReader.close();
-		}
-
-		// could not find file
-		catch (Exception error) {
+		} catch (Exception error) { //could not find file
 			save(fileName);
 			for (int i = 0; i < 10; i++) {
 
@@ -310,16 +307,16 @@ public class DataTable {
 	}
 
 	/******************************************************************************
-	 * Erases all unsaved changes from the TableView
+	 * Erases all unsaved changes from the TableView.
 	 *
-	 * @param fileName
+	 * @param fileName is name of file
 	 *****************************************************************************/
-	public void erase(String fileName) {
-		fileName = "src\\resources\\" + fileName;
+	public void erase(final String fileName) {
+		String file = "src\\resources\\" + fileName;
 		PrintWriter out = null;
 
 		try {
-			out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+			out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
 
 			// sets default values
 			for (@SuppressWarnings("unused") TableCell x : table.getItems()) {
@@ -335,7 +332,7 @@ public class DataTable {
 	}
 
 	/******************************************************************************
-	 * @return ArrayList of profileNames
+	 * @return ArrayList of profileNames.
 	 *****************************************************************************/
 	public ArrayList<String> getProfileNames() {
 		return profileNames;
@@ -343,14 +340,14 @@ public class DataTable {
 
 	/******************************************************************************
 	 * @param profileNames
-	 *            sets profileNames
+	 *            sets profileNames.
 	 *****************************************************************************/
-	public void setProfileNames(ArrayList<String> profileNames) {
+	public void setProfileNames(final ArrayList<String> profileNames) {
 		this.profileNames = profileNames;
 	}
 
 	/******************************************************************************
-	 * @return ArrayList of twitterURLs
+	 * @return ArrayList of twitterURLs.
 	 *****************************************************************************/
 	public ArrayList<String> getTwitterURLs() {
 		return twitterURLs;
@@ -358,44 +355,44 @@ public class DataTable {
 
 	/******************************************************************************
 	 * @param twitterURLs
-	 *            sets twitterURls
+	 *            sets twitterURls.
 	 *****************************************************************************/
-	public void setTwitterURLs(ArrayList<String> twitterURLs) {
+	public void setTwitterURLs(final ArrayList<String> twitterURLs) {
 		this.twitterURLs = twitterURLs;
 	}
 
-	/******************************************************************************
-	 * @return ArrayList of instagramURLS
-	 *****************************************************************************/
+	/************************************************************************
+	 * @return ArrayList of instagramURLS.
+	 **********************************************************************/
 	public ArrayList<String> getInstagramURLs() {
 		return instagramURLs;
 	}
 
-	/******************************************************************************
+	/***********************************************************************
 	 * @param instagramURLs
-	 *            sets instagramURls
-	 *****************************************************************************/
-	public void setInstagramURLs(ArrayList<String> instagramURLs) {
+	 *            sets instagramURls.
+	 ********************************************************************/
+	public void setInstagramURLs(final ArrayList<String> instagramURLs) {
 		this.instagramURLs = instagramURLs;
 	}
 
-	/******************************************************************************
-	 * @return ArrayList of faceBookURLs
-	 *****************************************************************************/
+	/************************************************************************
+	 * @return ArrayList of faceBookURLs.
+	 ***********************************************************************/
 	public ArrayList<String> getFaceBookURLs() {
 		return faceBookURLs;
 	}
 
-	/******************************************************************************
+	/**********************************************************************
 	 * @param faceBookURLs
-	 *            sets faceBookURLs
-	 *****************************************************************************/
-	public void setFaceBookURLs(ArrayList<String> faceBookURLs) {
+	 *            sets faceBookURLs.
+	 ********************************************************************/
+	public void setFaceBookURLs(final ArrayList<String> faceBookURLs) {
 		this.faceBookURLs = faceBookURLs;
 	}
 
 	/******************************************************************************
-	 * @return ArrayList of faceBookKeys
+	 * @return ArrayList of faceBookKeys.
 	 *****************************************************************************/
 	public ArrayList<String> getFaceBookKeys() {
 		return faceBookKeys;
@@ -403,14 +400,14 @@ public class DataTable {
 
 	/******************************************************************************
 	 * @param faceBookKeys
-	 *            sets faceBookKeys
+	 *            sets faceBookKeys.
 	 *****************************************************************************/
-	public void setFaceBookKeys(ArrayList<String> faceBookKeys) {
+	public void setFaceBookKeys(final ArrayList<String> faceBookKeys) {
 		this.faceBookKeys = faceBookKeys;
 	}
 
 	/******************************************************************************
-	 * @return ArrayList of twitterNames
+	 * @return ArrayList of twitterNames.
 	 *****************************************************************************/
 	public ArrayList<String> getTwitterNames() {
 		return twitterNames;
@@ -418,14 +415,14 @@ public class DataTable {
 
 	/******************************************************************************
 	 * @param twitterKeys
-	 *            sets twitterNames
+	 *            sets twitterNames.
 	 *****************************************************************************/
-	public void setTwitterNames(ArrayList<String> twitterKeys) {
+	public void setTwitterNames(final ArrayList<String> twitterKeys) {
 		this.twitterNames = twitterKeys;
 	}
 
 	/******************************************************************************
-	 * @return ArrayList of instagramKeys
+	 * @return ArrayList of instagramKeys.
 	 *****************************************************************************/
 	public ArrayList<String> getInstagramKeys() {
 		return instagramKeys;
@@ -433,9 +430,9 @@ public class DataTable {
 
 	/******************************************************************************
 	 * @param instagramKeys
-	 *            sets instagramKeys
+	 *            sets instagramKeys.
 	 *****************************************************************************/
-	public void setInstagramKeys(ArrayList<String> instagramKeys) {
+	public void setInstagramKeys(final ArrayList<String> instagramKeys) {
 		this.instagramKeys = instagramKeys;
 	}
 }
