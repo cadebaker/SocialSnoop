@@ -13,11 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-/*******************************************************************************
+/***************************************************************
  * Class that formats data pulled from the Facebook API.
  *
  * @author Logan
- ******************************************************************************/
+ **************************************************************/
 public class FacebookProfile {
 
 	/** the primary storage container. **/
@@ -42,12 +42,12 @@ public class FacebookProfile {
 	/** The object created from the Profile Image url. **/
 	private Image img;
 
-	/******************************************************************************
+	/*********************************************************
 	 * @param p
 	 *            Raw data from the facebook API.
 	 * @param c
 	 *            Instance of the Controller class
-	 *****************************************************************************/
+	 *********************************************************/
 	@SuppressWarnings("deprecation")
 	public FacebookProfile(final Post p, final Controller c) {
 
@@ -71,9 +71,9 @@ public class FacebookProfile {
 		this.postStoryText = new Text(date + ":  " + p.getStory());
 	}
 
-	/******************************************************************************
+	/**********************************************************
 	 * @return a VBox that contains relevant Text Post information.
-	 *****************************************************************************/
+	 **********************************************************/
 	public VBox getVBox() {
 		if (!postDataText.getText().trim().equals("")) {
 			textHolder.getChildren().addAll(postDataText);
@@ -94,17 +94,18 @@ public class FacebookProfile {
 		return textHolder;
 	}
 
-	/******************************************************************************
+	/*********************************************************
 	 * @param img
 	 *            sets the Image url.
-	 *****************************************************************************/
+	 *********************************************************/
 	public void setImg(final Image img) {
 		this.img = img;
 	}
 
-	/******************************************************************************
-	 * @return a HBox Container that has the user's profile image and text data.
-	 *****************************************************************************/
+	/*********************************************************
+	 * @return a HBox Container that has the 
+	 * 			user's profile image and text data.
+	 *********************************************************/
 	public HBox getHBox() {
 
 		ImageView pPicture = new ImageView(img);

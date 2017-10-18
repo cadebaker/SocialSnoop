@@ -19,28 +19,28 @@ public class TwitterSearch {
 	/**Array List of the last status update if each twitter profile user.*/
 	//protected ArrayList<Tweet> tweets;
 	
-	/************************************************************************
+	/********************************************************************
 	 * Default constructor for the class. Takes in a array list of profiles
 	 * and tweets for the users.
 	 * @param p The arraylist of profiles.
 	 * @param t The arraylist of tweets.
 	 * @return 
-	 *************************************************************************/
+	 *********************************************************************/
 	 TwitterSearch(final ArrayList<TwitterProfile> p, final ArrayList<Tweet> t) {
 		setProfiles(p);
 		//tweets = t;
 	}
 
-	/******************************************************************************
+	/**********************************************************************
 	 * @return the profiles
-	 *****************************************************************************/
+	 *********************************************************************/
 	public ArrayList<TwitterProfile> getProfiles() {
 		return profiles;
 	}
 
-	/******************************************************************************
+	/**********************************************************************
 	 * @param profiles the profiles to set
-	 *****************************************************************************/
+	 *********************************************************************/
 	public void setProfiles(final ArrayList<TwitterProfile> profiles) {
 		this.profiles = profiles;
 	}

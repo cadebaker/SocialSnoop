@@ -80,11 +80,12 @@ public class FacebookSnooper {
 
 		this.c = c;
 
-		// Set the user's access token to the value inputed into the constructor
+		// Set the user's access token to the 
+		// value inputed into the constructor
 		myAccessToken = aToken;
 
-		// Initialize a Facebook Client using RestFB, the user's access token,
-		// and the application secret
+		// Initialize a Facebook Client using RestFB, the user's
+		// access token, and the application secret
 		facebookClient = new DefaultFacebookClient(myAccessToken, MY_APP_SECRET, Version.VERSION_2_8);
 
 		// Initialize a user object from RestFB
@@ -104,7 +105,8 @@ public class FacebookSnooper {
 	}
 
 	/***********************************************************************
-	 * getProfilePicture() gets the user's profile picture URL from Facebook.
+	 * getProfilePicture() gets the user's
+	 * profile picture URL from Facebook.
 	 * 
 	 * @return returns the user's Facebook profile picture URL
 	 **********************************************************************/
@@ -138,10 +140,10 @@ public class FacebookSnooper {
 		return activeUser.getName();
 	}
 
-	/***************************************************************************
+	/*********************************************************************
 	 * getPosts() gets the user's posts from Facebook and stores them as.
 	 * FacebookProfile object
-	 **************************************************************************/
+	 ********************************************************************/
 	public void getPosts() {
 
 		// Create a connection to the Facebook posts for the active user
@@ -150,26 +152,29 @@ public class FacebookSnooper {
 
 		// Store the posts from myFeed in the myFeedPage array
 		for (List<Post> myFeedPage : myFeed) {
-			// Iterate over the list of data from myFeedPage to get single
-			// objects
+			// Iterate over the list of data from myFeedPage
+			// to get single objects
 			for (Post post : myFeedPage) {
 				try {
 					if (c != null) {
 						// creates FacebookProfile object
-						FacebookProfile p = new FacebookProfile(post, c);
+						FacebookProfile p = 
+								new FacebookProfile(post, c);
 
 						// adds it to the array
 						profiles.add(p);
 					} else {
-						// store post message in the postData array
+						// store post message in the 
+						// postData array
 						postData.add(post.getMessage());
-						// store the story in the postStory array
+						// store the story in the 
+						// postStory array
 						postStory.add(post.getStory());
-						// store the time the post was created in the postTIme
-						// array
+						// store the time the post was created
+						// in the Posttime array
 						postTime.add(post.getCreatedTime());
-						// store the direct link to the post in the postLink
-						// array
+						// store the direct link to the post
+						// in the postlink array
 						postLink.add("fb.com/" + post.getId());
 					}
 
@@ -181,61 +186,61 @@ public class FacebookSnooper {
 		}
 	}
 
-	/***************************************************************************
+	/************************************************************
 	 * @return profiles
-	 **************************************************************************/
+	 ************************************************************/
 	public ArrayList<FacebookProfile> getProfiles() {
 		return profiles;
 	}
 
-	/***************************************************************************
+	/************************************************************
 	 * @param profiles sets profiles
-	 **************************************************************************/
+	 ***********************************************************/
 	public void setProfiles(final ArrayList<FacebookProfile> profiles) {
 		this.profiles = profiles;
 	}
 	
-	/***************************************************************************
+	/***********************************************************
 	 * getPostData() returns the arraylist of postData.
 	 * @return returns the postData array
-	 **************************************************************************/
+	 ***********************************************************/
 	public ArrayList<String> getPostData() {
 		return postData;
 	}
 	
-	/***************************************************************************
+	/*********************************************************
 	 * getPostStory() returns the arraylist of postStory.
 	 * @return returns the postStory array
-	 **************************************************************************/
+	 *********************************************************/
 	public ArrayList<String> getPostStory() {
 		return postStory;
 	}
 	
-	/***************************************************************************
+	/********************************************************
 	 * getPostTime() returns the arraylist of postTime.
 	 * @return returns the postTime array
-	 **************************************************************************/
+	 *******************************************************/
 	public ArrayList<Date> getPostTime() {
 		return postTime;
 	}
 	
-	/***************************************************************************
+	/*******************************************************
 	 * getPostLink() returns the arraylist of postLink.
 	 * @return returns the postLink array
-	 **************************************************************************/
+	 ******************************************************/
 	public ArrayList<String> getPostLink() {
 		return postLink;
 	}
 
-	/***************************************************************************
-	 * main(String[] args) tests different aspects of the code above, such as.
-	 * the ability to use the constructor and the getters
+	/*******************************************************
+	 * main(String[] args) tests different aspects of the code above,
+	 * such as the ability to use the constructor and the getters.
 	 * 
 	 * @param args
 	 *            Default requirement for the running of the program
-	 **************************************************************************/
+	 ******************************************************/
 	public static void main(final String[] args) {
-		// utilize the constructor with a long term access token (Cade's)
+		//utilize the constructor with a long term access token (Cade's)
 		FacebookSnooper fb = new FacebookSnooper(
 				"EAAL02oTtWsgBANXt6DOJPxBuvCQZBTFW3y5I4Eny6WNr2gsQHLeFOZBodPHf"
 				+ "Ea5Gusffv72PRCwSVPeT8LDhsqMzP8qdlGzpvxSePMVmBrTJHMaupYv4GTJq"

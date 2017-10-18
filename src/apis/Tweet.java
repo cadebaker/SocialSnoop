@@ -80,7 +80,8 @@ public class Tweet {
 	 * @return String 
 	 **********************************************************/
 	public String toString() {
-		return name + " * " + screenName + " * " + tweetTime + "\n\t" + tweet + "\n";
+		return name + " * " + screenName + " * " 
+				+ tweetTime + "\n\t" + tweet + "\n";
 	}
 	
 	/****************************************************
@@ -92,8 +93,9 @@ public class Tweet {
 	private String dateToString(final Date date) {
 		
 		//Compare current date to the time the other date was created.
-		//SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy"); //Format the date.
-		Date current = Calendar.getInstance().getTime();		  //Get the current date.
+		//SimpleDateFormat df = 
+			//new SimpleDateFormat("MM/dd/yyyy"); //Format the date.
+		Date current = Calendar.getInstance().getTime(); //Get the current date.
 	
 		int x = date.compareTo(current);
 		

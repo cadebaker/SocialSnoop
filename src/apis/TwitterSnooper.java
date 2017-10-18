@@ -14,13 +14,13 @@ import twitter4j.TwitterFactory;
 import twitter4j.User;
 import twitter4j.conf.ConfigurationBuilder;
 
-/*************************************************************************************
+/*****************************************************************************
  * This class is used to search for twitter user profiles by screen name.
  * It does this by setting up a developer access token and then using various
  * methods from the twitter4j software package to pull search results from twitter. 
  * @author Anthony Sciarini
  * @version 10/9/2017 Release 1.0
- ************************************************************************************/
+ ****************************************************************************/
 public class TwitterSnooper {
 	
 	/**
@@ -59,14 +59,14 @@ public class TwitterSnooper {
 	/**Gets instance of twitter4j API content for Twitter Factory.*/
 	private twitter4j.Twitter twitter;
 	
-	/*******************************************************************************************
-	 * Constructor for Twitter Snooper class. Takes in parameters for a developer access token
-	 * and sets up twitter4j package for use. 
+	/**********************************************************************
+	 * Constructor for Twitter Snooper class. Takes in parameters for a 
+	 * developer access token and sets up twitter4j package for use. 
 	 * @param consumerKey The Key needed to access servers
 	 * @param consumerSecret  A different type of token for Access
 	 * @param accessToken
 	 * @param accessTokenSecret
-	 ********************************************************************************************/
+	 *********************************************************************/
 	public TwitterSnooper(final String consumerKey, final String consumerSecret) {
 		//Set up configuration builder.
 		cb = new ConfigurationBuilder();
@@ -85,15 +85,19 @@ public class TwitterSnooper {
 		twitter = tf.getInstance();	
 	}
 	
-	/**********************************************************************************
+	/**********************************************************************
 	 * Search for users with screenName specified by the input parameter.
-	 * @throws TwitterException throws a twitter exception if twitter is currently down.
+	 * @throws TwitterException throws a twitter exception 
+	 * 			if twitter is currently down.
 	 * @param searchInput screen name that the user is searching for.
-	 * @return returns a array list of the first 1000 screen names related to search.
-	 **********************************************************************************/
+	 * @return returns a array list of the first 1000 
+	 * 			screen names related to search.
+	 *********************************************************************/
 	public TwitterSearch searchUser(final String searchInput)throws TwitterException {
 
-		ArrayList<TwitterProfile> users = new ArrayList<TwitterProfile>();
+		ArrayList<TwitterProfile> users = 
+				new ArrayList<TwitterProfile>();
+		
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		try {
 		for (int pageIndex = 1; pageIndex <=  5; pageIndex++) {	//Loops though first 20 pages.
@@ -122,12 +126,13 @@ public class TwitterSnooper {
 		return tweets;
 	}
 	
-	/********************************************************************************
+	/*********************************************************************
 	 * Searches for one user. Used mostly for testing.
-	 * @param searchInput	The screen name or name of the user being searched for.
+	 * @param searchInput	The screen name or name of 
+	 * 							the user being searched for.
 	 * @return				The user 
 	 * @throws TwitterException If twitter is down.
-	 ********************************************************************************/
+	 *********************************************************************/
 	//public User searchAUser(String searchInput)throws TwitterException{
 	//	return twitter.lookupUsers(searchInput).get(0);
 	//}
@@ -137,7 +142,7 @@ public class TwitterSnooper {
 	 * user.
 	 * @param u a User.
 	 * @return ArrayList of the users tweets.
-	 ***********************************************************************/
+	 *********************************************************************/
 	/*public Tweet getTweet(User u){
 		return new Tweet(u.getStatus());
 	}*/
@@ -173,7 +178,8 @@ public class TwitterSnooper {
 	 ***********************************************************/
 	public static void main(final String[] args) throws TwitterException {
 		
-		//TwitterSnooper test = new TwitterSnooper("FhCBvdpzex12AQmkQMKEobkei","8tGcCduevsMdEWSL2K7uZS4gHiGP8v9U5lswJ3SMogXbigu4Wy");
+		//TwitterSnooper test = 
+					//new TwitterSnooper("FhCBvdpzex12AQmkQMKEobkei","8tGcCduevsMdEWSL2K7uZS4gHiGP8v9U5lswJ3SMogXbigu4Wy");
 		
 		//test.getUsersProfilePic("A");	//Returns an array list of ImageIcons, can be displayed with a JLabel.
 		
@@ -181,8 +187,10 @@ public class TwitterSnooper {
 		System.out.println("Searchs results for A ");
 //		TwitterSearch search = test.searchUser("A");
 //		for(TwitterProfile p:  search.profiles)
-//			System.out.println("~~~~~ " +"\nName: " +p.getName().getText() + "\nScreen name: " + p.getScreenName().getText()  
-//			+ "\nBio: " + p.getBio().getText() + "\nLast Status: " + search.tweets.get(search.profiles.indexOf(p)).toString() + "\n~~~~~");
+//			System.out.println("~~~~~ " + "\nName: " +p.getName().getText()
+//			+ "\nScreen name: " + p.getScreenName().getText()  
+//			+ "\nBio: " + p.getBio().getText() + "\nLast Status: " + 
+//			search.tweets.get(search.profiles.indexOf(p)).toString() + "\n~~~~~");
 //			
 	}
 	

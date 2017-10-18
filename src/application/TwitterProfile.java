@@ -39,8 +39,8 @@ public class TwitterProfile {
 	// private ImageIcon profilePic;
 
 	/**********************************************
-	 * Takes a object of User, u, and pulls profile information from the user
-	 * object.
+	 * Takes a object of User, u, and pulls profile 
+	 * information from the user object.
 	 * 
 	 * @param u
 	 *            A user.
@@ -81,9 +81,9 @@ public class TwitterProfile {
 
 	}
 
-	/******************************************************************************
+	/******************************************************************
 	 * @return pane
-	 *****************************************************************************/
+	 *****************************************************************/
 	public BorderPane getPane() {
 		return pane;
 	}

@@ -46,12 +46,12 @@ public class Main extends Application {
 	}
 	
 	
-	/******************************************************************************
+	/**********************************************************************
 	 * Method that ensures the user actually wants to close the program.
-	 *****************************************************************************/
+	 *********************************************************************/
 	private static void closeProgram() {
-		CloseBox c = new CloseBox();
-		boolean close = c.display("Social Snooper", "Are you sure you want to exit?");
+		
+		boolean close = CloseBox.display("Social Snooper", "Are you sure you want to exit?");
 
 		if (close) {
 			Platform.exit();
@@ -59,11 +59,11 @@ public class Main extends Application {
 
 	}
 
-	/******************************************************************************
+	/**********************************************************************
 	 * JavaFX method that launches the program.
 	 *
 	 * @param args Traditional parameter
-	 *****************************************************************************/
+	 *********************************************************************/
 	public static void main(final String[] args) {
 		launch(args);
 	}

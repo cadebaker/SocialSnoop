@@ -21,7 +21,7 @@ public final class CloseBox {
 	
 	/** Constructor. */
 	protected CloseBox() {
-		answer = true;
+		
 	}
 	/**********************************************************************
 	 * Displays the pop-up.

@@ -267,7 +267,8 @@ public class Controller {
 	}
 
 	/********************************************************************
-	 * Method that finds the numerical value of the Radio Button that is active.
+	 * Method that finds the numerical value of the
+	 * Radio Button that is active.
 	 *
 	 * @return RadioButtonIdNum
 	 ******************************************************************/
@@ -293,4 +294,5 @@ public class Controller {
 	public Image getFbProfilePicture() {
 		return fbProfilePicture;
 	}
+	
 }
