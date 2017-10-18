@@ -17,18 +17,18 @@ public class TwitterProfile {
 
 	private BorderPane pane;
 	/** The first and last name of the twitter user. */
-	Text name;
+	protected Text name;
 	// private String name, screenName, bio, tweetDate;
 
 	/** The screen name of the twitter profile. */
-	Text screenName;
+	protected Text screenName;
 
 	/** The users bio. */
-	Text bio;
+	private Text bio;
 
 	/** The users profile picture. */
-	ImageView profilePic;
-	Image image;
+	protected ImageView profilePic;
+	protected Image image;
 
 	/** The URL of the users home twitter page. */
 	private String url;
@@ -50,7 +50,7 @@ public class TwitterProfile {
 		// user.
 		screenName = new Text(u.getScreenName());
 		// bio = new Text(u.getDescription()); // Gets the user description.
-		bio = new Text(u.getDescription());
+		setBio(new Text(u.getDescription()));
 		url = u.getURL(); // Gets the URL of the user's twitter page.
 		image = new Image(u.getBiggerProfileImageURL());
 
@@ -66,9 +66,9 @@ public class TwitterProfile {
 		name.setId("name-text");
 
 		VBox textHolder = new VBox();
-		textHolder.getChildren().addAll(name, bio);
+		textHolder.getChildren().addAll(name, getBio());
 		VBox.setMargin(name, new Insets(10, 10, 0, 0));
-		VBox.setMargin(bio, new Insets(0, 10, 10, 10));
+		VBox.setMargin(getBio(), new Insets(0, 10, 10, 10));
 
 		pane = new BorderPane();
 		pane.setLeft(profilePic);
@@ -83,5 +83,38 @@ public class TwitterProfile {
 	 *****************************************************************************/
 	public BorderPane getPane() {
 		return pane;
+	}
+
+	/********************************************************
+	 * Gets the twitter user bio.
+	 * @return	returns the a text object of the user bio.
+	 ********************************************************/
+	public Text getBio() {
+		return bio;
+	}
+	
+	/***************************************
+	 * Sets the bio of the user profile.
+	 * @param bio a object of text
+	 **************************************/
+	public void setBio(Text bio){
+		this.bio = bio;
+	}
+
+	/*********************************************
+	 * Gets the twitter user name.
+	 * @return returns a Text of the user name.
+	 *********************************************/
+	public Text getName() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+	
+	/*******************************************************************
+	 * Gets the screen name of the twitter user.
+	 * @return returns a Text object of the twitter users screen name.
+	 ******************************************************************/
+	public Text getScreenName(){
+		return screenName;
 	}
 }
