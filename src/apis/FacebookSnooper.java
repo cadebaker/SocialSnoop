@@ -29,11 +29,41 @@ import java.util.List;
  ******************************************************************************/
 public class FacebookSnooper {
 
+	/* private string to hold the user's Facebook access token */
 	private static String MY_ACCESS_TOKEN = "";
+
+	/*
+	 * private string to hold the application secret (never changes so its
+	 * static)
+	 */
 	private static final String MY_APP_SECRET = "9e1c68e2f607f6b1be1bbef52913421c";
+
+	/* private FacebookClient object to set up access to the Facebook API */
 	private FacebookClient facebookClient;
+
+	/* private User object to set up access to the user's Facebook data */
 	private User activeUser;
+
+	/* private arraylist of strings to hold the messages of posts */
+	private ArrayList<String> postData = new ArrayList<String>();
+
+	/* private arraylist of strings to hold the storys from the user */
+	private ArrayList<String> postStory = new ArrayList<String>();
+
+	/* private arraylist of strings to hold the time of creation of posts */
+	private ArrayList<Date> postTime = new ArrayList<Date>();
+
+	/* private arraylist of strings to hold the links to the posts */
+	private ArrayList<String> postLink = new ArrayList<String>();
+
+	private User activeUserImages;
+
+	/** private arraylist of profiles created by the api */
 	private ArrayList<FacebookProfile> profiles = new ArrayList<FacebookProfile>();
+
+	/**
+	 * private instance of the controller class, used to manipulate GUI data
+	 **/
 	private Controller c;
 
 	/**********************************************************************
@@ -118,14 +148,24 @@ public class FacebookSnooper {
 			// objects
 			for (Post post : myFeedPage) {
 				try {
-					// FacebookProfile p = new
-					// FacebookProfile(post.getMessage(), post.getStory(),
-					// post.getCreatedTime(),
-					// "fb.com/" + post.getId());
+					if (c != null) {
+						// creates FacebookProfile object
+						FacebookProfile p = new FacebookProfile(post, c);
 
-					FacebookProfile p = new FacebookProfile(post, c);
-
-					profiles.add(p);
+						// adds it to the array
+						profiles.add(p);
+					} else {
+						// store post message in the postData array
+						postData.add(post.getMessage());
+						// store the story in the postStory array
+						postStory.add(post.getStory());
+						// store the time the post was created in the postTIme
+						// array
+						postTime.add(post.getCreatedTime());
+						// store the direct link to the post in the postLink
+						// array
+						postLink.add("fb.com/" + post.getId());
+					}
 
 				} catch (Exception e) {
 				}
@@ -149,4 +189,23 @@ public class FacebookSnooper {
 	public void setProfiles(ArrayList<FacebookProfile> profiles) {
 		this.profiles = profiles;
 	}
-}
+
+	/***********************************************************************
+	 * main(String[] args) tests different aspects of the code above, such as
+	 * the ability to use the constructor and the getters
+	 * 
+	 * @param args
+	 *            Default requirement for the running of the program
+	 **********************************************************************/
+	public static void main(String[] args) {
+		// utilize the constructor with a long term access token (Cade's)
+		FacebookSnooper fb = new FacebookSnooper(
+				"EAAL02oTtWsgBANXt6DOJPxBuvCQZBTFW3y5I4Eny6WNr2gsQHLeFOZBodPHfEa5Gusffv72PRCwSVPeT8LDhsqMzP8qdlGzpvxSePMVmBrTJHMaupYv4GTJqLZAUIa5jCUxijD1zAuhfqJPmmDZAZBExoIcMZAJmZAK5PZBG1aWbvwZDZD", null);
+
+		// get the user's name
+		System.out.println(fb.getName());
+
+		// get the profile picture
+		System.out.println(fb.getProfilePicture());
+
+	}
