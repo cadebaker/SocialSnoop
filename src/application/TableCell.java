@@ -43,9 +43,13 @@ public class TableCell {
 
 	/******************************************************************************
 	 * @param name
+	 * 	Cell name
 	 * @param twitterName
+	 * 	Cell Twitter tag
 	 * @param instagramKey
+	 * Cell instagram token
 	 * @param faceBookKey
+	 * Cell faceBook token
 	 *****************************************************************************/
 	public TableCell(String name, String twitterName, String instagramKey, String faceBookKey) {
 		this.name = name;
