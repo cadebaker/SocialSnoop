@@ -231,6 +231,9 @@ public class DataTable {
 
 	/******************************************************************************
 	 * Method that prints all profile variables to a text file
+	 * 
+	 * @param fileName
+	 * text file to which the data is saved
 	 *****************************************************************************/
 	public void save(String fileName) {
 		fileName = "src\\resources\\" + fileName;
@@ -255,6 +258,9 @@ public class DataTable {
 
 	/******************************************************************************
 	 * Method that uses a scanner to read profile variables from a text file
+	 * 
+	 * @param fileName
+	 * text file that is loaded
 	 *****************************************************************************/
 	public void load(String fileName) {
 		setProfileNames(new ArrayList<String>());
