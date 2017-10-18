@@ -183,11 +183,13 @@ public class Controller {
 			TwitterSnooper snoop = new TwitterSnooper("FhCBvdpzex12AQmkQMKEobkei",
 					"8tGcCduevsMdEWSL2K7uZS4gHiGP8v9U5lswJ3SMogXbigu4Wy");
 			try {
-				TwitterSearch search = snoop.searchUser(table.getTwitterNames().get(getRadioId()));
-				for (TwitterProfile p : search.getProfiles()) {
+				if (!table.getTwitterNames().get(getRadioId()).equals("TwitterName")) {
+					TwitterSearch search = snoop.searchUser(table.getTwitterNames().get(getRadioId()));
+					for (TwitterProfile p : search.getProfiles()) {
 
-					// adds Twitter results to the results area
-					displayBox.getChildren().addAll(p.getPane());
+						// adds Twitter results to the results area
+						displayBox.getChildren().addAll(p.getPane());
+					}
 				}
 			} catch (TwitterException e) {
 				// fires when Twitter.com is unavailable
