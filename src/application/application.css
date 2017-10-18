@@ -5,49 +5,51 @@
 }
 
 .flat-button{
-
-   -fx-background-radius: 0.0;
+	/* makes the button have curved edges*/
+   -fx-background-radius: 90.0;
 }
 
 .image-button{
+	/* hides the button so that only the attached image remains */
     -fx-background-color:transparent;
     -fx-border-color:transparent;
     -fx-text-fill:transparent;    
 }
 
-.text-field{
-    -fx-background-radius: 20.0;
- }
-  
+
 .radio-button > .radio {
+	/* sets radiobuton to a certain size and color */
+	
     -fx-color: #B6BABE;
     -fx-border-width: 0.0;  
 }
 
 .radio-button:selected > .radio{
-  /*-fx-color: #69B1E2;*/
+  /* removes standard selected effect*/
     -fx-background-color: #69B1E2;
 }
 
 .radio-button:selected > .radio > .dot {
+	/* removes standard selected effect*/
     -fx-background-color: transparent;
 }
 
 .vbox-left{
-	/* -fx-background-color: radial-gradient(center 50% -40%, radius 200%, #00FFFF 45%, #00BFFF 50%); */
+	/* creates a wave effect between the two chosen colors */
 	-fx-background-color: radial-gradient(center 15% -40%, radius 300%, #0065a4 45%, #00BFFF 50%);
 }
 
 .vbox-right{
+	/* creates a wave effect between the two chosen colors */
 	-fx-background-color: radial-gradient(center 180% -40%, radius 300%, #00BFFF 45%, #0065a4 50%);
 }
 
 .scroll-bar{
+	/* sets the size of the scroll bar */
 	-fx-font-size: 14px;
 }
 
 #name-text{
+	/* sets the style of the font */
 	-fx-font: 16px "Times New Roman";
 }
-
-

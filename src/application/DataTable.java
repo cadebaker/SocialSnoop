@@ -2,36 +2,21 @@ package application;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -39,25 +24,43 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/*******************************************************************************
+ * Class that handles the local saving and loading of profile data
+ *
+ * @author Logan Karney
+ ******************************************************************************/
 public class DataTable {
 
+	/** name of the text file that is loaded **/
 	private String fileName;
 
+	/** Used to hold the data of multiple profiles **/
 	private ArrayList<String> profileNames, twitterURLs, twitterNames, instagramURLs, instagramKeys, faceBookURLs,
 			faceBookKeys;
 
+	/** primary stage **/
 	Stage window;
 
+	/** Display Table **/
 	TableView<TableCell> table;
 
+	/** columns displayed in the table object **/
 	TableColumn<TableCell, String> nameColumn, twitterNameColumn, instagramKeyColumn, faceBookKeyColumn;
 
+	/** scene **/
 	Scene scene;
 
+	/** Buttons used for user interaction within the menu **/
 	Button clear, reset, done;
-	
+
+	/** instance of the Controller class that called this class **/
 	private Controller c;
 
+	/******************************************************************************
+	 * Sets up Data and saves filename variable
+	 * 
+	 * @param fileName
+	 *****************************************************************************/
 	public DataTable(String fileName) {
 		this.fileName = fileName;
 
@@ -65,15 +68,24 @@ public class DataTable {
 
 	}
 
+	/******************************************************************************
+	 * Displays relevant saved data
+	 *
+	 * @param c
+	 *            Controller class
+	 *****************************************************************************/
 	public void display(Controller c) {
 		this.c = c;
 		setUp();
 
 		window = new Stage();
 		window.initStyle(StageStyle.UNDECORATED);
+
+		// freezes activity in main window
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Profiles");
 
+		// ensures the user does not accidently lose unsaved data
 		window.setOnCloseRequest(e -> save(fileName));
 
 		HBox hBox = new HBox();
@@ -92,6 +104,9 @@ public class DataTable {
 
 	}
 
+	/******************************************************************************
+	 * Prepares data to be displayed
+	 *****************************************************************************/
 	@SuppressWarnings("unchecked")
 	public void setUp() {
 		// Profile name column
@@ -117,6 +132,7 @@ public class DataTable {
 
 		// https://stackoverflow.com/questions/23300774/why-tableview-tablecolumn-is-not-editable
 		// by Aerospace
+		// creates the Cells for display
 		nameColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		twitterNameColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		instagramKeyColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
@@ -124,6 +140,7 @@ public class DataTable {
 
 		// https://stackoverflow.com/questions/41465181/tableview-update-database-on-edit,
 		// answer by James_D
+		// allows TableCells to be edited within the display table
 		nameColumn.setOnEditCommit(event -> {
 			TableCell cell = event.getRowValue();
 			cell.setName(event.getNewValue());
@@ -157,12 +174,14 @@ public class DataTable {
 		done.setText("Done");
 
 		// Button actions
+		// sets all data to a default state
 		clear.setOnAction(e -> {
 			erase(fileName);
 			table.setItems(getProfiles());
 			table.refresh();
 		});
 
+		// clears all unsaved data from the current session
 		reset.setOnAction(e -> {
 			// reload data
 			load(fileName);
@@ -170,16 +189,17 @@ public class DataTable {
 			table.refresh();
 		});
 
+		// saves data and updates the TitledPanes accordingly
 		done.setOnAction(e -> {
 			// save data
 			save(fileName);
 			load(fileName);
 			Text[] names = c.getProfileNames();
-			
-			for(int i = 0; i < names.length; i++){
+
+			for (int i = 0; i < names.length; i++) {
 				names[i].setText(profileNames.get(i));
 			}
-			
+
 			window.close();
 		});
 
@@ -192,6 +212,9 @@ public class DataTable {
 
 	}
 
+	/******************************************************************************
+	 * @return ArrayList of TableCells
+	 *****************************************************************************/
 	public ObservableList<TableCell> getProfiles() {
 
 		load(fileName);
@@ -215,7 +238,7 @@ public class DataTable {
 
 		try {
 			out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
-			// TODO: print out all text data in easily readable format
+
 			for (TableCell x : table.getItems()) {
 
 				out.println(
@@ -252,6 +275,8 @@ public class DataTable {
 				counter++;
 			}
 			for (String p : profileArray) {
+
+				// splits and distributes read data
 				String[] parts = p.split(":");
 
 				getProfileNames().add(parts[0]);
@@ -267,6 +292,9 @@ public class DataTable {
 		catch (Exception error) {
 			save(fileName);
 			for (int i = 0; i < 10; i++) {
+
+				// sets default values
+
 				getProfileNames().add("Profile");
 				twitterNames.add("twitterName");
 				instagramKeys.add("instagramKey");
@@ -275,15 +303,20 @@ public class DataTable {
 		}
 	}
 
+	/******************************************************************************
+	 * Erases all unsaved changes from the TableView
+	 *
+	 * @param fileName
+	 *****************************************************************************/
 	public void erase(String fileName) {
 		fileName = "src\\resources\\" + fileName;
 		PrintWriter out = null;
 
 		try {
 			out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
-			// TODO: print out all text data in easily readable format
-			for (TableCell x : table.getItems()) {
 
+			// sets default values
+			for (@SuppressWarnings("unused") TableCell x : table.getItems()) {
 				out.println("Profile" + ":" + "TwitterName" + ":" + "InstagramKey" + ":" + "FacebookKey");
 
 			}
@@ -295,48 +328,83 @@ public class DataTable {
 
 	}
 
+	/******************************************************************************
+	 * @return ArrayList of profileNames
+	 *****************************************************************************/
 	public ArrayList<String> getProfileNames() {
 		return profileNames;
 	}
 
+	/******************************************************************************
+	 * @param profileNames
+	 *            sets profileNames
+	 *****************************************************************************/
 	public void setProfileNames(ArrayList<String> profileNames) {
 		this.profileNames = profileNames;
 	}
 
+	/******************************************************************************
+	 * @return ArrayList of twitterURLs
+	 *****************************************************************************/
 	public ArrayList<String> getTwitterURLs() {
 		return twitterURLs;
 	}
 
+	/******************************************************************************
+	 * @param twitterURLs
+	 *            sets twitterURls
+	 *****************************************************************************/
 	public void setTwitterURLs(ArrayList<String> twitterURLs) {
 		this.twitterURLs = twitterURLs;
 	}
 
+	/******************************************************************************
+	 * @return ArrayList of instagramURLS
+	 *****************************************************************************/
 	public ArrayList<String> getInstagramURLs() {
 		return instagramURLs;
 	}
 
+	/******************************************************************************
+	 * @param instagramURLs
+	 *            sets instagramURls
+	 *****************************************************************************/
 	public void setInstagramURLs(ArrayList<String> instagramURLs) {
 		this.instagramURLs = instagramURLs;
 	}
 
+	/******************************************************************************
+	 * @return ArrayList of faceBookURLs
+	 *****************************************************************************/
 	public ArrayList<String> getFaceBookURLs() {
 		return faceBookURLs;
 	}
 
+	/******************************************************************************
+	 * @param faceBookURLs
+	 *            sets faceBookURLs
+	 *****************************************************************************/
 	public void setFaceBookURLs(ArrayList<String> faceBookURLs) {
 		this.faceBookURLs = faceBookURLs;
 	}
 
+	/******************************************************************************
+	 * @return ArrayList of faceBookKeys
+	 *****************************************************************************/
 	public ArrayList<String> getFaceBookKeys() {
 		return faceBookKeys;
 	}
 
+	/******************************************************************************
+	 * @param faceBookKeys
+	 *            sets faceBookKeys
+	 *****************************************************************************/
 	public void setFaceBookKeys(ArrayList<String> faceBookKeys) {
 		this.faceBookKeys = faceBookKeys;
 	}
 
 	/******************************************************************************
-	 * @return the twitterKeys
+	 * @return ArrayList of twitterKeys
 	 *****************************************************************************/
 	public ArrayList<String> getTwitterKeys() {
 		return twitterNames;
@@ -344,14 +412,14 @@ public class DataTable {
 
 	/******************************************************************************
 	 * @param twitterKeys
-	 *            the twitterKeys to set
+	 *            sets twitterKeys
 	 *****************************************************************************/
 	public void setTwitterKeys(ArrayList<String> twitterKeys) {
 		this.twitterNames = twitterKeys;
 	}
 
 	/******************************************************************************
-	 * @return the instagramKeys
+	 * @return ArrayList of instagramKeys
 	 *****************************************************************************/
 	public ArrayList<String> getInstagramKeys() {
 		return instagramKeys;
@@ -359,7 +427,7 @@ public class DataTable {
 
 	/******************************************************************************
 	 * @param instagramKeys
-	 *            the instagramKeys to set
+	 *            sets instagramKeys
 	 *****************************************************************************/
 	public void setInstagramKeys(ArrayList<String> instagramKeys) {
 		this.instagramKeys = instagramKeys;
