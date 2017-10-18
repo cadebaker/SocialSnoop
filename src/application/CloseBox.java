@@ -1,6 +1,5 @@
 package application;
 
-import java.io.File;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,17 +9,33 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
+/*******************************************************************************
+ * Class that makes a pop-up to ensure the user wants to close the main program
+ *
+ * @author Logan Karney
+ ******************************************************************************/
 public class CloseBox {
 
+	/** the user given input **/
 	static boolean answer;
 
+	/******************************************************************************
+	 * Displays the pop-up
+	 *
+	 * @param title
+	 *            the title of the window
+	 * @param message
+	 *            the message displayed to the user
+	 * @return
+	 *****************************************************************************/
 	public static boolean display(String title, String message) {
 		Stage window = new Stage();
+
+		// removes minimize and maximize buttons from the frame
 		window.initStyle(StageStyle.DECORATED);
 		window.setResizable(false);
-		
-		//disables user input on other windows
+
+		// disables user input on other windows
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle(title);
 		window.setMinWidth(230);
@@ -36,7 +51,7 @@ public class CloseBox {
 			answer = true;
 			window.close();
 		});
-		
+
 		noButton.setOnAction(e -> {
 			answer = false;
 			window.close();
@@ -47,12 +62,12 @@ public class CloseBox {
 		layout.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(layout);
-		
+
 		window.setScene(scene);
-		
-		//disables user input on other windows
+
+		// disables user input on other windows
 		window.showAndWait();
-		
+
 		return answer;
 	}
 }
