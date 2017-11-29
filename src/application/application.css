@@ -44,6 +44,10 @@
 	-fx-background-color: radial-gradient(center 180% -40%, radius 300%, #00BFFF 45%, #0065a4 50%);
 }
 
+.background{
+	-fx-background-color: #0065a4;
+}
+
 .scroll-bar{
 	/* sets the size of the scroll bar */
 	-fx-font-size: 14px;
