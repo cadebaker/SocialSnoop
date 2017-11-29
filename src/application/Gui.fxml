@@ -16,11 +16,12 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
    <left>
-      <VBox prefHeight="717.0" prefWidth="43.0" styleClass="background" BorderPane.alignment="CENTER">
+      <VBox prefHeight="717.0" prefWidth="41.0" styleClass="background" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="16.0" prefWidth="276.0">
                <children>
@@ -46,30 +47,20 @@
       </HBox>
    </center>
    <bottom>
-      <HBox prefHeight="46.0" prefWidth="1280.0" styleClass="background" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="41.0" prefWidth="1280.0" styleClass="background" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
       <HBox prefHeight="41.0" prefWidth="1009.0" styleClass="background" BorderPane.alignment="CENTER">
          <children>
             <Region prefHeight="42.0" prefWidth="63.0" />
-            <ImageView fitHeight="76.0" fitWidth="344.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/logo2.jpg" />
-               </image>
-            </ImageView>
-            <Region prefHeight="42.0" prefWidth="557.0" />
-            <Button mnemonicParsing="false" onAction="#buttonClicked" prefHeight="18.0" prefWidth="18.0" styleClass="image-button">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="28.0" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/exit.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Social Snooper" wrappingWidth="337.52000427246094">
+               <font>
+                  <Font name="Cruiser Fortress Bevel Italic" size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="6.0" />
+               </HBox.margin>
+            </Text>
          </children></HBox>
    </top>
    <right>
@@ -118,8 +109,8 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile1Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
-                                    <RadioButton fx:id="profile1Button" focusTraversable="false" mnemonicParsing="false" onAction="#radioButtonClicked">
+                                    <Text fx:id="profile1Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
+                                    <RadioButton fx:id="profile1Button" focusTraversable="false" mnemonicParsing="false" onAction="#radioButtonClicked" prefWidth="117.0">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="profile" />
                                        </toggleGroup>
@@ -153,7 +144,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile2Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile2Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile2Button" focusTraversable="false" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -184,7 +175,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile3Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile3Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile3Button" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -215,7 +206,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile4Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile4Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile4Button" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -246,7 +237,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile5Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile5Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile5Button" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -277,7 +268,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile6Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile6Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile6Button" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -308,7 +299,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile7Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile7Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile7Button" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -339,7 +330,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile8Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile8Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile8Button" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -370,7 +361,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile9Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile9Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile9Button" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -401,7 +392,7 @@
                            <graphic>
                               <HBox prefHeight="17.0" prefWidth="146.0">
                                  <children>
-                                    <Text fx:id="profile10Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="123.767578125" />
+                                    <Text fx:id="profile10Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="149.767578125" />
                                     <RadioButton fx:id="profile10Button" mnemonicParsing="false" onAction="#radioButtonClicked" toggleGroup="$profile" />
                                  </children>
                               </HBox>
@@ -433,12 +424,14 @@
                   <Region prefHeight="138.0" prefWidth="200.0" />
                   <HBox prefHeight="60.0" prefWidth="200.0">
                      <children>
-                        <Region prefHeight="100.0" prefWidth="57.0" />
+                        <Region prefHeight="60.0" prefWidth="35.0" />
                         <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#settingsButtonClicked" styleClass="flat-button" text="Settings">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                         </Button>
+                        <Region prefHeight="60.0" prefWidth="14.0" />
+                        <Button fx:id="siteButton" mnemonicParsing="false" onAction="#siteButtonClicked" styleClass="flat-button" text="Website" />
                      </children>
                   </HBox>
                </children>
