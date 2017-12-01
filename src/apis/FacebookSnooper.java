@@ -63,9 +63,9 @@ public class FacebookSnooper {
 	/** private arraylist of profiles created by the api. */
 	private ArrayList<FacebookProfile> profiles = 
 			new ArrayList<FacebookProfile>();
+	/** private arraylist of strings to hold the full pictures to the posts. */
+	private ArrayList<String> fullPic = new ArrayList<String>();
 
-	/**private instance of the controller class, used to manipulate GUI data.*/
-	private Controller c;
 
 	/**********************************************************************
 	 * facebookProfile is a constructor to setup the fetching of data from
@@ -76,9 +76,8 @@ public class FacebookSnooper {
 	 * @param c 
 	 *            A call to the conroller class
 	 **********************************************************************/
-	public FacebookSnooper(final String aToken, final Controller c) {
+	public FacebookSnooper(final String aToken) {
 
-		this.c = c;
 
 		// Set the user's access token to the 
 		// value inputed into the constructor
@@ -141,29 +140,24 @@ public class FacebookSnooper {
 	}
 
 	/*********************************************************************
-	 * getPosts() gets the user's posts from Facebook and stores them as.
+	 * getPosts() gets the user's posts from Facebook and stores them as a
 	 * FacebookProfile object
 	 ********************************************************************/
 	public void getPosts() {
 
+		Date sixMonthsAgo = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L * 7L * 4L * 6L);
+		
 		// Create a connection to the Facebook posts for the active user
-		Connection<Post> myFeed = 
-				facebookClient.fetchConnection("me/feed", Post.class);
+		Connection<Post> myFeed = facebookClient.fetchConnection("me/feed", Post.class, 
+				Parameter.with("fields", "attachments, picture, full_picture, caption, story, description"),
+				Parameter.with("limit", 3), Parameter.with("since", sixMonthsAgo));
 
 		// Store the posts from myFeed in the myFeedPage array
 		for (List<Post> myFeedPage : myFeed) {
 			// Iterate over the list of data from myFeedPage
 			// to get single objects
 			for (Post post : myFeedPage) {
-				try {
-					if (c != null) {
-						// creates FacebookProfile object
-						FacebookProfile p = 
-								new FacebookProfile(post, c);
-
-						// adds it to the array
-						profiles.add(p);
-					} else {
+					
 						// store post message in the 
 						// postData array
 						postData.add(post.getMessage());
@@ -176,13 +170,11 @@ public class FacebookSnooper {
 						// store the direct link to the post
 						// in the postlink array
 						postLink.add("fb.com/" + post.getId());
-					}
-
-				} catch (Exception e) {
-				}
+						//store the full puture in the fullPic
+						//array
+						fullPic.add(post.getFullPicture());
 
 			}
-
 		}
 	}
 
@@ -244,14 +236,17 @@ public class FacebookSnooper {
 		FacebookSnooper fb = new FacebookSnooper(
 				"EAAL02oTtWsgBANXt6DOJPxBuvCQZBTFW3y5I4Eny6WNr2gsQHLeFOZBodPHf"
 				+ "Ea5Gusffv72PRCwSVPeT8LDhsqMzP8qdlGzpvxSePMVmBrTJHMaupYv4GTJq"
-				+ "LZAUIa5jCUxijD1zAuhfqJPmmDZAZBExoIcMZAJmZAK5PZBG1aWbvwZDZD", 
-				null);
+				+ "LZAUIa5jCUxijD1zAuhfqJPmmDZAZBExoIcMZAJmZAK5PZBG1aWbvwZDZD");
 
 		// get the user's name
 		System.out.println(fb.getName());
 
 		// get the profile picture
 		System.out.println(fb.getProfilePicture());
+		
+
+
+
 
 	}
 }
