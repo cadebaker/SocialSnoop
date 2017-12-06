@@ -149,7 +149,7 @@ public class FacebookSnooper {
 		
 		// Create a connection to the Facebook posts for the active user
 		Connection<Post> myFeed = facebookClient.fetchConnection("me/feed", Post.class, 
-				Parameter.with("fields", "attachments, picture, full_picture, caption, story, description"),
+				Parameter.with("fields", "attachments, picture, full_picture, caption, story, description, created_time"),
 				Parameter.with("limit", 3), Parameter.with("since", sixMonthsAgo));
 
 		// Store the posts from myFeed in the myFeedPage array
