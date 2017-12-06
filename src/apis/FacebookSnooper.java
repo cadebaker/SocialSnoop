@@ -234,9 +234,7 @@ public class FacebookSnooper {
 	public static void main(final String[] args) {
 		//utilize the constructor with a long term access token (Cade's)
 		FacebookSnooper fb = new FacebookSnooper(
-				"EAAL02oTtWsgBANXt6DOJPxBuvCQZBTFW3y5I4Eny6WNr2gsQHLeFOZBodPHf"
-				+ "Ea5Gusffv72PRCwSVPeT8LDhsqMzP8qdlGzpvxSePMVmBrTJHMaupYv4GTJq"
-				+ "LZAUIa5jCUxijD1zAuhfqJPmmDZAZBExoIcMZAJmZAK5PZBG1aWbvwZDZD");
+				"");
 
 		// get the user's name
 		System.out.println(fb.getName());
