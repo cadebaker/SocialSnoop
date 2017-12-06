@@ -66,6 +66,9 @@ public class FacebookSnooper {
 	/** private arraylist of strings to hold the full pictures to the posts. */
 	private ArrayList<String> fullPic = new ArrayList<String>();
 
+	/** private integer that holds how many post the user has made in the provided time-frame */
+	private int numPost = 0;
+
 
 	/**********************************************************************
 	 * facebookProfile is a constructor to setup the fetching of data from
@@ -151,7 +154,8 @@ public class FacebookSnooper {
 		Connection<Post> myFeed = facebookClient.fetchConnection("me/feed", Post.class, 
 				Parameter.with("fields", "attachments, picture, full_picture, caption, story, description"),
 				Parameter.with("limit", 3), Parameter.with("since", sixMonthsAgo));
-
+	
+		
 		// Store the posts from myFeed in the myFeedPage array
 		for (List<Post> myFeedPage : myFeed) {
 			// Iterate over the list of data from myFeedPage
@@ -173,9 +177,12 @@ public class FacebookSnooper {
 						//store the full puture in the fullPic
 						//array
 						fullPic.add(post.getFullPicture());
-
+						//increment numPost
+						numPost++;
 			}
+			
 		}
+		
 	}
 
 	/************************************************************
@@ -223,6 +230,22 @@ public class FacebookSnooper {
 	public ArrayList<String> getPostLink() {
 		return postLink;
 	}
+	
+	/******************************************************************************
+	 * getFullPic() returns the arraylist of fullPic
+	 * @return returns the fullPic array
+	 *****************************************************************************/
+	public ArrayList<String> getFullPic() {
+		return fullPic;
+	}
+
+	/******************************************************************************
+	 * getNumPost() returns the int numPost
+	 * @return the number of posts the user has made
+	 *****************************************************************************/
+	public int getNumPost() {
+		return numPost;
+	}
 
 	/*******************************************************
 	 * main(String[] args) tests different aspects of the code above,
@@ -244,8 +267,6 @@ public class FacebookSnooper {
 		// get the profile picture
 		System.out.println(fb.getProfilePicture());
 		
-
-
 
 
 	}
