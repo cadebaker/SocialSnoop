@@ -48,7 +48,7 @@ public class FacebookProfile{
 		VBox.setMargin(profileNameStory, new Insets(15,0,4,-30));
 		
 		//row 2
-		Label tempTimeDate = new Label("Temp Time - Temp Date");
+		Label tempTimeDate = new Label(postTime);
 		tempTimeDate.setTextFill(Color.GRAY);
 		tempTimeDate.setTextAlignment(TextAlignment.JUSTIFY);
 		
