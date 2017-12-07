@@ -37,9 +37,9 @@
    <center>
       <HBox prefHeight="717.0" prefWidth="836.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane fx:id="scroller" prefHeight="800.0" prefWidth="834.0">
+            <ScrollPane fx:id="scroller" focusTraversable="false" prefHeight="800.0" prefWidth="834.0" style="-fx-background-radius: 90;">
                <content>
-                  <VBox fx:id="displayBox" prefHeight="712.0" prefWidth="699.0" />
+                  <VBox fx:id="displayBox" prefHeight="715.0" prefWidth="719.0" />
                </content>
             </ScrollPane>
             <Region prefHeight="717.0" prefWidth="135.0" styleClass="background" />
@@ -69,14 +69,14 @@
             <VBox prefHeight="800.0" prefWidth="0.0" styleClass="background">
                <children>
                   <Region prefHeight="19.0" prefWidth="200.0" />
-                  <HBox prefHeight="81.0" prefWidth="200.0">
+                  <HBox prefHeight="81.0" prefWidth="234.0">
                      <children>
                         <Region prefHeight="59.0" prefWidth="37.0" />
                         <Button fx:id="faceBookButton" mnemonicParsing="false" onAction="#buttonClicked" styleClass="image-button">
                            <graphic>
-                              <ImageView fitHeight="48.0" fitWidth="177.0" preserveRatio="true">
+                              <ImageView fitHeight="49.0" fitWidth="177.0" preserveRatio="true" styleClass="image-button-image">
                                  <image>
-                                    <Image url="@../resources/fb-art.png" />
+                                    <Image url="@../resources/facebook-icon.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -86,18 +86,18 @@
                         </Button>
                         <Button fx:id="twitterButton" mnemonicParsing="false" onAction="#buttonClicked" styleClass="image-button">
                            <graphic>
-                              <ImageView fitHeight="49.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="49.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true" styleClass="image-button-image">
                                  <image>
-                                    <Image url="@../resources/tt-art.jpg" />
+                                    <Image url="@../resources/social-twitter-button-blue-icon.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="instagramButton" mnemonicParsing="false" onAction="#buttonClicked" styleClass="image-button">
+                        <Button fx:id="instagramButton" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="59.0" prefWidth="267.0" styleClass="image-button">
                            <graphic>
-                              <ImageView fitHeight="49.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="49.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../resources/ig-art.png" />
+                                    <Image url="@../resources/Active-Instagram-4-icon.png" />
                                  </image>
                               </ImageView>
                            </graphic>
