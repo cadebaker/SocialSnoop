@@ -37,9 +37,7 @@
    <center>
       <HBox prefHeight="717.0" prefWidth="836.0" BorderPane.alignment="CENTER">
          <children>
-
-            <ScrollPane fx:id="scroller" focusTraversable="false" prefHeight="800.0" prefWidth="834.0" style="-fx-background-radius: 90;">
-
+            <ScrollPane fx:id="scroller" prefHeight="800.0" prefWidth="834.0" style="-fx-background-radius: 90;">
                <content>
                   <VBox fx:id="displayBox" prefHeight="715.0" prefWidth="719.0" />
                </content>

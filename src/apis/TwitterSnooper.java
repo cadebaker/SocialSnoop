@@ -115,31 +115,6 @@ public class TwitterSnooper {
 		tweetProfileImageURL = new ArrayList<String>();
 		tweetURL = new ArrayList<String>();
 	}
-	
-	public ArrayList<String> getTweetName() {
-		return tweetName;
-	}
-
-	public ArrayList<String> getTweetScreenName() {
-		return tweetScreenName;
-	}
-
-	public ArrayList<String> getTweetData() {
-		return tweetData;
-	}
-
-	public ArrayList<String> getTweetTime() {
-		return tweetTime;
-	}
-
-	public ArrayList<String> getTweetProfileImageURL() {
-		return tweetProfileImageURL;
-	}
-
-	public ArrayList<String> getTweetURL() {
-		return tweetURL;
-	}
-
 
 	/**********************************************************
 	 * Get timeline in an arraylist of tweets.
@@ -195,7 +170,7 @@ public class TwitterSnooper {
 			tweetData.add(s.getText()); 						 // Get data.
 			tweetBio.add(u.getDescription()); 					 // Get data.
 			tweetTime.add(dateToString(s.getCreatedAt())); 		 		 // Get data.
-			tweetProfileImageURL.add(u.getOriginalProfileImageURL());    			 // Get data.
+			tweetProfileImageURL.add(u.getProfileImageURL());   			 // Get data.
 			
 			if(s.getMediaEntities().length == 0)				 	 // Get data.
 				tweetURL.add("NOPE");

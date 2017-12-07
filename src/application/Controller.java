@@ -218,27 +218,33 @@ public class Controller {
 		} else if (filter == SocialFilter.INSTAGRAM) {
 			// loads instagram information
 		} else if (filter == SocialFilter.TWITTER) {
+
+			//TwitterSnooper tS = new TwitterSnooper();
 			
-			TwitterSnooper test = new TwitterSnooper("sN5hY2x6U4Y5jJEDjMxXyVvb5",
-					"hwap0d0rnoup4c0lW6S8ULYMMHXKu28OseLz9vvhI50t0o9cjJ");
-
-
-			try {
-				test.getUserTimeLine();
-				for (int i = 0; i < test.getSize(); i++) {
-
-					TwitterProfile tP = new TwitterProfile(test.getTweetName().get(i), test.getTweetScreenName().get(i),
-							test.getTweetData().get(i), test.getTweetTime().get(i),
-							test.getTweetProfileImageURL().get(i), test.getTweetURL().get(i));
-
-					displayBox.getChildren().add(tP.getPane());
-
-				}
-			} catch (TwitterException e) {
-			}
-
-	
-
+			TwitterProfile tP = new TwitterProfile("name", "@tag", "data", "time", "picURL", "tweetPicURL");
+			
+			// // Instantiates Twitter Api object
+			// TwitterSnooper2 snoop = new
+			// TwitterSnooper2("FhCBvdpzex12AQmkQMKEobkei",
+			// "8tGcCduevsMdEWSL2K7uZS4gHiGP8v9U5lswJ3SMogXbigu4Wy");
+			// try {
+			// if
+			// (!table.getTwitterNames().get(getRadioId()).equals("TwitterName"))
+			// {
+			// TwitterSearch search =
+			// snoop.searchUser(table.getTwitterNames().get(getRadioId()));
+			// for (TwitterProfile p : search.getProfiles()) {
+			//
+			// // adds Twitter results to the results area
+			// displayBox.getChildren().addAll(p.getPane());
+			// }
+			// }
+			// } catch (TwitterException e) {
+			// // fires when Twitter.com is unavailable
+			// displayBox.getChildren().addAll(new Text("Error contacting
+			// twitter"));
+			// } catch (NullPointerException e) {
+			// }
 		}
 	}
 
