@@ -27,7 +27,7 @@ import twitter4j.conf.ConfigurationBuilder;
  * twitter.
  * 
  * @author Anthony Sciarini
- * @version 10/9/2017 Release 1.0
+ * @version 10/9/2017 Release 2.0
  ***********************************************************************************/
 public class TwitterSnooper {
 
@@ -126,18 +126,20 @@ public class TwitterSnooper {
 	public void getUserTimeLine() throws TwitterException {
 
 		listSize = 0; 					   // reset list size.
-		//reset lists
-		Paging paging = new Paging(1, 50); // set paging.
-		tweetName.clear(); 				   
-		tweetScreenName.clear();		   	  
-		tweetData.clear(); 				  
-		tweetBio.clear(); 				  
-		tweetTime.clear(); 				   
-		tweetProfileImageURL.clear(); 	   
-		tweetURL.clear();				  
+		Paging paging = new Paging(1, 50); 	           // set paging.
+		tweetName.clear(); 				   // reset list.
+		tweetScreenName.clear();		  	   // reset list.
+		tweetData.clear(); 				   // reset list.
+		tweetBio.clear(); 				   // reset list.
+		tweetTime.clear(); 				   // reset list.
+		tweetProfileImageURL.clear(); 	   		   // reset list.
+		tweetURL.clear();				   // reset list.
+	
+		//Get the users screen name.
+		String user = twitter.verifyCredentials().getScreenName();
 		
-		// Loop through the user timeline.
-		for (Status s : twitter.getHomeTimeline(paging)) {
+		//Get all the the users Tweets.
+		for(Status s : twitter.getUserTimeline(user)){
 			User u = s.getUser(); 					// Get data.
 			tweetName.add(u.getName()); 				// Get data.
 			tweetScreenName.add(u.getScreenName()); 		// Get data.
@@ -153,11 +155,35 @@ public class TwitterSnooper {
 						s.getMediaEntities()[0].getMediaURL();   // Get data.
 				//If it is a .jpg add it.
 				if(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".jpeg"))					     
-					tweetURL.add(url);				 // Get data.
+					tweetURL.add(url);						 // Get data.
 				else											 
-					tweetURL.add("NOPE");				 // Get data.
+					tweetURL.add("NOPE");						 // Get data.
 			}
-			listSize++;		// The size of the list.
+			listSize++;									 // The size of the list.
+		}
+		
+		//Get all the tweets in the users TimeLine
+		for (Status s : twitter.getHomeTimeline(paging)) {
+			User u = s.getUser(); 							 // Get data.
+			tweetName.add(u.getName()); 						 // Get data.
+			tweetScreenName.add(u.getScreenName()); 				 // Get data.
+			tweetData.add(s.getText()); 						 // Get data.
+			tweetBio.add(u.getDescription()); 					 // Get data.
+			tweetTime.add(dateToString(s.getCreatedAt())); 		 		 // Get data.
+			tweetProfileImageURL.add(u.getProfileImageURL());   			 // Get data.
+			
+			if(s.getMediaEntities().length == 0)				 	 // Get data.
+				tweetURL.add("NOPE");
+			else{												
+				String url = 									
+						s.getMediaEntities()[0].getMediaURL();   	 // Get data.
+				//If it is a .jpg add it.
+				if(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".jpeg"))					     
+					tweetURL.add(url);					 // Get data.
+				else											 
+					tweetURL.add("NOPE");					 // Get data.
+			}
+			listSize++;								 // The size of the list.
 		}
 	}
 
@@ -173,8 +199,8 @@ public class TwitterSnooper {
 		// Compare current date to the time the other date was created.
 		// SimpleDateFormat df =
 		// new SimpleDateFormat("MM/dd/yyyy"); //Format the date.
-		Date current = Calendar.getInstance().getTime(); // Get the current date.
-												
+		Date current = Calendar.getInstance().getTime(); // Get the current
+								 // date.
 
 		int x = date.compareTo(current);
 
@@ -184,7 +210,7 @@ public class TwitterSnooper {
 				return date.getMinutes() + "m";
 			} else {
 				return date.getHours() + "h"; // If posted more than an hour ago
-							      // then use hours.
+												// then use hours.
 			}
 		} else if (x < 0) { // If the tweet was posted before current date, then
 							// use the month and the day.
@@ -226,12 +252,12 @@ public class TwitterSnooper {
 		test.getUserTimeLine();
 		
 		/*
-		 	tweetName.add(u.getName()); 						 // Get data.
-			tweetScreenName.add(u.getScreenName()); 				 // Get data.
-			tweetData.add(s.getText()); 						 // Get data.
-			tweetBio.add(u.getDescription()); 					 // Get data.
-			tweetTime.add(dateToString(s.getCreatedAt())); 				 // Get data.
-			tweetPic.add(new ImageIcon(u.getProfileImageURL())); 			 // Get data.
+		 	tweetName.add(u.getName()); 			     // Get data.
+			tweetScreenName.add(u.getScreenName()); 	     // Get data.
+			tweetData.add(s.getText()); 			     // Get data.
+			tweetBio.add(u.getDescription()); 		     // Get data.
+			tweetTime.add(dateToString(s.getCreatedAt())); 	     // Get data.
+			tweetPic.add(new ImageIcon(u.getProfileImageURL())); // Get data.
 		 */
 
 		System.out.println("HOMETIME LINE: ");
