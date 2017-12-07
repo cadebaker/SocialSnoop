@@ -146,7 +146,7 @@ public class TwitterSnooper {
 			tweetData.add(s.getText()); 				// Get data.
 			tweetBio.add(u.getDescription()); 			// Get data.
 			tweetTime.add(dateToString(s.getCreatedAt())); 		// Get data.
-			tweetProfileImageURL.add(u.getProfileImageURL());    	// Get data.
+			tweetProfileImageURL.add(u.getProfileOriginalImageURL());  	// Get data.
 			
 			if(s.getMediaEntities().length == 0)			// Get data.
 				tweetURL.add("NOPE");
