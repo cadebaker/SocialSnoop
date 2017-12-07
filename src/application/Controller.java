@@ -9,8 +9,10 @@ import com.restfb.exception.FacebookOAuthException;
 
 import apis.FacebookProfile;
 import apis.FacebookSnooper;
+import apis.TwitterProfile;
 import apis.TwitterSearch;
 import apis.TwitterSnooper;
+import apis.TwitterSnooper2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -20,6 +22,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,7 +33,7 @@ import twitter4j.TwitterException;
 /*******************************************************************************
  * Class that handles how the GUI interacts with the APIs
  *
- * @author Logan Karney, Anthony Sciarini
+ * @author Logan Karney
  ******************************************************************************/
 public class Controller {
 
@@ -98,7 +101,9 @@ public class Controller {
 	 *****************************************************************************/
 	public Controller() {
 		table = new DataTable("savedprofiles.txt");
+		
 		filter = SocialFilter.FACEBOOK;
+		
 	}
 
 	/******************************************************************************
@@ -113,7 +118,8 @@ public class Controller {
 
 		// loading of custom font used in GUI
 		Font.loadFont(Main.class.getResource("Cruiser.TTF").toExternalForm(), 10);
-
+		
+		faceBookButton.setEffect(new DropShadow());
 	}
 
 	/******************************************************************************
@@ -124,14 +130,25 @@ public class Controller {
 	 *****************************************************************************/
 	@FXML
 	private void buttonClicked(ActionEvent e) {
+		
+		faceBookButton.setEffect(null);
+		twitterButton.setEffect(null);
+		instagramButton.setEffect(null);
+		
 		if (e.getSource() == faceBookButton) {
+			faceBookButton.setEffect(new DropShadow());
+			
 			filter = SocialFilter.FACEBOOK;
 		} else if (e.getSource() == twitterButton) {
+			twitterButton.setEffect(new DropShadow());
+			
 			filter = SocialFilter.TWITTER;
-			displayBox.getChildren().clear();
 		} else if (e.getSource() == instagramButton) {
+			instagramButton.setEffect(new DropShadow());
 			filter = SocialFilter.INSTAGRAM;
 		}
+		
+		//setEffect(new DropShadow());
 
 		if (profile.getSelectedToggle() != null)
 			radioButtonClicked();
@@ -156,8 +173,9 @@ public class Controller {
 	 *****************************************************************************/
 	@FXML
 	private void siteButtonClicked(ActionEvent e) throws URISyntaxException {
-		
-		//answer provided by Kevin Reynolds at https://stackoverflow.com/questions/24202337/javafx-open-url-in-chrome-browser
+
+		// answer provided by Kevin Reynolds at
+		// https://stackoverflow.com/questions/24202337/javafx-open-url-in-chrome-browser
 		try {
 			Desktop.getDesktop().browse(new URI("https://bakerservers.com/"));
 		} catch (IOException e1) {
@@ -178,26 +196,21 @@ public class Controller {
 		displayBox.getChildren().clear();
 		if (filter == SocialFilter.FACEBOOK) {
 			try {
-				FacebookSnooper fb = new FacebookSnooper(table.getFaceBookKeys().get(id), this);
+				// NEED
+				 FacebookSnooper fb = new
+				 FacebookSnooper(table.getFaceBookKeys().get(id));
 
-				fbProfilePicture = new Image(fb.getProfilePicture());
-				fb.getPosts();
+				for (int i = 0; i < fb.getNumPost(); i++) {
+					
+					FacebookProfile fbP = new FacebookProfile(fb.getProfilePicture(),
+					 fb.getName(), fb.getPostStory().get(i), fb.getFullPic().get(i),
+					"PostLink");
 
-				for (FacebookProfile p : fb.getProfiles()) {
+					 displayBox.getChildren().addAll(fbP.getPane());
 
-					p.setImg(fbProfilePicture);
-
-					HBox box = p.getHBox();
-
-					if (box == null)
-						System.out.println("HERE");
-
-					if (box != null) {
-						HBox.setMargin(box, new Insets(0, 0, 20, 0));
-
-						displayBox.getChildren().addAll(box);
-					}
+					VBox.setMargin(fbP.getPane(), new Insets(0, 0, 5, 0));
 				}
+			
 			} catch (FacebookOAuthException e) {
 			}
 
@@ -208,6 +221,7 @@ public class Controller {
 			
 			TwitterSnooper test = new TwitterSnooper("sN5hY2x6U4Y5jJEDjMxXyVvb5",
 					"hwap0d0rnoup4c0lW6S8ULYMMHXKu28OseLz9vvhI50t0o9cjJ");
+
 
 			try {
 				test.getUserTimeLine();
@@ -223,7 +237,8 @@ public class Controller {
 			} catch (TwitterException e) {
 			}
 
-		}
+	
+
 		}
 	}
 
@@ -319,3 +334,4 @@ public class Controller {
 		return fbProfilePicture;
 	}
 }
+

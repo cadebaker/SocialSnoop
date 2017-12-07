@@ -1,4 +1,4 @@
-package insta_login;
+package apis;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class InstagramProfile {
+public class InstagramSnooper {
 	
 public static void main(final String[] args) throws IOException, JSONException {	
 		
