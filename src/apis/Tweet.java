@@ -40,10 +40,8 @@ public class Tweet {
 	 ******************************************************************/
 	public Tweet(final Status s, final String name, final String screenName) {
 		tweetTime = dateToString(s.getCreatedAt()); //Get time tweeted.
-		//get the name of the user that posted the tweet
-		this.name = name; 
-		//get the screen name of the user that posted the tweet.
-		this.screenName = screenName; 
+		this.name = name; //get the name of the user that posted the tweet
+		this.screenName = screenName; //get the screen name of the user that posted the tweet.
 		tweet = s.getText();
 	}
 	/*******************************************
@@ -97,28 +95,21 @@ public class Tweet {
 		//Compare current date to the time the other date was created.
 		//SimpleDateFormat df = 
 			//new SimpleDateFormat("MM/dd/yyyy"); //Format the date.
-		Date current = Calendar.getInstance().
-				getTime(); //Get the current date.
+		Date current = Calendar.getInstance().getTime(); //Get the current date.
 	
 		int x = date.compareTo(current);
 		
 		
 		if (x == 0) { //If the tweet was posted today. 
-			//If it was posted within the last hour use minutes.
-			if (date.getHours() == 1) { 
+			if (date.getHours() == 1) { //If it was posted within the last hour use minutes.
 				return date.getMinutes() + "m";
 			} else {
-				//If posted more than an hour ago 
-				//then use hours.
-				return date.getHours() + "h"; 
+				return date.getHours() + "h"; //If posted more than an hour ago then use hours.
 			}
-			//If the tweet was posted before 
-			//current date, then use the month and the day.
-		} else if (x < 0) { 
+		} else if (x < 0) { //If the tweet was posted before current date, then use the month and the day.
 			return date.toString().substring(4, 11);
 		} else {
-			//If the post was made in the future
-			return "FUUUUTURE!!!"; 
+			return "FUUUUTURE!!!"; //If the post was made in the future
 		}
 	}
 	

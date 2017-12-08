@@ -53,7 +53,7 @@ public class TwitterProfile {
 		Label nameLb = new Label(name);
 		nameLb.setFont(Font.font("Calibri", FontWeight.BOLD, 18));
 
-		Label screenNameLb = new Label("@" + screenName + " Â· " + time);
+		Label screenNameLb = new Label("@" + screenName + " · " + time);
 		screenNameLb.setFont(Font.font("Calibri", 16));
 		screenNameLb.setTextFill(Color.GRAY);
 

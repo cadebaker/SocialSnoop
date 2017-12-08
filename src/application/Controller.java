@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONException;
@@ -222,33 +223,14 @@ public class Controller {
 		} else if (filter == SocialFilter.INSTAGRAM) {
 
 			try {
-				
-				// //searches for instagram data based on the profile
-				// InstagramSnooper iS = new InstagramSnooper();
-				//
-				// //System.out.println(iS.getPostInfo().size());
-				//
-				// for(int i = 0; i < iS.getPostInfo().size(); i++){
-				// System.out.println(iS.getPostInfo().get(i));
-				// }
-				//
-				// for(int i = 0; i < iS.getUserInfo().size(); i++){
-				// System.out.println(iS.getInfo().get(i));
-				// }
-
-//				String profilePic = info.get("profile picture");
-//
-//				for (int i = 0; i < 5; i++) {
-//
-//					
-//					//creates a GUI component for each post found
-//					InstagramProfile iP = new InstagramProfile(info.get("username"), profilePic,
-//							"https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/22069552_2021124434784827_6245902769404772352_n.jpg",
-//							"caption", "500");
-//
-//					displayBox.getChildren().add(iP.getColumn());
-//				}
-
+				InstagramSnooper iS = new InstagramSnooper();
+				for(int i = 0; i < 20; i++){
+					ArrayList<String >post = InstagramSnooper.getPosts(i);
+					
+					InstagramProfile iP = new InstagramProfile(table.getProfileNames().get(i), InstagramSnooper.getUserInfo(0), post.get(0), post.get(1), post.get(2));
+					
+					displayBox.getChildren().add(iP.getColumn());
+				}
 			} catch (Exception e) {
 			}
 
