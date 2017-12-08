@@ -10,7 +10,7 @@ import com.restfb.types.Post;
 import com.restfb.types.User;
 import com.restfb.Version;
 
-//import application.Controller;
+import application.Controller;
 //import javafx.scene.image.Image;
 //import javafx.scene.image.ImageView;
 
@@ -35,15 +35,14 @@ import java.util.List;
 public class FacebookSnooper {
 
 	/** private string to hold the user's Facebook access token. */
-	private String myAccessToken = "";
+	private static String myAccessToken = "";
 
 	/** private string to hold the application secret (never changes so its
 	 * static).*/
 	private static final String MY_APP_SECRET = 
 			"9e1c68e2f607f6b1be1bbef52913421c";
 
-	/** private FacebookClient object to 
-	 * set up access to the Facebook API. */
+	/** private FacebookClient object to set up access to the Facebook API. */
 	private FacebookClient facebookClient;
 
 	/** private User object to set up access to the user's Facebook data. */
@@ -55,8 +54,7 @@ public class FacebookSnooper {
 	/** private arraylist of strings to hold the storys from the user. */
 	private ArrayList<String> postStory = new ArrayList<String>();
 
-	/** private arraylist of strings to hold the 
-	 * time of creation of posts. */
+	/** private arraylist of strings to hold the time of creation of posts. */
 	private ArrayList<Date> postTime = new ArrayList<Date>();
 
 	/** private arraylist of strings to hold the links to the posts. */
@@ -65,9 +63,11 @@ public class FacebookSnooper {
 	/** private arraylist of profiles created by the api. */
 	private ArrayList<FacebookProfile> profiles = 
 			new ArrayList<FacebookProfile>();
-	/** private arraylist of strings to hold 
-	 * the full pictures to the posts. */
+	/** private arraylist of strings to hold the full pictures to the posts. */
 	private ArrayList<String> fullPic = new ArrayList<String>();
+
+	/** private integer that holds how many post the user has made in the provided time-frame */
+	private int numPost = 0;
 
 
 	/**********************************************************************
@@ -76,6 +76,8 @@ public class FacebookSnooper {
 	 * 
 	 * @param aToken
 	 *            the access token for the targeted Facebook user
+	 * @param c 
+	 *            A call to the conroller class
 	 **********************************************************************/
 	public FacebookSnooper(final String aToken) {
 
@@ -86,8 +88,7 @@ public class FacebookSnooper {
 
 		// Initialize a Facebook Client using RestFB, the user's
 		// access token, and the application secret
-		facebookClient = new DefaultFacebookClient(myAccessToken, 
-					MY_APP_SECRET, Version.VERSION_2_8);
+		facebookClient = new DefaultFacebookClient(myAccessToken, MY_APP_SECRET, Version.VERSION_2_8);
 
 		// Initialize a user object from RestFB
 		activeUser = facebookClient.fetchObject("me", User.class);
@@ -115,12 +116,9 @@ public class FacebookSnooper {
 		// create a JSONObject to pull the user's high quality profile
 		// picture URL and filter out the fields that are not the URL
 		JsonObject js = facebookClient.fetchObject("/me/picture", 
-				JsonObject.class, Parameter.with(
-						"type", "large"),
-				// don't redirect
-				Parameter.with("redirect", "false"), 
-				// only show URL
-				Parameter.with("fields", "url")); 
+				JsonObject.class, Parameter.with("type", "large"),
+				Parameter.with("redirect", "false"), // don't redirect
+				Parameter.with("fields", "url")); // only show URL
 
 		// get the tostring of the JSON Object from above
 		String picURL = js.toString();
@@ -130,9 +128,7 @@ public class FacebookSnooper {
 
 		// extract the URL from 'http' to the last value of the URL
 		// (the 'picURL.length() - 3' filters out quotes and parenthesis
-		String picURLFinal = 
-				picURL.substring(picURLStart, 
-						picURL.length() - 3);
+		String picURLFinal = picURL.substring(picURLStart, picURL.length() - 3);
 
 		// return the selected portion of the string
 		return picURLFinal;
@@ -148,27 +144,18 @@ public class FacebookSnooper {
 
 	/*********************************************************************
 	 * getPosts() gets the user's posts from Facebook and stores them as a
-	 * FacebookProfile object.
+	 * FacebookProfile object
 	 ********************************************************************/
 	public void getPosts() {
 
-		Date sixMonthsAgo = 
-				new Date(System.currentTimeMillis() 
-						- 1000L * 60L * 60L * 24L 
-						* 7L * 4L * 6L);
+		Date sixMonthsAgo = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L * 7L * 4L * 6L);
 		
 		// Create a connection to the Facebook posts for the active user
-		Connection<Post> myFeed = 
-				facebookClient.fetchConnection(
-						"me/feed", Post.class, 
-				Parameter.with("fields", "attachments,"
-						+ " picture, "
-						+ "full_picture, caption, "
-						+ "story, description, "
-						+ "created_time"),
-				Parameter.with("limit", 3), 
-					Parameter.with("since", sixMonthsAgo));
-
+		Connection<Post> myFeed = facebookClient.fetchConnection("me/feed", Post.class, 
+				Parameter.with("fields", "attachments, picture, full_picture, caption, story, description, created_time"),
+				Parameter.with("limit", 3), Parameter.with("since", sixMonthsAgo));
+	
+		
 		// Store the posts from myFeed in the myFeedPage array
 		for (List<Post> myFeedPage : myFeed) {
 			// Iterate over the list of data from myFeedPage
@@ -181,23 +168,21 @@ public class FacebookSnooper {
 						// store the story in the 
 						// postStory array
 						postStory.add(post.getStory());
-						// store the time the post 
-						// was created
+						// store the time the post was created
 						// in the Posttime array
-						postTime.add(post.
-								getCreatedTime());
-						// store the direct 
-						// link to the post
+						postTime.add(post.getCreatedTime());
+						// store the direct link to the post
 						// in the postlink array
-						postLink.add("fb.com/" 
-								+ post.getId());
-						//store the full puture in 
-						// the fullPic array
-						fullPic.add(
-								post.getFullPicture());
-
+						postLink.add("fb.com/" + post.getId());
+						//store the full puture in the fullPic
+						//array
+						fullPic.add(post.getFullPicture());
+						//increment numPost
+						numPost++;
 			}
+			
 		}
+		
 	}
 
 	/************************************************************
@@ -245,6 +230,22 @@ public class FacebookSnooper {
 	public ArrayList<String> getPostLink() {
 		return postLink;
 	}
+	
+	/******************************************************************************
+	 * getFullPic() returns the arraylist of fullPic
+	 * @return returns the fullPic array
+	 *****************************************************************************/
+	public ArrayList<String> getFullPic() {
+		return fullPic;
+	}
+
+	/******************************************************************************
+	 * getNumPost() returns the int numPost
+	 * @return the number of posts the user has made
+	 *****************************************************************************/
+	public int getNumPost() {
+		return numPost;
+	}
 
 	/*******************************************************
 	 * main(String[] args) tests different aspects of the code above,
@@ -264,8 +265,6 @@ public class FacebookSnooper {
 		// get the profile picture
 		System.out.println(fb.getProfilePicture());
 		
-
-
 
 
 	}
