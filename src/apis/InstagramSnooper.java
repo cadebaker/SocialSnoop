@@ -8,7 +8,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,11 +75,17 @@ public class InstagramSnooper {
 	    JSONObject j = json.optJSONObject("data");
 	    
 	    /**HashMap to store important parts of a Instagram Profile **/
-	    HashMap<String, String> info = user(j);
+	    ArrayList<String>  info = new ArrayList<String>();
+	    info = user(j);
 	    
+	    System.out.println(info.get(0));
 	    is.close();
 	    
-	    System.out.println(info.get("profile picture"));
+	    //System.out.println(info.get("profile picture"));
+	    ArrayList<String> post = new ArrayList<String>();
+	    post = getPosts(1);
+	    System.out.println(post.get(1));
+	    
 	        
 	}
 	
@@ -109,7 +115,7 @@ public class InstagramSnooper {
 	 * @return ArrayList that holds user information
 	 * @throws JSONException in case the JSON object breaks
 	 **********************************************************************/
-	private static HashMap<String, String> user(final JSONObject j) throws JSONException {
+	private static ArrayList<String> user(final JSONObject j) throws JSONException {
 		
 		/**JSONObject.get() returns an object, so object x stores
 		 * that value until we can call toString on it.
@@ -119,19 +125,20 @@ public class InstagramSnooper {
 		/**the info Hashmap stores different parts of the instagram 
 		 * information for easier access to place into the GUI
 		 */
-		HashMap<String, String> info = new HashMap<String, String>();
+		ArrayList<String> info = new ArrayList<String>();
 		
 		x = j.get("profile_picture");
-		info.put("profile picture", x.toString());
+		info.add(x.toString());
 		
 		x = j.get("full_name");
-		info.put("full name", x.toString());
+		info.add(x.toString());
+		System.out.println(x.toString());
 		
 		x = j.get("bio");
-		info.put("bio", x.toString());
+		info.add(x.toString());
 		
 		x = j.get("username");
-		info.put("username", x.toString());
+		info.add(x.toString());
 		
 		return info;
 	}
@@ -139,12 +146,13 @@ public class InstagramSnooper {
  * 	Method getPosts retrieves information from Instagram
  * and stores the data as an ArrayList.
  * 
- * @param access is an access token
+ * @param postNum is the number of the post from the most 
+ * 			recent post by user.
  * @return ArrayList that holds information 
  * @throws IOException for while reading html from url
  * @throws JSONException in case JSON breaks.
  ********************************************************/
-public static HashMap<String, String> getPosts(final String access) throws IOException, JSONException {
+public static ArrayList<String> getPosts(final int postNum) throws IOException, JSONException {
 		
 		/** String value that holds the access token. **/
 		String accessCade = 
@@ -154,7 +162,7 @@ public static HashMap<String, String> getPosts(final String access) throws IOExc
 		/** Url to get user information **/
 		URL url = new URL(
 				"https://api.instagram.com/v1/users/self"
-				+ "/media/recent?access_token=" + access);
+				+ "/media/recent?access_token=" + accessCade);
 		
 		/**Connection to get access to the Web**/
 		URLConnection con = url.openConnection();
@@ -171,25 +179,25 @@ public static HashMap<String, String> getPosts(final String access) throws IOExc
 //	    System.out.println(json.get("data"));
 //	    System.out.println(json.optJSONObject("data"));
 	    JSONArray j = json.optJSONArray("data");
-	    
-	    System.out.println(j);
-	    JSONObject post0 = j.getJSONObject(0);
-	    System.out.println(post0);
+	   
+	    JSONObject post0 = j.getJSONObject(postNum);
 	    
 	    
-		HashMap<String, String> posts = 
-				new HashMap<String, String>(); 
-		System.out.println(post0.get("images"));
-		posts.put("picture", 
+	    
+		ArrayList<String> posts = 
+				new ArrayList<String>(); 
+		
+		posts.add(
 				post0.optJSONObject("images").
 				optJSONObject("standard_resolution").
 				get("url").toString());
-		posts.put("caption", 
+		posts.add(
 				post0.optJSONObject("caption").
 				get("text").toString());
-		posts.put("likes", 
+		posts.add(
 				post0.optJSONObject("likes").
 				get("count").toString());
+		System.out.println(posts.get(0));
 		
 		return posts;
 	}
