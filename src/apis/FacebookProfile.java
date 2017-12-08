@@ -25,7 +25,7 @@ public class FacebookProfile{
 	private VBox column;
 	
 
-	public FacebookProfile(String profilePicURL, String name, String postStory, String postPictureURL, String PostLink){
+	public FacebookProfile(String profilePicURL, String name, String postStory, String postPictureURL, String postTime){
 		pane = new BorderPane();
 		
 		column = new VBox();
@@ -49,6 +49,7 @@ public class FacebookProfile{
 		
 		//row 2
 		Label tempTimeDate = new Label(postTime);
+		//Label tempTimeDate = new Label("Temp Time - Temp Date");
 		tempTimeDate.setTextFill(Color.GRAY);
 		tempTimeDate.setTextAlignment(TextAlignment.JUSTIFY);
 		
