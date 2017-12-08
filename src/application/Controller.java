@@ -4,12 +4,16 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+
+import org.json.JSONException;
 
 import com.restfb.exception.FacebookOAuthException;
 
 import apis.FacebookProfile;
 import apis.FacebookSnooper;
 import apis.InstagramProfile;
+import apis.InstagramSnooper;
 import apis.TwitterProfile;
 import apis.TwitterSnooper;
 import javafx.event.ActionEvent;
@@ -23,7 +27,6 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -100,9 +103,9 @@ public class Controller {
 	 *****************************************************************************/
 	public Controller() {
 		table = new DataTable("savedprofiles.txt");
-		
+
 		filter = SocialFilter.FACEBOOK;
-		
+
 	}
 
 	/******************************************************************************
@@ -117,7 +120,7 @@ public class Controller {
 
 		// loading of custom font used in GUI
 		Font.loadFont(Main.class.getResource("Cruiser.TTF").toExternalForm(), 10);
-		
+
 		faceBookButton.setEffect(new DropShadow());
 	}
 
@@ -129,25 +132,25 @@ public class Controller {
 	 *****************************************************************************/
 	@FXML
 	private void buttonClicked(ActionEvent e) {
-		
+
 		faceBookButton.setEffect(null);
 		twitterButton.setEffect(null);
 		instagramButton.setEffect(null);
-		
+
 		if (e.getSource() == faceBookButton) {
 			faceBookButton.setEffect(new DropShadow());
-			
+
 			filter = SocialFilter.FACEBOOK;
 		} else if (e.getSource() == twitterButton) {
 			twitterButton.setEffect(new DropShadow());
-			
+
 			filter = SocialFilter.TWITTER;
 		} else if (e.getSource() == instagramButton) {
 			instagramButton.setEffect(new DropShadow());
 			filter = SocialFilter.INSTAGRAM;
 		}
-		
-		//setEffect(new DropShadow());
+
+		// setEffect(new DropShadow());
 
 		if (profile.getSelectedToggle() != null)
 			radioButtonClicked();
@@ -194,47 +197,64 @@ public class Controller {
 		// erases any previous results
 		displayBox.getChildren().clear();
 		if (filter == SocialFilter.FACEBOOK) {
-			try {
-				// NEED
-				 FacebookSnooper fb = new
-				 FacebookSnooper(table.getFaceBookKeys().get(id));
+			try {	
+				
+				//Searches for facebook data based on the profile
+				FacebookSnooper fb = new FacebookSnooper(table.getFaceBookKeys().get(id));
 
 				for (int i = 0; i < fb.getNumPost(); i++) {
 					
+					//creates a GUI component for each post found
 					FacebookProfile fbP = new FacebookProfile(fb.getProfilePicture(), fb.getName(),
 							fb.getPostStory().get(i), fb.getFullPic().get(i), fb.getPostTime().get(i).toString());
 
-					 displayBox.getChildren().addAll(fbP.getPane());
+					displayBox.getChildren().addAll(fbP.getPane());
 
 					VBox.setMargin(fbP.getPane(), new Insets(0, 0, 5, 0));
+					
+					getProfileF()[id].setText(fb.getProfileURL());
 				}
-			
+
 			} catch (FacebookOAuthException e) {
 			}
 
 			// loads facebook information
 		} else if (filter == SocialFilter.INSTAGRAM) {
-			
-			for (int i = 0; i < 5; i++) {
 
-				InstagramProfile iP = new InstagramProfile("Profilename",
-						"http://pbs.twimg.com/profile_images/767088666309193728/49dCK7xy.jpg",
-						"http://pbs.twimg.com/ext_tw_video_thumb/938645140381491200/pu/img/oJ4p1UVX9zUOSnTd.jpg",
-						"caption", "500");
+			try {
+				
+				//searches for instagram data based on the profile
+				InstagramSnooper iS = new InstagramSnooper(table.getInstagramKeys().get(id));
 
-				displayBox.getChildren().add(iP.getColumn());
+				HashMap<String, String> info = iS.getInfo();
+
+				String profilePic = info.get("profile picture");
+
+				for (int i = 0; i < 5; i++) {
+
+					
+					//creates a GUI component for each post found
+					InstagramProfile iP = new InstagramProfile(info.get("username"), profilePic,
+							"https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/22069552_2021124434784827_6245902769404772352_n.jpg",
+							"caption", "500");
+
+					displayBox.getChildren().add(iP.getColumn());
+				}
+
+			} catch (Exception e) {
 			}
-			
-		} else if (filter == SocialFilter.TWITTER) {
 
+		} else if (filter == SocialFilter.TWITTER) {
 			
+			//searches for twitter data
 			TwitterSnooper test = new TwitterSnooper("sN5hY2x6U4Y5jJEDjMxXyVvb5",
 					"hwap0d0rnoup4c0lW6S8ULYMMHXKu28OseLz9vvhI50t0o9cjJ");
 
 			try {
 				test.getUserTimeLine();
 				for (int i = 0; i < test.getSize(); i++) {
-
+					
+					//for each tweet in the feed, creates a GUI component
 					TwitterProfile tP = new TwitterProfile(test.getTweetName().get(i), test.getTweetScreenName().get(i),
 							test.getTweetData().get(i), test.getTweetTime().get(i),
 							test.getTweetProfileImageURL().get(i), test.getTweetURL().get(i));
@@ -339,4 +359,3 @@ public class Controller {
 		return fbProfilePicture;
 	}
 }
-
