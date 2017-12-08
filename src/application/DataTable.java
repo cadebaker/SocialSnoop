@@ -35,7 +35,7 @@ public class DataTable {
 	private String fileName;
 
 	/** Used to hold the data of multiple profiles. **/
-	private ArrayList<String> profileNames, twitterURLs, twitterNames, 
+	private ArrayList<String> profileNames, twitterURLs, twitterKeys, 
 		instagramURLs, instagramKeys, faceBookURLs, faceBookKeys;
 
 	/** primary stage. **/
@@ -46,7 +46,7 @@ public class DataTable {
 
 	/** columns displayed in the table object. **/
 	private TableColumn<TableCell, String> nameColumn, 
-		twitterNameColumn, instagramKeyColumn, faceBookKeyColumn;
+		twitterKeyColumn, instagramKeyColumn, faceBookKeyColumn;
 
 	/** scene. **/
 	private Scene scene;
@@ -117,9 +117,9 @@ public class DataTable {
 		nameColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("name"));
 
 		// TwitterKey column
-		twitterNameColumn = new TableColumn<>("Twitter Name");
-		twitterNameColumn.setMinWidth(200);
-		twitterNameColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("twitterName"));
+		twitterKeyColumn = new TableColumn<>("Twitter Key");
+		twitterKeyColumn.setMinWidth(200);
+		twitterKeyColumn.setCellValueFactory(new PropertyValueFactory<TableCell, String>("twitterKey"));
 
 		// InstagramKey column
 		instagramKeyColumn = new TableColumn<>("Instagram Key");
@@ -135,7 +135,7 @@ public class DataTable {
 		// by Aerospace
 		// creates the Cells for display
 		nameColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
-		twitterNameColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
+		twitterKeyColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		instagramKeyColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 		faceBookKeyColumn.setCellFactory(TextFieldTableCell.<TableCell>forTableColumn());
 
@@ -147,9 +147,9 @@ public class DataTable {
 			cell.setName(event.getNewValue());
 		});
 
-		twitterNameColumn.setOnEditCommit(event -> {
+		twitterKeyColumn.setOnEditCommit(event -> {
 			TableCell cell = event.getRowValue();
-			cell.setTwitterName(event.getNewValue());
+			cell.setTwitterKey(event.getNewValue());
 		});
 
 		instagramKeyColumn.setOnEditCommit(event -> {
@@ -209,7 +209,7 @@ public class DataTable {
 		table.getSelectionModel().cellSelectionEnabledProperty().set(true);
 
 		table.setItems(getProfiles());
-		table.getColumns().addAll(nameColumn, twitterNameColumn, instagramKeyColumn, faceBookKeyColumn);
+		table.getColumns().addAll(nameColumn, twitterKeyColumn, instagramKeyColumn, faceBookKeyColumn);
 
 	}
 
@@ -223,7 +223,7 @@ public class DataTable {
 		ObservableList<TableCell> profiles = FXCollections.observableArrayList();
 
 		for (int i = 0; i < getProfileNames().size(); i++) {
-			profiles.add(new TableCell(getProfileNames().get(i), twitterNames.get(i), instagramKeys.get(i),
+			profiles.add(new TableCell(getProfileNames().get(i), twitterKeys.get(i), instagramKeys.get(i),
 					faceBookKeys.get(i)));
 		}
 
@@ -246,7 +246,7 @@ public class DataTable {
 			for (TableCell x : table.getItems()) {
 
 				out.println(
-						x.getName() + ":" + x.getTwitterName() + ":" + x.getInstagramKey() + ":" + x.getFaceBookKey());
+						x.getName() + ":" + x.getTwitterKey() + ":" + x.getInstagramKey() + ":" + x.getFaceBookKey());
 
 			}
 
@@ -266,7 +266,7 @@ public class DataTable {
 	 *********************************************************************/
 	public void load(final String fileName) {
 		setProfileNames(new ArrayList<String>());
-		twitterNames = new ArrayList<String>();
+		twitterKeys = new ArrayList<String>();
 		instagramKeys = new ArrayList<String>();
 		faceBookKeys = new ArrayList<String>();
 
@@ -288,7 +288,7 @@ public class DataTable {
 				String[] parts = p.split(":");
 
 				getProfileNames().add(parts[0]);
-				twitterNames.add(parts[1]);
+				twitterKeys.add(parts[1]);
 				instagramKeys.add(parts[2]);
 				faceBookKeys.add(parts[3]);
 			}
@@ -301,7 +301,7 @@ public class DataTable {
 				// sets default values
 
 				getProfileNames().add("Profile");
-				twitterNames.add("twitterName");
+				twitterKeys.add("twitterKey");
 				instagramKeys.add("instagramKey");
 				faceBookKeys.add("facebookKey");
 			}
@@ -322,7 +322,7 @@ public class DataTable {
 
 			// sets default values
 			for (@SuppressWarnings("unused") TableCell x : table.getItems()) {
-				out.println("Profile" + ":" + "TwitterName" + ":" + "InstagramKey" + ":" + "FacebookKey");
+				out.println("Profile" + ":" + "TwitterKey" + ":" + "InstagramKey" + ":" + "FacebookKey");
 
 			}
 
@@ -411,16 +411,16 @@ public class DataTable {
 	/**********************************************************************
 	 * @return ArrayList of twitterNames.
 	 *********************************************************************/
-	public ArrayList<String> getTwitterNames() {
-		return twitterNames;
+	public ArrayList<String> getTwitterKeys() {
+		return twitterKeys;
 	}
 
 	/**********************************************************************
 	 * @param twitterKeys
 	 *            sets twitterNames.
 	 *********************************************************************/
-	public void setTwitterNames(final ArrayList<String> twitterKeys) {
-		this.twitterNames = twitterKeys;
+	public void setTwitterKeys(final ArrayList<String> twitterKeys) {
+		this.twitterKeys = twitterKeys;
 	}
 
 	/**********************************************************************
