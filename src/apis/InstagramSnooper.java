@@ -24,11 +24,20 @@ import org.json.JSONObject;
  *******************************************************/
 public class InstagramSnooper {
 	
+	/** ArrayList to store post information. */
+	private static ArrayList<String> post;
+	
+	/** ArrayList to store user information. */
+	private static ArrayList<String> info;
+	
+	
+	
 	/*************************************************************
 	 * Default Constructor for InstagramSnooper.
 	 ************************************************************/
 	private InstagramSnooper() {
-		String access = "";
+		post = new ArrayList<String>();
+		info = new ArrayList<String>();
 	}
 	
 	
@@ -75,18 +84,18 @@ public class InstagramSnooper {
 	    JSONObject j = json.optJSONObject("data");
 	    
 	    /**HashMap to store important parts of a Instagram Profile **/
-	    ArrayList<String>  info = new ArrayList<String>();
+	    //ArrayList<String>  info = new ArrayList<String>();
 	    info = user(j);
 	    
 	    System.out.println(info.get(0));
 	    is.close();
 	    
 	    //System.out.println(info.get("profile picture"));
-	    ArrayList<String> post = new ArrayList<String>();
+	   // ArrayList<String> post = new ArrayList<String>();
 	    post = getPosts(1);
 	    System.out.println(post.get(1));
 	    
-	        
+	    System.out.println(getUserInfo(0));
 	}
 	
 	/***********************************************************************
@@ -200,5 +209,27 @@ public static ArrayList<String> getPosts(final int postNum) throws IOException, 
 		System.out.println(posts.get(0));
 		
 		return posts;
+	}
+
+	/***************************************************************
+	 * Gets the particular information the program needs
+	 * from the user info.
+	 * 
+	 * @param index is the information it needs.
+	 * @return String value which is the information
+	 **************************************************************/
+	public static String getUserInfo(final int index) {
+		return info.get(index);
+	}
+	
+	/***************************************************************
+	 * Gets the particular information the program needs
+	 * from the post info.
+	 * 
+	 * @param index is the information it needs.
+	 * @return String value which is the information
+	 **************************************************************/
+	public static String getPostInfo(final int index) {
+		return post.get(index);
 	}
 }
