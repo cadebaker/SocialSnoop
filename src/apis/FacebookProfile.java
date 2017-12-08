@@ -1,126 +1,94 @@
 package apis;
 
-
-import java.util.Date;
-
-import com.restfb.types.Post;
-
-import application.Controller;
+import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 
-/***************************************************************
- * Class that formats data pulled from the Facebook API.
+/*******************************************************************************
+ * Class that takes data pulled from the Facebook API and creates a visual
+ * representation
  *
  * @author Logan
- **************************************************************/
+ ******************************************************************************/
 public class FacebookProfile {
 
-	/** the primary storage container. **/
-	private HBox pane;
+	/** Primary Container */
+	private BorderPane pane;
 
-	/** Holds the text data from the facebook API. **/
-	private VBox textHolder;
+	/** contains Text data */
+	private VBox column;
 
-	/** The Post's main data. **/
-	private Text postDataText;
+	/******************************************************************************
+	 * @param profilePicURL
+	 * @param name
+	 * @param postStory
+	 * @param postPictureURL
+	 * @param postTime
+	 *****************************************************************************/
+	public FacebookProfile(String profilePicURL, String name, String postStory, String postPictureURL,
+			String postTime) {
+		pane = new BorderPane();
 
-	/** The Post's secondary heading. **/
-	private Text postStoryText;
+		column = new VBox();
+		column.setMaxWidth(580);
+		column.setMinWidth(580);
 
-	/** Time at which the post was made. **/
-	private Date postTime;
+		// row 1
+		Image img = new Image(profilePicURL);
+		Circle circ = new Circle(50, 50, 35);
+		ImageView pPic = new ImageView(img);
+		pPic.setClip(circ);
+		pPic.setFitHeight(100);
+		pPic.setFitWidth(100);
 
-	/** Raw data from the Facebook API. **/
-	@SuppressWarnings("Unused field")
-	private Post p;
+		Label profileNameStory = new Label(name + " - " + postStory);
+		profileNameStory.setFont(Font.font("Calibri", 16));
 
-	/** The object created from the Profile Image url. **/
-	private Image img;
+		column.getChildren().add(profileNameStory);
+		VBox.setMargin(profileNameStory, new Insets(15, 0, 4, -30));
 
-	/*********************************************************
-	 * @param p
-	 *            Raw data from the facebook API.
-	 * @param c
-	 *            Instance of the Controller class
-	 *********************************************************/
-	@SuppressWarnings("deprecation")
-	public FacebookProfile(final Post p, final Controller c) {
+		// row 2
+		Label tempTimeDate = new Label(postTime);
+		
+		tempTimeDate.setTextFill(Color.GRAY);
+		tempTimeDate.setTextAlignment(TextAlignment.JUSTIFY);
 
-		this.img = c.getFbProfilePicture();
+		column.getChildren().add(tempTimeDate);
+		VBox.setMargin(tempTimeDate, new Insets(0, 0, 0, -22));
 
-		pane = new HBox();
+		// row 3
+		Image postImage = new Image(postPictureURL);
+		ImageView pPic2 = new ImageView(postImage);
+		pPic2.setFitHeight(postImage.getHeight() / 1.5);
+		pPic2.setFitWidth(postImage.getWidth() / 1.5);
 
-		//this.p = p;
+		column.getChildren().add(pPic2);
+		VBox.setMargin(pPic2, new Insets(12, 0, 0, -22));
 
-		textHolder = new VBox();
+		// row 4
+		TextFlow flow = new TextFlow();
 
-		this.postTime = p.getCreatedTime();
-
-		String date = postTime.getYear() + "";
-
-		// proper formating of the date
-		date = postTime.getMonth() + "/" + postTime.getDate() + "/" 
-				+ date.substring(1);
-
-		this.postDataText = new Text(p.getMessage());
-
-		this.postStoryText = new Text(date + ":  " + p.getStory());
+		pane.setLeft(pPic);
+		pane.setRight(column);
 	}
 
-	/**********************************************************
-	 * @return a VBox that contains relevant Text Post information.
-	 **********************************************************/
-	public VBox getVBox() {
-		if (!postDataText.getText().trim().equals("")) {
-			textHolder.getChildren().addAll(postDataText);
-		VBox.setMargin(postDataText, new Insets(5, 10, 0, 10));
-		}
-		if (!postStoryText.getText().equals("")) {
-			postDataText.setId("name-text");
-			if (postDataText.getText().trim().equals("")) {
-
-				textHolder.getChildren().addAll(postStoryText);
-
-			VBox.setMargin(postStoryText, new Insets(0, 0, 0, 10));
-			}
-		} else {
-			return textHolder;
-		}
-
-		return textHolder;
-	}
-
-	/*********************************************************
-	 * @param img
-	 *            sets the Image url.
-	 *********************************************************/
-	public void setImg(final Image img) {
-		this.img = img;
-	}
-
-	/*********************************************************
-	 * @return a HBox Container that has the 
-	 * 			user's profile image and text data.
-	 *********************************************************/
-	public HBox getHBox() {
-
-		ImageView pPicture = new ImageView(img);
-
-		pPicture.setFitHeight(100);
-		pPicture.setFitWidth(100);
-
-		pane.getChildren().addAll(pPicture);
-
-		HBox.setMargin(pPicture, new Insets(0, 0, 10, 10));
-
-		pane.getChildren().addAll(getVBox());
-
+	/******************************************************************************
+	 * @return primary container
+	 *****************************************************************************/
+	public BorderPane getPane() {
 		return pane;
-
 	}
+
 }
