@@ -223,23 +223,31 @@ public class Controller {
 
 			try {
 				
-				//searches for instagram data based on the profile
-				InstagramSnooper iS = new InstagramSnooper(table.getInstagramKeys().get(id));
+				// //searches for instagram data based on the profile
+				// InstagramSnooper iS = new InstagramSnooper();
+				//
+				// //System.out.println(iS.getPostInfo().size());
+				//
+				// for(int i = 0; i < iS.getPostInfo().size(); i++){
+				// System.out.println(iS.getPostInfo().get(i));
+				// }
+				//
+				// for(int i = 0; i < iS.getUserInfo().size(); i++){
+				// System.out.println(iS.getInfo().get(i));
+				// }
 
-				HashMap<String, String> info = iS.getInfo();
-
-				String profilePic = info.get("profile picture");
-
-				for (int i = 0; i < 5; i++) {
-
-					
-					//creates a GUI component for each post found
-					InstagramProfile iP = new InstagramProfile(info.get("username"), profilePic,
-							"https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/22069552_2021124434784827_6245902769404772352_n.jpg",
-							"caption", "500");
-
-					displayBox.getChildren().add(iP.getColumn());
-				}
+//				String profilePic = info.get("profile picture");
+//
+//				for (int i = 0; i < 5; i++) {
+//
+//					
+//					//creates a GUI component for each post found
+//					InstagramProfile iP = new InstagramProfile(info.get("username"), profilePic,
+//							"https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/22069552_2021124434784827_6245902769404772352_n.jpg",
+//							"caption", "500");
+//
+//					displayBox.getChildren().add(iP.getColumn());
+//				}
 
 			} catch (Exception e) {
 			}
@@ -247,7 +255,7 @@ public class Controller {
 		} else if (filter == SocialFilter.TWITTER) {
 			
 			//searches for twitter data
-			TwitterSnooper test = new TwitterSnooper("sN5hY2x6U4Y5jJEDjMxXyVvb5",
+			TwitterSnooper test = new TwitterSnooper(table.getTwitterKeys().get(id),
 					"hwap0d0rnoup4c0lW6S8ULYMMHXKu28OseLz9vvhI50t0o9cjJ");
 
 			try {
