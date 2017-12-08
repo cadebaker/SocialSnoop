@@ -201,9 +201,8 @@ public class Controller {
 
 				for (int i = 0; i < fb.getNumPost(); i++) {
 					
-					FacebookProfile fbP = new FacebookProfile(fb.getProfilePicture(),
-					 fb.getName(), fb.getPostStory().get(i), fb.getFullPic().get(i),
-					"PostLink");
+					FacebookProfile fbP = new FacebookProfile(fb.getProfilePicture(), fb.getName(),
+							fb.getPostStory().get(i), fb.getFullPic().get(i), fb.getPostTime().get(i).toString());
 
 					 displayBox.getChildren().addAll(fbP.getPane());
 
