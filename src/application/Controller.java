@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONException;
@@ -222,32 +223,21 @@ public class Controller {
 		} else if (filter == SocialFilter.INSTAGRAM) {
 
 			try {
-				
-				//searches for instagram data based on the profile
-				InstagramSnooper iS = new InstagramSnooper(table.getInstagramKeys().get(id));
-
-				HashMap<String, String> info = iS.getInfo();
-
-				String profilePic = info.get("profile picture");
-
-				for (int i = 0; i < 5; i++) {
-
+				InstagramSnooper iS = new InstagramSnooper();
+				for(int i = 0; i < 20; i++){
+					ArrayList<String >post = InstagramSnooper.getPosts(i);
 					
-					//creates a GUI component for each post found
-					InstagramProfile iP = new InstagramProfile(info.get("username"), profilePic,
-							"https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/22069552_2021124434784827_6245902769404772352_n.jpg",
-							"caption", "500");
-
+					InstagramProfile iP = new InstagramProfile(table.getProfileNames().get(i), InstagramSnooper.getUserInfo(0), post.get(0), post.get(1), post.get(2));
+					
 					displayBox.getChildren().add(iP.getColumn());
 				}
-
 			} catch (Exception e) {
 			}
 
 		} else if (filter == SocialFilter.TWITTER) {
 			
 			//searches for twitter data
-			TwitterSnooper test = new TwitterSnooper("sN5hY2x6U4Y5jJEDjMxXyVvb5",
+			TwitterSnooper test = new TwitterSnooper(table.getTwitterKeys().get(id),
 					"hwap0d0rnoup4c0lW6S8ULYMMHXKu28OseLz9vvhI50t0o9cjJ");
 
 			try {
