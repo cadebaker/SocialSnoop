@@ -227,7 +227,7 @@ public class Controller {
 				for(int i = 0; i < 20; i++){
 					ArrayList<String >post = InstagramSnooper.getPosts(i);
 					
-					InstagramProfile iP = new InstagramProfile(table.getProfileNames().get(i), InstagramSnooper.getUserInfo(0), post.get(0), post.get(1), post.get(2));
+					InstagramProfile iP = new InstagramProfile(table.getProfileNames().get(id), InstagramSnooper.getUserInfo(0), post.get(0), post.get(1), post.get(2));
 					
 					displayBox.getChildren().add(iP.getColumn());
 				}
