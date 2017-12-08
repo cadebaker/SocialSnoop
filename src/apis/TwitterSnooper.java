@@ -115,26 +115,44 @@ public class TwitterSnooper {
 		tweetURL = new ArrayList<String>();
 	}
 
+	/******************************************************************************
+	 * @return tweetName
+	 *****************************************************************************/
 	public ArrayList<String> getTweetName() {
 		return tweetName;
 	}
 
+	/******************************************************************************
+	 * @return getTweetScreenName
+	 *****************************************************************************/
 	public ArrayList<String> getTweetScreenName() {
 		return tweetScreenName;
 	}
 
+	/******************************************************************************
+	 * @return tweetData
+	 *****************************************************************************/
 	public ArrayList<String> getTweetData() {
 		return tweetData;
 	}
 
+	/******************************************************************************
+	 * @return tweetTime
+	 *****************************************************************************/
 	public ArrayList<String> getTweetTime() {
 		return tweetTime;
 	}
 
+	/******************************************************************************
+	 * @return tweetProfileImageURL
+	 *****************************************************************************/
 	public ArrayList<String> getTweetProfileImageURL() {
 		return tweetProfileImageURL;
 	}
 
+	/******************************************************************************
+	 * @return getTweetURL
+	 *****************************************************************************/
 	public ArrayList<String> getTweetURL() {
 		return tweetURL;
 	}
