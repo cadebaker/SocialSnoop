@@ -214,7 +214,17 @@ public class Controller {
 
 			// loads facebook information
 		} else if (filter == SocialFilter.INSTAGRAM) {
-			// loads instagram information
+			
+			for (int i = 0; i < 5; i++) {
+
+				InstagramProfile iP = new InstagramProfile("Profilename",
+						"http://pbs.twimg.com/profile_images/767088666309193728/49dCK7xy.jpg",
+						"http://pbs.twimg.com/ext_tw_video_thumb/938645140381491200/pu/img/oJ4p1UVX9zUOSnTd.jpg",
+						"caption", "500");
+
+				displayBox.getChildren().add(iP.getColumn());
+			}
+			
 		} else if (filter == SocialFilter.TWITTER) {
 
 			
