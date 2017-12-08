@@ -267,7 +267,7 @@ public class TwitterSnooper {
 			return date.toString().substring(4, 11);
 		} else {
 			// If the post was made in the future
-			return "FUUUUTURE!!!"; 
+			return ""; 
 		}
 	}
 
