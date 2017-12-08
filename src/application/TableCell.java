@@ -134,7 +134,7 @@ public class TableCell {
 	}
 
 	/******************************************************************************
-	 * @return the twitterName
+	 * @return the twitterKey
 	 *****************************************************************************/
 	public String getTwitterKey() {
 		return twitterKey;
