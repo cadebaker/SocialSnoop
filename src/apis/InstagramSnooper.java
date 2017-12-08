@@ -14,23 +14,60 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*******************************************************
+ * @author Luke Bassett
+ *
+ * The InstagramSnooper Class is the main class
+ * that handles Instagram data from its API.
+ * It handles getting user information and post
+ * information from specific access tokens.
+ *******************************************************/
 public class InstagramSnooper {
 	
-public static void main(final String[] args) throws IOException, JSONException {	
+	/*************************************************************
+	 * Default Constructor for InstagramSnooper.
+	 ************************************************************/
+	private InstagramSnooper() {
+		String access = "";
+	}
+	
+	
+	/*************************************************************
+	 * A main method that currently controls all data 
+	 * and function.
+	 * @param args as standard argument
+	 * @throws IOException for reading url and its information
+	 * @throws JSONException in case the JSON object has an error
+	 *************************************************************/
+
+	public static void main(final String[] args) throws IOException, JSONException {	
+		//URL to access token is : 
+			//https://www.instagram.com/oauth/authorize/
+			//?client_id=8504729cdd204b3bbab5f59c7a995ba9
+			//&redirect_uri=https://
+			//bakerservers.com/&response_type=token
 		
 		/** String value that holds the access token. **/
-		String Access ="6188961345.8504729.30f2ce5d68654477a79cf32dbd94525b";
+		String access = 
+				"6188961345.8504729.30f2ce5d6865"
+				+ "4477a79cf32dbd94525b "; 
 		
-		/** Url that is the same anytime (besides the access token) to get user information **/
-		URL url = new URL("https://api.instagram.com/v1/users/self/?access_token=" + Access);
+		/** Url to get user information **/
+		URL url = new URL(
+				"https://api.instagram.com/v1/users"
+				+ "/self/?access_token=" + access);
 		
 		/**Connection to get access to the Web**/
 		URLConnection con = url.openConnection();
-	    InputStream is =con.getInputStream();
+	    InputStream is = con.getInputStream(); 
 	    
 	     
-	    /**BufferedReader to read the online files and put it into a JSON **/
-	    BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+	    /**BufferedReader to read the online files and put it into a JSON**/
+	    BufferedReader rd = 
+	    		new BufferedReader(
+	    				new InputStreamReader(is, 
+	    						Charset.forName(
+	    								"UTF-8")));
 	    String jsonText = readAll(rd);
 	    
 	    JSONObject json = new JSONObject(jsonText);
@@ -38,7 +75,7 @@ public static void main(final String[] args) throws IOException, JSONException {
 	    JSONObject j = json.optJSONObject("data");
 	    
 	    /**HashMap to store important parts of a Instagram Profile **/
-	    HashMap<String,String> info = user(j);
+	    HashMap<String, String> info = user(j);
 	    
 	    is.close();
 	    
@@ -46,12 +83,14 @@ public static void main(final String[] args) throws IOException, JSONException {
 	        
 	}
 	
-	/*************************************************************************
+	/***********************************************************************
 	 * Method readAll is a method that runs through reading a website
 	 * to help convert it into a JSON in the main method.
 	 * 
-	 * @param rd is a BufferedReader that reads the JSON web file
-	 *************************************************************************/
+	 * @param rd is a BufferedReader that reads the JSON web file.
+	 * @return String for method
+	 * @throws IOException for reading file
+	 **********************************************************************/
 	private static String readAll(final Reader rd) throws IOException {
 		    StringBuilder sb = new StringBuilder();
 		    int cp;
@@ -61,14 +100,16 @@ public static void main(final String[] args) throws IOException, JSONException {
 		    return sb.toString();
 		  }
 	
-	/*************************************************************************
+	/***********************************************************************
 	 * Method readAll is a method that runs through reading a website
 	 * to help convert it into a JSON in the main method.
 	 * 
 	 * @param j is the JSON object that holds the 'data' JSONArray
 	 * 				within the original JSON object.
-	 **************************************************************************/
-	private static HashMap<String,String> user(final JSONObject j) throws JSONException {
+	 * @return ArrayList that holds user information
+	 * @throws JSONException in case the JSON object breaks
+	 **********************************************************************/
+	private static HashMap<String, String> user(final JSONObject j) throws JSONException {
 		
 		/**JSONObject.get() returns an object, so object x stores
 		 * that value until we can call toString on it.
@@ -78,7 +119,7 @@ public static void main(final String[] args) throws IOException, JSONException {
 		/**the info Hashmap stores different parts of the instagram 
 		 * information for easier access to place into the GUI
 		 */
-		HashMap<String,String> info = new HashMap<String, String>();
+		HashMap<String, String> info = new HashMap<String, String>();
 		
 		x = j.get("profile_picture");
 		info.put("profile picture", x.toString());
@@ -94,22 +135,36 @@ public static void main(final String[] args) throws IOException, JSONException {
 		
 		return info;
 	}
-	
-public static HashMap<String,String> getPosts(String Access) throws IOException, JSONException{
+/********************************************************
+ * 	Method getPosts retrieves information from Instagram
+ * and stores the data as an ArrayList.
+ * 
+ * @param access is an access token
+ * @return ArrayList that holds information 
+ * @throws IOException for while reading html from url
+ * @throws JSONException in case JSON breaks.
+ ********************************************************/
+public static HashMap<String, String> getPosts(final String access) throws IOException, JSONException {
 		
 		/** String value that holds the access token. **/
-		String Acces ="241274222.8504729.5e561ee33eca44b1a675b41af138c063";
+		String accessCade = 
+				"241274222.8504729.5e561ee33eca44b1a6"
+				+ "75b41af138c063";
 		
-		/** Url that is the same (besides the access token) to get user information **/
-		URL url = new URL("https://api.instagram.com/v1/users/self/media/recent?access_token=" + Access);
+		/** Url to get user information **/
+		URL url = new URL(
+				"https://api.instagram.com/v1/users/self"
+				+ "/media/recent?access_token=" + access);
 		
 		/**Connection to get access to the Web**/
 		URLConnection con = url.openConnection();
-	    InputStream is =con.getInputStream();
+	    InputStream is = con.getInputStream();
 	    
 	     
-	    /**BufferedReader to read the online files and put it into a JSON **/
-	    BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+	    /**BufferedReader to read the online files and put it into a JSON**/
+	    BufferedReader rd = 
+	    		new BufferedReader(new InputStreamReader(
+	    				is, Charset.forName("UTF-8")));
 	    String jsonText = readAll(rd);
 	    JSONObject json = new JSONObject(jsonText);
 //	    System.out.println(json);
@@ -122,14 +177,19 @@ public static HashMap<String,String> getPosts(String Access) throws IOException,
 	    System.out.println(post0);
 	    
 	    
-		HashMap<String,String> posts = new HashMap<String, String>();//getPostInfo(json);
+		HashMap<String, String> posts = 
+				new HashMap<String, String>(); 
 		System.out.println(post0.get("images"));
-		posts.put("picture", post0.optJSONObject("images").optJSONObject("standard_resolution").get("url").toString());
-		posts.put("caption", post0.optJSONObject("caption").get("text").toString());
-		posts.put("likes", post0.optJSONObject("likes").get("count").toString());
-		JSONArray people = post0.optJSONArray("users_in_photo");
-		posts.put("tagged person 1", people.getJSONObject(0).optJSONObject("user").get("username").toString());
-		posts.put("tagged person 2", people.getJSONObject(1).optJSONObject("user").get("username").toString());
+		posts.put("picture", 
+				post0.optJSONObject("images").
+				optJSONObject("standard_resolution").
+				get("url").toString());
+		posts.put("caption", 
+				post0.optJSONObject("caption").
+				get("text").toString());
+		posts.put("likes", 
+				post0.optJSONObject("likes").
+				get("count").toString());
 		
 		return posts;
 	}

@@ -28,10 +28,13 @@ public class FacebookTest {
 
 	/**setup the constructor to complete the tests.*/
 	private FacebookSnooper test = 
-			new FacebookSnooper("EAAL02oTtWsgBANXt6DOJPxBuvCQZBTFW3y5I4Eny6WNr2"
-					+ "gsQHLeFOZBodPHfEa5Gusffv72PRCwSVPeT8LDhsqMzP8qdlGzpvxSe"
-					+ "PMVmBrTJHMaupYv4GTJqLZAUIa5jCUxijD1zAuhfqJPmmDZAZBExoIc"
-					+ "MZAJmZAK5PZBG1aWbvwZDZD", null);
+			new FacebookSnooper("EAAL02oTtWsgBANXt6"
+					+ "DOJPxBuvCQZBTFW3y5I4Eny6WNr2"
+					+ "gsQHLeFOZBodPHfEa5Gusffv72PR"
+					+ "CwSVPeT8LDhsqMzP8qdlGzpvxSe"
+					+ "PMVmBrTJHMaupYv4GTJqLZAUIa5jCU"
+					+ "xijD1zAuhfqJPmmDZAZBExoIc"
+					+ "MZAJmZAK5PZBG1aWbvwZDZD");
 	
 
 	
