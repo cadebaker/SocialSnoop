@@ -1,90 +1,276 @@
 package apis;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import java.util.ArrayList;
+//import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
-public class TwitterProfile {
+import javax.swing.ImageIcon;
 
-	/** Primary Container */
-	private BorderPane pane;
+//import javax.swing.ImageIcon;
+//import javax.swing.JFrame;
 
-	/** contains Text data */
-	private VBox column;
+import twitter4j.MediaEntity;
+import twitter4j.Paging;
+//import twitter4j.ResponseList;
+import twitter4j.Status;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.User;
+import twitter4j.conf.ConfigurationBuilder;
 
-	public TwitterProfile(String name, String screenName, String data, String time, String profilePic,
-			String tweetPic) {
-		pane = new BorderPane();
+/***********************************************************************************
+ * This class is used to search for twitter user profiles by screen name. It
+ * does this by setting up a developer access token and then using various
+ * methods from the twitter4j software package to pull search results from
+ * twitter.
+ * 
+ * @author Anthony Sciarini
+ * @version 10/9/2017 Release 1.0
+ ***********************************************************************************/
+public class TwitterSnooper {
 
-		column = new VBox();
-		//column.setMaxWidth(580);
-		column.setMinWidth(580);
+	/** Used to set up access token. */
+	private String consumerKey;
 
-		Image img = new Image(profilePic);
-		// Image img = new
-		// Image("http://pbs.twimg.com/profile_images/553634315532513280/r38xQFqc.jpeg");
-		Circle circ = new Circle(50, 50, 35);
-		ImageView pPic = new ImageView(img);
-		pPic.setClip(circ);
-		pPic.setFitHeight(100);
-		pPic.setFitWidth(100);
+	/** Used to set up access token */
+	private String consumerSecret;
 
-		HBox names = new HBox();
+	/** Used to set up access token. */
+	private static final String ACCESS_TOKEN = "916313147946004481-mdvtO2ZWeDIWpKg0twt9DzzIeMEkW45";
 
-		Label nameLb = new Label(name);
-		nameLb.setFont(Font.font("Calibri", FontWeight.BOLD, 18));
-		//nameLb.setFont(Font.font("Calibri", 18));
-		//nameLb.setStyle("-fx-font-weight: bold");
+	/** Used to set up access token. */
+	private static final String ACCESS_TOKEN_SECRET = "V0NsucYzB7qQm4I3MYWRxSaqjLXnpqPmXrd3U2zoerNsH";
 
-		Label screenNameLb = new Label("@" + screenName + " · " + time);
-		screenNameLb.setFont(Font.font("Calibri", 16));
-		screenNameLb.setTextFill(Color.GRAY);
+	/** Takes access token strings to gain access to twitter4j's capabilities.*/
+	private ConfigurationBuilder cb;
 
-		names.getChildren().addAll(nameLb, screenNameLb);
-		HBox.setMargin(screenNameLb, new Insets(4, 0, 0, 5));
+	/** An instance of the twitter4j API content. */
+	private TwitterFactory tf;
 
-		Label tweet = new Label(data);
-		tweet.setFont(Font.font("Calibri", 17));
-		tweet.setWrapText(true);
-		tweet.setMaxWidth(600);
+	/** Gets instance of twitter4j API content for Twitter Factory. */
+	private twitter4j.Twitter twitter;
 
-		column.getChildren().addAll(names, tweet);
-		VBox.setMargin(names, new Insets(12, 0, 0, -35));
-		VBox.setMargin(tweet, new Insets(0, 0, 0, -33));
+	// THE DATA OF THE TIMELINE.
 
-		try {
-			Image postImg = new Image(tweetPic);
-			// Image postImg = new
-			// Image("http://pbs.twimg.com/profile_images/553634315532513280/r38xQFqc.jpeg");
-			ImageView pPic2 = new ImageView(postImg);
-			pPic2.setFitHeight(postImg.getHeight() / 1.5);
-			pPic2.setFitWidth(postImg.getWidth() / 1.5);
-			VBox.setMargin(pPic2, new Insets(5, 0, 0, -50));
-		} catch (Exception e) {
+	/** List of the names of the twitter users that posted on the timeline. */
+	private ArrayList<String> tweetName;
 
-			// if (!tweetPic.contains("NOPE")) {
-			// System.out.println(name + " @" + screenName);
-			// System.out.println(data);
+	/** List of the screen names of the twitter users that posted on the timeline*/
+	private ArrayList<String> tweetScreenName;
 
-			// System.out.println(tweetPic);
+	/** List of the content of each tweet */
+	private ArrayList<String> tweetData;
 
-			// System.out.println(e);
-			// }
+	/** List of the bios of each twitter user profile. */
+	private ArrayList<String> tweetBio;
+
+	/** List of the dates times that the tweets were posted. */
+	private ArrayList<String> tweetTime;
+
+	/** List of the profile pictures of each twitter user */
+	private ArrayList<String> tweetProfileImageURL;
+	
+	/** List of the image URLS of images in tweets.*/
+	private ArrayList<String> tweetURL;
+	
+	private int listSize = 0;
+
+	/**********************************************************************
+	 * Constructor for Twitter Snooper class. Takes in parameters for a
+	 * developer access token and sets up twitter4j package for use.
+	 * 
+	 * @param consumerKey
+	 *            The Key needed to access servers
+	 * @param consumerSecret
+	 *            A different type of token for Access
+	 * @param accessToken
+	 * @param accessTokenSecret
+	 *********************************************************************/
+	public TwitterSnooper(final String consumerKey,
+			final String consumerSecret) {
+
+		// Set up configuration builder.
+		cb = new ConfigurationBuilder();
+
+		// Input access tokens
+		cb.setDebugEnabled(true).setOAuthConsumerKey(consumerKey)
+				.setOAuthConsumerSecret(consumerSecret)
+				.setOAuthAccessToken(ACCESS_TOKEN)
+				.setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
+
+		// Set up twitter factory
+		tf = new TwitterFactory(cb.build());
+
+		// Get the current instance of the twitter users information.
+		twitter = tf.getInstance();
+		
+		//Set up array lists
+		tweetName = new ArrayList<String>();
+		tweetScreenName = new ArrayList<String>();
+		tweetData = new ArrayList<String>();
+		tweetBio = new ArrayList<String>();
+		tweetTime = new ArrayList<String>();
+		tweetProfileImageURL = new ArrayList<String>();
+		tweetURL = new ArrayList<String>();
+	}
+
+	public ArrayList<String> getTweetName() {
+		return tweetName;
+	}
+
+	public ArrayList<String> getTweetScreenName() {
+		return tweetScreenName;
+	}
+
+	public ArrayList<String> getTweetData() {
+		return tweetData;
+	}
+
+	public ArrayList<String> getTweetTime() {
+		return tweetTime;
+	}
+
+	public ArrayList<String> getTweetProfileImageURL() {
+		return tweetProfileImageURL;
+	}
+
+	public ArrayList<String> getTweetURL() {
+		return tweetURL;
+	}
+
+	/**********************************************************
+	 * Get timeline in an arraylist of tweets.
+	 * 
+	 * @throws TwitterException
+	 *             an exception
+	 * @return ArrayList
+	 ********************************************************/
+	public void getUserTimeLine() throws TwitterException {
+
+		listSize = 0; 					   // reset list size.
+		//reset lists
+		Paging paging = new Paging(1, 50); // set paging.
+		tweetName.clear(); 				   
+		tweetScreenName.clear();		   	  
+		tweetData.clear(); 				  
+		tweetBio.clear(); 				  
+		tweetTime.clear(); 				   
+		tweetProfileImageURL.clear(); 	   
+		tweetURL.clear();				  
+		
+		// Loop through the user timeline.
+		for (Status s : twitter.getHomeTimeline(paging)) {
+			User u = s.getUser(); 					// Get data.
+			tweetName.add(u.getName()); 				// Get data.
+			tweetScreenName.add(u.getScreenName()); 		// Get data.
+			tweetData.add(s.getText()); 				// Get data.
+			tweetBio.add(u.getDescription()); 			// Get data.
+			tweetTime.add(dateToString(s.getCreatedAt())); 		// Get data.
+			tweetProfileImageURL.add(u.getOriginalProfileImageURL());    	// Get data.
+			
+			
+			if(s.getMediaEntities().length == 0)			// Get data.
+				tweetURL.add("NOPE");
+			else{												
+				String url = 									
+						s.getMediaEntities()[0].getMediaURL();   // Get data.
+				//If it is a .jpg add it.
+				if(url.endsWith(".jpg") || url.endsWith(".png") || url.endsWith(".jpeg"))					     
+					tweetURL.add(url);				 // Get data.
+				else											 
+					tweetURL.add("NOPE");				 // Get data.
+			}
+			listSize++;		// The size of the list.
+		}
+	}
+
+	/******************************************************
+	 * Converts a date to a string.
+	 * 
+	 * @param date
+	 *            The date to be converted to string
+	 * @return The string representation of the date
+	 *****************************************************/
+	private String dateToString(final Date date) {
+
+		// Compare current date to the time the other date was created.
+		// SimpleDateFormat df =
+		// new SimpleDateFormat("MM/dd/yyyy"); //Format the date.
+		Date current = Calendar.getInstance().getTime(); // Get the current date.
+												
+
+		int x = date.compareTo(current);
+
+		if (x == 0) { // If the tweet was posted today.
+			if (date.getHours() == 1) { // If it was posted within the last hour
+										// use minutes.
+				return date.getMinutes() + "m";
+			} else {
+				return date.getHours() + "h"; // If posted more than an hour ago
+							      // then use hours.
+			}
+		} else if (x < 0) { // If the tweet was posted before current date, then
+							// use the month and the day.
+			return date.toString().substring(4, 11);
+		} else {
+			return "FUUUUTURE!!!"; // If the post was made in the future
+		}
+	}
+
+	/************************************
+	 * Gets the size of each array list.
+	 * @return
+	 ************************************/
+	public int getSize() {
+		return listSize;
+	}
+
+	/*************************************
+	 * Sets the size of each array list.
+	 * @param listSize
+	 ************************************/
+	public void setSize(int listSize) {
+		this.listSize = listSize;
+	}
+
+	/************************************************************
+	 * Main method.
+	 * 
+	 * @param args
+	 *            Standard Main argument
+	 * @throws TwitterException
+	 ***********************************************************/
+	public static void main(final String[] args) throws TwitterException {
+
+		TwitterSnooper test = new TwitterSnooper(
+				"sN5hY2x6U4Y5jJEDjMxXyVvb5",
+				"hwap0d0rnoup4c0lW6S8ULYMMHXKu28OseLz9vvhI50t0o9cjJ");
+
+		test.getUserTimeLine();
+		
+		/*
+		 	tweetName.add(u.getName()); 						 // Get data.
+			tweetScreenName.add(u.getScreenName()); 				 // Get data.
+			tweetData.add(s.getText()); 						 // Get data.
+			tweetBio.add(u.getDescription()); 					 // Get data.
+			tweetTime.add(dateToString(s.getCreatedAt())); 				 // Get data.
+			tweetPic.add(new ImageIcon(u.getProfileImageURL())); 			 // Get data.
+		 */
+
+		System.out.println("HOMETIME LINE: ");
+		for (int idx = 0; idx < test.getSize() ; idx++) {
+			String str = idx + ".)\n";
+			str += "Name: " + test.tweetName.get(idx) + "\n";
+			str += "ScreenName: " + test.tweetScreenName.get(idx) + "\n";
+			str += "Tweet: " + test.tweetData.get(idx) + "\n";
+			str += "Bio: " + test.tweetBio.get(idx) + "\n";
+			str += "Time Tweeted: " + test.tweetTime.get(idx) + "\n";
+			str += "Profile pic URL: " + test.tweetProfileImageURL.get(idx) + "\n";
+			str += "Media URL: " + test.tweetURL.get(idx) + "\n\n";
+			System.out.println(str);
 		}
 
-		pane.setLeft(pPic);
-		pane.setRight(column);
 	}
 
-	public BorderPane getPane() {
-		return pane;
-	}
 }
