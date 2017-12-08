@@ -76,16 +76,6 @@ public class InstagramSnooper {
 //		post = getPosts(3);
 //		System.out.println(post.get(1));
 //		post = getPosts(4);
-		
-		for(int i = 0; i < 20; i++){
-			post = getPosts(i);
-			System.out.println(post.get(0));
-			System.out.println(post.get(1));
-			System.out.println(post.get(2));
-		
-			System.out.println();
-		}
-
 
 		//System.out.println(getUserInfo(0));
 	}
