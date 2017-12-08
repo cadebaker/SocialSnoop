@@ -9,8 +9,8 @@ import com.restfb.exception.FacebookOAuthException;
 
 import apis.FacebookProfile;
 import apis.FacebookSnooper;
+import apis.InstagramProfile;
 import apis.TwitterProfile;
-import apis.TwitterSearch;
 import apis.TwitterSnooper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
